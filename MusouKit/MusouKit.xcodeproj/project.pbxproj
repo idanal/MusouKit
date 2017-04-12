@@ -1,0 +1,409 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		87AD46361E9B8E3C00C02FF5 /* MusouKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD46351E9B8E3C00C02FF5 /* MusouKit.m */; };
+		87AD46371E9B8E3C00C02FF5 /* MusouKit.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 87AD46341E9B8E3C00C02FF5 /* MusouKit.h */; };
+		87AD46431E9B8E9800C02FF5 /* MSAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD46421E9B8E9800C02FF5 /* MSAdditions.m */; };
+		87AD46461E9B8E9F00C02FF5 /* JSONEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD46451E9B8E9F00C02FF5 /* JSONEntity.m */; };
+		87AD464B1E9B8EB300C02FF5 /* MSBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD46481E9B8EB300C02FF5 /* MSBaseViewController.m */; };
+		87AD464C1E9B8EB300C02FF5 /* MSCameraController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD464A1E9B8EB300C02FF5 /* MSCameraController.m */; };
+		87AD464F1E9B8EBA00C02FF5 /* QRCodeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD464E1E9B8EBA00C02FF5 /* QRCodeController.m */; };
+		87AD46551E9B8EDE00C02FF5 /* MSVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD46541E9B8EDE00C02FF5 /* MSVersion.m */; };
+		87AD465B1E9B8EF900C02FF5 /* MSHttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD465A1E9B8EF900C02FF5 /* MSHttpClient.m */; };
+		87AD465E1E9B8F0F00C02FF5 /* HUDView.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD465D1E9B8F0F00C02FF5 /* HUDView.m */; };
+		87AD46611E9B8F1400C02FF5 /* MSBlockAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD46601E9B8F1400C02FF5 /* MSBlockAlertView.m */; };
+		87AD46731E9B8F5500C02FF5 /* MSDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD46721E9B8F5500C02FF5 /* MSDataSource.m */; };
+		87AD46761E9B8F7800C02FF5 /* DLAutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD46751E9B8F7800C02FF5 /* DLAutoLayout.m */; };
+		87AD467B1E9B900C00C02FF5 /* ActionPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD46781E9B900B00C02FF5 /* ActionPicker.m */; };
+		87AD467C1E9B900C00C02FF5 /* ActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD467A1E9B900C00C02FF5 /* ActionSheet.m */; };
+		87AD467F1E9B901700C02FF5 /* DLRangeSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD467E1E9B901700C02FF5 /* DLRangeSlider.m */; };
+		87AD46821E9B902900C02FF5 /* MSPlainCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD46811E9B902900C02FF5 /* MSPlainCellView.m */; };
+		87AD46851E9B907400C02FF5 /* MSDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD46841E9B907400C02FF5 /* MSDownloader.m */; };
+		87AD46881E9B907F00C02FF5 /* MSTaskQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD46871E9B907F00C02FF5 /* MSTaskQueue.m */; };
+		87AD46AF1E9E27B000C02FF5 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87AD46AE1E9E27B000C02FF5 /* CoreLocation.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		87AD462F1E9B8E3C00C02FF5 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+				87AD46371E9B8E3C00C02FF5 /* MusouKit.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		87AD46311E9B8E3C00C02FF5 /* libMusouKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMusouKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		87AD46341E9B8E3C00C02FF5 /* MusouKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MusouKit.h; sourceTree = "<group>"; };
+		87AD46351E9B8E3C00C02FF5 /* MusouKit.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MusouKit.m; sourceTree = "<group>"; };
+		87AD46411E9B8E9800C02FF5 /* MSAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSAdditions.h; sourceTree = "<group>"; };
+		87AD46421E9B8E9800C02FF5 /* MSAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSAdditions.m; sourceTree = "<group>"; };
+		87AD46441E9B8E9F00C02FF5 /* JSONEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONEntity.h; sourceTree = "<group>"; };
+		87AD46451E9B8E9F00C02FF5 /* JSONEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONEntity.m; sourceTree = "<group>"; };
+		87AD46471E9B8EB300C02FF5 /* MSBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSBaseViewController.h; sourceTree = "<group>"; };
+		87AD46481E9B8EB300C02FF5 /* MSBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSBaseViewController.m; sourceTree = "<group>"; };
+		87AD46491E9B8EB300C02FF5 /* MSCameraController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSCameraController.h; sourceTree = "<group>"; };
+		87AD464A1E9B8EB300C02FF5 /* MSCameraController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSCameraController.m; sourceTree = "<group>"; };
+		87AD464D1E9B8EBA00C02FF5 /* QRCodeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeController.h; sourceTree = "<group>"; };
+		87AD464E1E9B8EBA00C02FF5 /* QRCodeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeController.m; sourceTree = "<group>"; };
+		87AD46531E9B8EDE00C02FF5 /* MSVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSVersion.h; sourceTree = "<group>"; };
+		87AD46541E9B8EDE00C02FF5 /* MSVersion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSVersion.m; sourceTree = "<group>"; };
+		87AD46591E9B8EF900C02FF5 /* MSHttpClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSHttpClient.h; sourceTree = "<group>"; };
+		87AD465A1E9B8EF900C02FF5 /* MSHttpClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSHttpClient.m; sourceTree = "<group>"; };
+		87AD465C1E9B8F0F00C02FF5 /* HUDView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HUDView.h; sourceTree = "<group>"; };
+		87AD465D1E9B8F0F00C02FF5 /* HUDView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HUDView.m; sourceTree = "<group>"; };
+		87AD465F1E9B8F1400C02FF5 /* MSBlockAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSBlockAlertView.h; sourceTree = "<group>"; };
+		87AD46601E9B8F1400C02FF5 /* MSBlockAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSBlockAlertView.m; sourceTree = "<group>"; };
+		87AD46711E9B8F5500C02FF5 /* MSDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSDataSource.h; sourceTree = "<group>"; };
+		87AD46721E9B8F5500C02FF5 /* MSDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSDataSource.m; sourceTree = "<group>"; };
+		87AD46741E9B8F7800C02FF5 /* DLAutoLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DLAutoLayout.h; sourceTree = "<group>"; };
+		87AD46751E9B8F7800C02FF5 /* DLAutoLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DLAutoLayout.m; sourceTree = "<group>"; };
+		87AD46771E9B900B00C02FF5 /* ActionPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionPicker.h; sourceTree = "<group>"; };
+		87AD46781E9B900B00C02FF5 /* ActionPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionPicker.m; sourceTree = "<group>"; };
+		87AD46791E9B900C00C02FF5 /* ActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheet.h; sourceTree = "<group>"; };
+		87AD467A1E9B900C00C02FF5 /* ActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheet.m; sourceTree = "<group>"; };
+		87AD467D1E9B901700C02FF5 /* DLRangeSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DLRangeSlider.h; sourceTree = "<group>"; };
+		87AD467E1E9B901700C02FF5 /* DLRangeSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DLRangeSlider.m; sourceTree = "<group>"; };
+		87AD46801E9B902900C02FF5 /* MSPlainCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSPlainCellView.h; sourceTree = "<group>"; };
+		87AD46811E9B902900C02FF5 /* MSPlainCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSPlainCellView.m; sourceTree = "<group>"; };
+		87AD46831E9B907400C02FF5 /* MSDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSDownloader.h; sourceTree = "<group>"; };
+		87AD46841E9B907400C02FF5 /* MSDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSDownloader.m; sourceTree = "<group>"; };
+		87AD46861E9B907F00C02FF5 /* MSTaskQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSTaskQueue.h; sourceTree = "<group>"; };
+		87AD46871E9B907F00C02FF5 /* MSTaskQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSTaskQueue.m; sourceTree = "<group>"; };
+		87AD46AE1E9E27B000C02FF5 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		87AD462E1E9B8E3C00C02FF5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				87AD46AF1E9E27B000C02FF5 /* CoreLocation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		87AD46281E9B8E3C00C02FF5 = {
+			isa = PBXGroup;
+			children = (
+				87AD46331E9B8E3C00C02FF5 /* MusouKit */,
+				87AD46321E9B8E3C00C02FF5 /* Products */,
+				87AD46AD1E9E27B000C02FF5 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		87AD46321E9B8E3C00C02FF5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				87AD46311E9B8E3C00C02FF5 /* libMusouKit.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		87AD46331E9B8E3C00C02FF5 /* MusouKit */ = {
+			isa = PBXGroup;
+			children = (
+				87AD46341E9B8E3C00C02FF5 /* MusouKit.h */,
+				87AD46351E9B8E3C00C02FF5 /* MusouKit.m */,
+				87AD463D1E9B8E5B00C02FF5 /* Additions */,
+				87AD463E1E9B8E5B00C02FF5 /* Controllers */,
+				87AD463F1E9B8E5B00C02FF5 /* Utils */,
+				87AD46401E9B8E5B00C02FF5 /* Views */,
+			);
+			path = MusouKit;
+			sourceTree = "<group>";
+		};
+		87AD463D1E9B8E5B00C02FF5 /* Additions */ = {
+			isa = PBXGroup;
+			children = (
+				87AD46441E9B8E9F00C02FF5 /* JSONEntity.h */,
+				87AD46451E9B8E9F00C02FF5 /* JSONEntity.m */,
+				87AD46411E9B8E9800C02FF5 /* MSAdditions.h */,
+				87AD46421E9B8E9800C02FF5 /* MSAdditions.m */,
+				87AD46741E9B8F7800C02FF5 /* DLAutoLayout.h */,
+				87AD46751E9B8F7800C02FF5 /* DLAutoLayout.m */,
+			);
+			path = Additions;
+			sourceTree = "<group>";
+		};
+		87AD463E1E9B8E5B00C02FF5 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				87AD46471E9B8EB300C02FF5 /* MSBaseViewController.h */,
+				87AD46481E9B8EB300C02FF5 /* MSBaseViewController.m */,
+				87AD46491E9B8EB300C02FF5 /* MSCameraController.h */,
+				87AD464A1E9B8EB300C02FF5 /* MSCameraController.m */,
+				87AD464D1E9B8EBA00C02FF5 /* QRCodeController.h */,
+				87AD464E1E9B8EBA00C02FF5 /* QRCodeController.m */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		87AD463F1E9B8E5B00C02FF5 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				87AD46711E9B8F5500C02FF5 /* MSDataSource.h */,
+				87AD46721E9B8F5500C02FF5 /* MSDataSource.m */,
+				87AD46531E9B8EDE00C02FF5 /* MSVersion.h */,
+				87AD46541E9B8EDE00C02FF5 /* MSVersion.m */,
+				87AD46591E9B8EF900C02FF5 /* MSHttpClient.h */,
+				87AD465A1E9B8EF900C02FF5 /* MSHttpClient.m */,
+				87AD46831E9B907400C02FF5 /* MSDownloader.h */,
+				87AD46841E9B907400C02FF5 /* MSDownloader.m */,
+				87AD46861E9B907F00C02FF5 /* MSTaskQueue.h */,
+				87AD46871E9B907F00C02FF5 /* MSTaskQueue.m */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		87AD46401E9B8E5B00C02FF5 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				87AD46771E9B900B00C02FF5 /* ActionPicker.h */,
+				87AD46781E9B900B00C02FF5 /* ActionPicker.m */,
+				87AD46791E9B900C00C02FF5 /* ActionSheet.h */,
+				87AD467A1E9B900C00C02FF5 /* ActionSheet.m */,
+				87AD467D1E9B901700C02FF5 /* DLRangeSlider.h */,
+				87AD467E1E9B901700C02FF5 /* DLRangeSlider.m */,
+				87AD465C1E9B8F0F00C02FF5 /* HUDView.h */,
+				87AD465D1E9B8F0F00C02FF5 /* HUDView.m */,
+				87AD46801E9B902900C02FF5 /* MSPlainCellView.h */,
+				87AD46811E9B902900C02FF5 /* MSPlainCellView.m */,
+				87AD465F1E9B8F1400C02FF5 /* MSBlockAlertView.h */,
+				87AD46601E9B8F1400C02FF5 /* MSBlockAlertView.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		87AD46AD1E9E27B000C02FF5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				87AD46AE1E9E27B000C02FF5 /* CoreLocation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		87AD46301E9B8E3C00C02FF5 /* MusouKit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 87AD463A1E9B8E3C00C02FF5 /* Build configuration list for PBXNativeTarget "MusouKit" */;
+			buildPhases = (
+				87AD462D1E9B8E3C00C02FF5 /* Sources */,
+				87AD462E1E9B8E3C00C02FF5 /* Frameworks */,
+				87AD462F1E9B8E3C00C02FF5 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MusouKit;
+			productName = MusouKit;
+			productReference = 87AD46311E9B8E3C00C02FF5 /* libMusouKit.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		87AD46291E9B8E3C00C02FF5 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0810;
+				ORGANIZATIONNAME = DANAL;
+				TargetAttributes = {
+					87AD46301E9B8E3C00C02FF5 = {
+						CreatedOnToolsVersion = 8.1;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 87AD462C1E9B8E3C00C02FF5 /* Build configuration list for PBXProject "MusouKit" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 87AD46281E9B8E3C00C02FF5;
+			productRefGroup = 87AD46321E9B8E3C00C02FF5 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				87AD46301E9B8E3C00C02FF5 /* MusouKit */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		87AD462D1E9B8E3C00C02FF5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				87AD46881E9B907F00C02FF5 /* MSTaskQueue.m in Sources */,
+				87AD464C1E9B8EB300C02FF5 /* MSCameraController.m in Sources */,
+				87AD46731E9B8F5500C02FF5 /* MSDataSource.m in Sources */,
+				87AD465E1E9B8F0F00C02FF5 /* HUDView.m in Sources */,
+				87AD46821E9B902900C02FF5 /* MSPlainCellView.m in Sources */,
+				87AD46361E9B8E3C00C02FF5 /* MusouKit.m in Sources */,
+				87AD46461E9B8E9F00C02FF5 /* JSONEntity.m in Sources */,
+				87AD46431E9B8E9800C02FF5 /* MSAdditions.m in Sources */,
+				87AD46761E9B8F7800C02FF5 /* DLAutoLayout.m in Sources */,
+				87AD46551E9B8EDE00C02FF5 /* MSVersion.m in Sources */,
+				87AD465B1E9B8EF900C02FF5 /* MSHttpClient.m in Sources */,
+				87AD467C1E9B900C00C02FF5 /* ActionSheet.m in Sources */,
+				87AD467F1E9B901700C02FF5 /* DLRangeSlider.m in Sources */,
+				87AD46851E9B907400C02FF5 /* MSDownloader.m in Sources */,
+				87AD467B1E9B900C00C02FF5 /* ActionPicker.m in Sources */,
+				87AD464B1E9B8EB300C02FF5 /* MSBaseViewController.m in Sources */,
+				87AD464F1E9B8EBA00C02FF5 /* QRCodeController.m in Sources */,
+				87AD46611E9B8F1400C02FF5 /* MSBlockAlertView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		87AD46381E9B8E3C00C02FF5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		87AD46391E9B8E3C00C02FF5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		87AD463B1E9B8E3C00C02FF5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		87AD463C1E9B8E3C00C02FF5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		87AD462C1E9B8E3C00C02FF5 /* Build configuration list for PBXProject "MusouKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				87AD46381E9B8E3C00C02FF5 /* Debug */,
+				87AD46391E9B8E3C00C02FF5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		87AD463A1E9B8E3C00C02FF5 /* Build configuration list for PBXNativeTarget "MusouKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				87AD463B1E9B8E3C00C02FF5 /* Debug */,
+				87AD463C1E9B8E3C00C02FF5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 87AD46291E9B8E3C00C02FF5 /* Project object */;
+}
