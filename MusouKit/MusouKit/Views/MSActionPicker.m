@@ -1,17 +1,17 @@
 //
 //  ActionPicker.m
-//  iDemo
+//  
 //
 //  Created by danal on 11-11-10.
 //  Copyright 2011年 __MyCompanyName__. All rights reserved.
 //
 
-#import "ActionPicker.h"
+#import "MSActionPicker.h"
 
-@interface ActionPicker ()<UIPickerViewDataSource, UIPickerViewDelegate>
+@interface MSActionPicker ()<UIPickerViewDataSource, UIPickerViewDelegate>
 @end
 
-@implementation ActionPicker
+@implementation MSActionPicker
 
 - (id)initWithTitle:(NSString *)title datePicker:(BOOL)isDatePicker{
     CGRect frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);

@@ -1,6 +1,6 @@
 //
-//  MSPlainCellView.h
-//  iLove
+//  MSCellView.h
+//  
 //
 //  Created by danal.luo on 15/7/28.
 //  Copyright (c) 2015年 danal. All rights reserved.
@@ -14,7 +14,7 @@ enum {
     LineAtTopAndBottom = 2,
 };
 
-@interface MSPlainCellView : UIView
+@interface MSCellView : UIView
 @property (assign, nonatomic) NSInteger linePos;    //0-top, 1-bottom, 2-top&bottom
 @property (strong, nonatomic) UIColor *lineColor;
 @property (assign, nonatomic) CGFloat lineIndent;   //default 0
@@ -26,9 +26,9 @@ enum {
 @end
 
 
-@interface MSPlainCellViewBottom : MSPlainCellView
+@interface MSCellViewBottom : MSCellView
 @end
 
 
-@interface MSPlainCellViewBoth : MSPlainCellView
+@interface MSCellViewBoth : MSCellView
 @end

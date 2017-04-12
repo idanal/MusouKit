@@ -6,18 +6,18 @@
 //  Copyright (c) 2015 danal. All rights reserved.
 //
 
-#import "QRCodeController.h"
+#import "MSQRCodeController.h"
 #import <AVFoundation/AVFoundation.h>
 #import <CoreImage/CoreImage.h>
 #import <QuartzCore/QuartzCore.h>
 
-@interface QRCodeController () <AVCaptureMetadataOutputObjectsDelegate>
+@interface MSQRCodeController () <AVCaptureMetadataOutputObjectsDelegate>
 @property (nonatomic, strong) AVCaptureDevice *device;
 @property (nonatomic, strong) AVCaptureSession *session;
 @property (nonatomic, strong) AVCaptureVideoPreviewLayer *preview;
 @end
 
-@implementation QRCodeController
+@implementation MSQRCodeController
 
 - (void)viewDidLoad{
     [super viewDidLoad];
@@ -71,7 +71,7 @@
     
     //Overlay
     if (_overlay == nil){
-        QRCodeOverlay *overlay = [[QRCodeOverlay alloc] initWithFrame:self.view.bounds];
+        MSQRCodeOverlay *overlay = [[MSQRCodeOverlay alloc] initWithFrame:self.view.bounds];
         [overlay.cancelButton addTarget:self action:@selector(onCancel) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:overlay];
         _overlay = overlay;
@@ -242,7 +242,7 @@ void ProviderReleaseData (void *info, const void *data, size_t size){
 @end
 
 
-@implementation QRCodeOverlay
+@implementation MSQRCodeOverlay
 
 - (id)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];

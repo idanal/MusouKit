@@ -7,17 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
-@protocol ActionSheetDelegate;
-@interface ActionSheet : UIView {
+
+
+@interface MSActionSheet : UIView {
     UIScrollView *_scroll;
     UIView *_cancelButton;
     UIView *_mask;
 }
-@property (assign, nonatomic) id<ActionSheetDelegate> delegate;
 @property (assign, nonatomic) id userData;
 @property (assign, nonatomic) UILabel *titleLabel;
 @property (readonly, nonatomic) NSArray *buttons;
-@property (copy, nonatomic) void(^clickBlock)(ActionSheet *sheet, NSInteger buttonIndex);
+//Callback
+@property (copy, nonatomic) void(^clickBlock)(MSActionSheet *sheet, NSInteger buttonIndex);
 
 /** Title sheet with titles */
 - (id)initWithTitle:(NSString *)title cancelTitle:(NSString *)cancelTitle otherTitles:(NSString *)other,...;
@@ -44,8 +45,4 @@
 
 @end
 
-static const NSInteger ActionSheetMaxColumn = 3;
-
-@protocol ActionSheetDelegate <NSObject>
-- (void)onActionSheet:(ActionSheet *)sheet didClickAtButtonIndex:(NSInteger)buttonIndex;
-@end
+static const NSInteger MSActionSheetMaxColumn = 3;

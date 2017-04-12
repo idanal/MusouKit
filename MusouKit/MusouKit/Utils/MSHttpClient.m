@@ -7,7 +7,7 @@
 //
 
 #import "MSHttpClient.h"
-#import "JSONEntity.h"
+#import "MSJSONEntity.h"
 
 
 @interface MSHttpClient ()

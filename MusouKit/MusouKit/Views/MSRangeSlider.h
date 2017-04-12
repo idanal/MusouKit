@@ -11,7 +11,7 @@
 /**
  * A RangeSlider: Selection range 0.0-1.0
  */
-@interface DLRangeSlider : UIControl
+@interface MSRangeSlider : UIControl
 //Labels, it's nil if not set
 @property (nonatomic, assign) IBOutlet UILabel *labelLeft;
 @property (nonatomic, assign) IBOutlet UILabel *labelRight;
@@ -21,5 +21,5 @@
 /** Selected end value, in 0.0-1.0 */
 @property (nonatomic, readonly) CGFloat endValue;
 //Event callback
-@property (nonatomic, copy) void (^onValueChanged)(DLRangeSlider *sender);
+@property (nonatomic, copy) void (^onValueChanged)(MSRangeSlider *sender);
 @end

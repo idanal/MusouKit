@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface HUDView : UIView
+@interface MSHUDView : UIView
 {
     NSTimer *_timer;
     UILabel *_textLbl;
@@ -33,7 +33,7 @@
  * @param subtitle 消息下方的子标题
  * @return HUDView对象
  */
-+ (HUDView *)showMessageToView:(UIView *)superview msg:(NSString *)msg subtitle:(NSString *)subtitle;
++ (MSHUDView *)showMessageToView:(UIView *)superview msg:(NSString *)msg subtitle:(NSString *)subtitle;
 
 /**
  * 显示一条加载消息
@@ -42,7 +42,7 @@
  * @param subtitle 消息下方的子标题
  * @return HUDView对象
  */
-+ (HUDView *)showLoadingToView:(UIView *)superview msg:(NSString *)msg subtitle:(NSString *)subtitle;
++ (MSHUDView *)showLoadingToView:(UIView *)superview msg:(NSString *)msg subtitle:(NSString *)subtitle;
 /**
  * 显示一条加载消息
  * @param superview 父视图
@@ -51,14 +51,14 @@
  * @touchToHide 是否点击任意位置隐藏
  * @return HUDView对象
  */
-+ (HUDView *)showLoadingToView:(UIView *)superview msg:(NSString *)msg subtitle:(NSString *)subtitle touchToHide:(BOOL)touchToHide;
++ (MSHUDView *)showLoadingToView:(UIView *)superview msg:(NSString *)msg subtitle:(NSString *)subtitle touchToHide:(BOOL)touchToHide;
 
 /**
  * 显示一条提示为"Loading..."的加载消息
  * @param superview 父视图
  * @return HUDView对象
  */
-+ (HUDView *)showLoading:(UIView *)superview;
++ (MSHUDView *)showLoading:(UIView *)superview;
 
 /**
  * 移除superview里最顶层的hud

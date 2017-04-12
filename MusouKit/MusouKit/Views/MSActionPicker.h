@@ -1,6 +1,6 @@
 //
 //  ActionPicker.h
-//  iDemo
+//  
 //
 //  Created by danal on 11-11-10.
 //  Copyright 2011年 __MyCompanyName__. All rights reserved.
@@ -11,7 +11,7 @@
 /**
  * A Picker support Date or List
  */
-@interface ActionPicker : UIView<UIActionSheetDelegate> {
+@interface MSActionPicker : UIView<UIActionSheetDelegate> {
     UIToolbar   *_toolbar;
     UIView      *_picker;
     UIView      *_mask;
@@ -21,7 +21,7 @@
 @property (nonatomic, assign) UIDatePickerMode dateMode;    //default date
 
 //Callback when selection confirmed
-@property (nonatomic, copy) void (^onComplete)(ActionPicker *p, BOOL canceled);
+@property (nonatomic, copy) void (^onComplete)(MSActionPicker *p, BOOL canceled);
 
 //Data source for common picker use blocks
 @property (nonatomic, copy) NSInteger (^totalColumns)(void);

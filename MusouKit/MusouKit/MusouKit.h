@@ -8,6 +8,26 @@
 
 #import <Foundation/Foundation.h>
 
-@interface MusouKit : NSObject
 
-@end
+#import "MSAdditions.h"
+#import "MSJSONEntity.h"
+#import "DLAutoLayout.h"
+
+#import "MSDataSource.h"
+#import "MSHttpClient.h"
+
+#import "MSActionPicker.h"
+#import "MSActionSheet.h"
+#import "MSCellView.h"
+#import "MSHUDView.h"
+#import "MSRangeSlider.h"
+#import "MSBlockAlertView.h"
+
+#import "MSBaseViewController.h"
+#import "MSCameraController.h"
+#import "MSQRCodeController.h"
+
+
+
+//Macros
+#define kAppleLookupApi @"http://itunes.apple.com/lookup?id=%@"

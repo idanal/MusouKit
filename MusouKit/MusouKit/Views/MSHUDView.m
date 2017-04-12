@@ -7,12 +7,12 @@
 //
 
 #import <QuartzCore/QuartzCore.h>
-#import "HUDView.h"
+#import "MSHUDView.h"
 #import "MSAdditions.h"
 
 #define kHUDViewMargin 20.f
 
-@implementation HUDView
+@implementation MSHUDView
 
 - (id)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
@@ -188,23 +188,23 @@
     }
 }
 
-+ (HUDView *)showMessageToView:(UIView *)superview msg:(NSString *)msg subtitle:(NSString *)subtitle{
-    HUDView *hud = [[HUDView alloc] initWithFrame:superview.bounds];
++ (MSHUDView *)showMessageToView:(UIView *)superview msg:(NSString *)msg subtitle:(NSString *)subtitle{
+    MSHUDView *hud = [[MSHUDView alloc] initWithFrame:superview.bounds];
     [superview addSubview:hud];
     [hud showMessage:msg subtitle:subtitle loading:NO];
     return hud;
 }
 
-+ (HUDView *)showLoadingToView:(UIView *)superview msg:(NSString *)msg subtitle:(NSString *)subtitle{
-    HUDView *hud = [[HUDView alloc] initWithFrame:superview.bounds];
++ (MSHUDView *)showLoadingToView:(UIView *)superview msg:(NSString *)msg subtitle:(NSString *)subtitle{
+    MSHUDView *hud = [[MSHUDView alloc] initWithFrame:superview.bounds];
     [superview addSubview:hud];
     [hud showMessage:msg subtitle:subtitle loading:YES];
     return hud;
 }
 
-+ (HUDView *)showLoadingToView:(UIView *)superview msg:(NSString *)msg subtitle:(NSString *)subtitle touchToHide:(BOOL)touchToHide
++ (MSHUDView *)showLoadingToView:(UIView *)superview msg:(NSString *)msg subtitle:(NSString *)subtitle touchToHide:(BOOL)touchToHide
 {
-    HUDView *hud = [[HUDView alloc] initWithFrame:superview.bounds];
+    MSHUDView *hud = [[MSHUDView alloc] initWithFrame:superview.bounds];
     hud.touchToHide = touchToHide;
     [superview addSubview:hud];
     [hud showMessage:msg subtitle:subtitle loading:YES];
@@ -212,14 +212,14 @@
     return hud;
 }
 
-+ (HUDView *)showLoading:(UIView *)superview{
++ (MSHUDView *)showLoading:(UIView *)superview{
     return [self showLoadingToView:superview msg:NSLocalizedString(@"Loading...", nil) subtitle:nil];
 }
 
 + (void)hideHUD:(UIView *)superview{
     for (UIView *v in superview.subviews){
-        if ([v isKindOfClass:[HUDView class]]){
-            [(HUDView *)v hide];
+        if ([v isKindOfClass:[MSHUDView class]]){
+            [(MSHUDView *)v hide];
             break;
         }
     }
@@ -231,15 +231,15 @@
 @implementation UIView (HUD)
 
 - (void)showToast:(NSString *)msg{
-    [HUDView showMessageToView:self msg:msg subtitle:nil];
+    [MSHUDView showMessageToView:self msg:msg subtitle:nil];
 }
 
 - (void)showLoading:(NSString *)msg{
-    [HUDView showLoadingToView:self msg:msg ? msg : @"加载中，请稍候..." subtitle:nil];
+    [MSHUDView showLoadingToView:self msg:msg ? msg : @"加载中，请稍候..." subtitle:nil];
 }
 
 - (void)hideHUD{
-    [HUDView hideHUD:self];
+    [MSHUDView hideHUD:self];
 }
 
 @end

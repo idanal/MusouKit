@@ -6,16 +6,16 @@
 //  Copyright (c) 2014 danal. All rights reserved.
 //
 
-#import "ActionSheet.h"
+#import "MSActionSheet.h"
 #import "MSAdditions.h"
 
 static const CGFloat _kButtonSize = 52.f;
 
-@interface ActionSheet ()
+@interface MSActionSheet ()
 @property (strong, nonatomic) NSMutableArray *buttonList;
 @end
 
-@implementation ActionSheet
+@implementation MSActionSheet
 
 - (void)dealloc{
 #if !__has_feature(objc_arc)
@@ -153,15 +153,15 @@ static const CGFloat _kButtonSize = 52.f;
 #endif
         x = 20.f;
         CGFloat w1 = 0, h1 = 0;
-        CGFloat marY = 10.f, marX = 20.f; //marX = (280.f - ActionSheetMaxColumn*w1)/(ActionSheetMaxColumn+1) ;
-        w1 = h1 = (_scroll.bounds.size.width - ActionSheetMaxColumn*marX - marX)/ActionSheetMaxColumn;
+        CGFloat marY = 10.f, marX = 20.f; //marX = (280.f - MSActionSheetMaxColumn*w1)/(MSActionSheetMaxColumn+1) ;
+        w1 = h1 = (_scroll.bounds.size.width - MSActionSheetMaxColumn*marX - marX)/MSActionSheetMaxColumn;
         w1 = h1 = MIN(w1, _kButtonSize);
-        marX = (_scroll.bounds.size.width - ActionSheetMaxColumn*w1)/(ActionSheetMaxColumn+1);
+        marX = (_scroll.bounds.size.width - MSActionSheetMaxColumn*w1)/(MSActionSheetMaxColumn+1);
         NSInteger tag = 0, row = 0, col = 0;
         //Buttons
         for (NSInteger i = 0; i < titleAndIconList.count; i+=2, tag++){
-            row = tag/ActionSheetMaxColumn;
-            col = tag%ActionSheetMaxColumn;
+            row = tag/MSActionSheetMaxColumn;
+            col = tag%MSActionSheetMaxColumn;
             
             NSString *buttTitle = titleAndIconList[i];
             NSString *iconFile = titleAndIconList[i+1];
@@ -182,7 +182,7 @@ static const CGFloat _kButtonSize = 52.f;
             buttLbl.font = [UIFont systemFontOfSize:12.f];
             [butt addSubview:buttLbl];
         }
-        _scroll.contentSize = CGSizeMake(_scroll.bounds.size.width, ceilf(tag*1.f/ActionSheetMaxColumn)*(marY+h1+20.f)+marY);
+        _scroll.contentSize = CGSizeMake(_scroll.bounds.size.width, ceilf(tag*1.f/MSActionSheetMaxColumn)*(marY+h1+20.f)+marY);
         
         if (cancelTitle) {   //Cancel button
             y += mar;
@@ -229,15 +229,15 @@ static const CGFloat _kButtonSize = 52.f;
         NSString *icon = iconFile1;
         CGFloat w1 = 0, h1 = 0;
         CGFloat marY = 10.f, marX = 20.f;
-        w1 = h1 = (_scroll.bounds.size.width - ActionSheetMaxColumn*marX - marX)/ActionSheetMaxColumn;
+        w1 = h1 = (_scroll.bounds.size.width - MSActionSheetMaxColumn*marX - marX)/MSActionSheetMaxColumn;
         w1 = h1 = MIN(w1, _kButtonSize);
-        marX = (_scroll.bounds.size.width - ActionSheetMaxColumn*w1)/(ActionSheetMaxColumn+1);
+        marX = (_scroll.bounds.size.width - MSActionSheetMaxColumn*w1)/(MSActionSheetMaxColumn+1);
         NSInteger i = 0, row = 0, col = 0;
         va_list ap;
         va_start(ap, iconFile1);
         do {
-            row = i/ActionSheetMaxColumn;
-            col = i%ActionSheetMaxColumn;
+            row = i/MSActionSheetMaxColumn;
+            col = i%MSActionSheetMaxColumn;
             UIButton *butt = [UIButton buttonWithType:UIButtonTypeCustom];
             butt.tag = i++;
             butt.frame = CGRectMake(col*(marX+w1)+marX, row*(marY+h1)+marY, w1, h1);
@@ -262,16 +262,13 @@ static const CGFloat _kButtonSize = 52.f;
             [self addSubview:butt];
             _cancelButton = butt;
         }
-        _scroll.contentSize = CGSizeMake(_scroll.bounds.size.width, ceilf(i*1.f/ActionSheetMaxColumn)*(marY+h1)+marY);
+        _scroll.contentSize = CGSizeMake(_scroll.bounds.size.width, ceilf(i*1.f/MSActionSheetMaxColumn)*(marY+h1)+marY);
     }
     return self;
 }
 
 - (IBAction)buttonAction:(UIButton *)sender{
-    if (_delegate){
-        [_delegate onActionSheet:self didClickAtButtonIndex:sender.tag];
-    }
-    else if (_clickBlock){
+    if (_clickBlock){
         _clickBlock(self, sender.tag);
     }
     [self dismiss];

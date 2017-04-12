@@ -10,23 +10,21 @@
 		87AD46361E9B8E3C00C02FF5 /* MusouKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD46351E9B8E3C00C02FF5 /* MusouKit.m */; };
 		87AD46371E9B8E3C00C02FF5 /* MusouKit.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 87AD46341E9B8E3C00C02FF5 /* MusouKit.h */; };
 		87AD46431E9B8E9800C02FF5 /* MSAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD46421E9B8E9800C02FF5 /* MSAdditions.m */; };
-		87AD46461E9B8E9F00C02FF5 /* JSONEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD46451E9B8E9F00C02FF5 /* JSONEntity.m */; };
+		87AD46461E9B8E9F00C02FF5 /* MSJSONEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD46451E9B8E9F00C02FF5 /* MSJSONEntity.m */; };
 		87AD464B1E9B8EB300C02FF5 /* MSBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD46481E9B8EB300C02FF5 /* MSBaseViewController.m */; };
 		87AD464C1E9B8EB300C02FF5 /* MSCameraController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD464A1E9B8EB300C02FF5 /* MSCameraController.m */; };
-		87AD464F1E9B8EBA00C02FF5 /* QRCodeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD464E1E9B8EBA00C02FF5 /* QRCodeController.m */; };
-		87AD46551E9B8EDE00C02FF5 /* MSVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD46541E9B8EDE00C02FF5 /* MSVersion.m */; };
+		87AD464F1E9B8EBA00C02FF5 /* MSQRCodeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD464E1E9B8EBA00C02FF5 /* MSQRCodeController.m */; };
 		87AD465B1E9B8EF900C02FF5 /* MSHttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD465A1E9B8EF900C02FF5 /* MSHttpClient.m */; };
-		87AD465E1E9B8F0F00C02FF5 /* HUDView.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD465D1E9B8F0F00C02FF5 /* HUDView.m */; };
+		87AD465E1E9B8F0F00C02FF5 /* MSHUDView.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD465D1E9B8F0F00C02FF5 /* MSHUDView.m */; };
 		87AD46611E9B8F1400C02FF5 /* MSBlockAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD46601E9B8F1400C02FF5 /* MSBlockAlertView.m */; };
 		87AD46731E9B8F5500C02FF5 /* MSDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD46721E9B8F5500C02FF5 /* MSDataSource.m */; };
 		87AD46761E9B8F7800C02FF5 /* DLAutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD46751E9B8F7800C02FF5 /* DLAutoLayout.m */; };
-		87AD467B1E9B900C00C02FF5 /* ActionPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD46781E9B900B00C02FF5 /* ActionPicker.m */; };
-		87AD467C1E9B900C00C02FF5 /* ActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD467A1E9B900C00C02FF5 /* ActionSheet.m */; };
-		87AD467F1E9B901700C02FF5 /* DLRangeSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD467E1E9B901700C02FF5 /* DLRangeSlider.m */; };
-		87AD46821E9B902900C02FF5 /* MSPlainCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD46811E9B902900C02FF5 /* MSPlainCellView.m */; };
+		87AD467B1E9B900C00C02FF5 /* MSActionPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD46781E9B900B00C02FF5 /* MSActionPicker.m */; };
+		87AD467C1E9B900C00C02FF5 /* MSActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD467A1E9B900C00C02FF5 /* MSActionSheet.m */; };
+		87AD467F1E9B901700C02FF5 /* MSRangeSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD467E1E9B901700C02FF5 /* MSRangeSlider.m */; };
+		87AD46821E9B902900C02FF5 /* MSCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD46811E9B902900C02FF5 /* MSCellView.m */; };
 		87AD46851E9B907400C02FF5 /* MSDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD46841E9B907400C02FF5 /* MSDownloader.m */; };
 		87AD46881E9B907F00C02FF5 /* MSTaskQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD46871E9B907F00C02FF5 /* MSTaskQueue.m */; };
-		87AD46AF1E9E27B000C02FF5 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87AD46AE1E9E27B000C02FF5 /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -48,34 +46,32 @@
 		87AD46351E9B8E3C00C02FF5 /* MusouKit.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MusouKit.m; sourceTree = "<group>"; };
 		87AD46411E9B8E9800C02FF5 /* MSAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSAdditions.h; sourceTree = "<group>"; };
 		87AD46421E9B8E9800C02FF5 /* MSAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSAdditions.m; sourceTree = "<group>"; };
-		87AD46441E9B8E9F00C02FF5 /* JSONEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONEntity.h; sourceTree = "<group>"; };
-		87AD46451E9B8E9F00C02FF5 /* JSONEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONEntity.m; sourceTree = "<group>"; };
+		87AD46441E9B8E9F00C02FF5 /* MSJSONEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSJSONEntity.h; sourceTree = "<group>"; };
+		87AD46451E9B8E9F00C02FF5 /* MSJSONEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSJSONEntity.m; sourceTree = "<group>"; };
 		87AD46471E9B8EB300C02FF5 /* MSBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSBaseViewController.h; sourceTree = "<group>"; };
 		87AD46481E9B8EB300C02FF5 /* MSBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSBaseViewController.m; sourceTree = "<group>"; };
 		87AD46491E9B8EB300C02FF5 /* MSCameraController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSCameraController.h; sourceTree = "<group>"; };
 		87AD464A1E9B8EB300C02FF5 /* MSCameraController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSCameraController.m; sourceTree = "<group>"; };
-		87AD464D1E9B8EBA00C02FF5 /* QRCodeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeController.h; sourceTree = "<group>"; };
-		87AD464E1E9B8EBA00C02FF5 /* QRCodeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeController.m; sourceTree = "<group>"; };
-		87AD46531E9B8EDE00C02FF5 /* MSVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSVersion.h; sourceTree = "<group>"; };
-		87AD46541E9B8EDE00C02FF5 /* MSVersion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSVersion.m; sourceTree = "<group>"; };
+		87AD464D1E9B8EBA00C02FF5 /* MSQRCodeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSQRCodeController.h; sourceTree = "<group>"; };
+		87AD464E1E9B8EBA00C02FF5 /* MSQRCodeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSQRCodeController.m; sourceTree = "<group>"; };
 		87AD46591E9B8EF900C02FF5 /* MSHttpClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSHttpClient.h; sourceTree = "<group>"; };
 		87AD465A1E9B8EF900C02FF5 /* MSHttpClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSHttpClient.m; sourceTree = "<group>"; };
-		87AD465C1E9B8F0F00C02FF5 /* HUDView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HUDView.h; sourceTree = "<group>"; };
-		87AD465D1E9B8F0F00C02FF5 /* HUDView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HUDView.m; sourceTree = "<group>"; };
+		87AD465C1E9B8F0F00C02FF5 /* MSHUDView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSHUDView.h; sourceTree = "<group>"; };
+		87AD465D1E9B8F0F00C02FF5 /* MSHUDView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSHUDView.m; sourceTree = "<group>"; };
 		87AD465F1E9B8F1400C02FF5 /* MSBlockAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSBlockAlertView.h; sourceTree = "<group>"; };
 		87AD46601E9B8F1400C02FF5 /* MSBlockAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSBlockAlertView.m; sourceTree = "<group>"; };
 		87AD46711E9B8F5500C02FF5 /* MSDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSDataSource.h; sourceTree = "<group>"; };
 		87AD46721E9B8F5500C02FF5 /* MSDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSDataSource.m; sourceTree = "<group>"; };
 		87AD46741E9B8F7800C02FF5 /* DLAutoLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DLAutoLayout.h; sourceTree = "<group>"; };
 		87AD46751E9B8F7800C02FF5 /* DLAutoLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DLAutoLayout.m; sourceTree = "<group>"; };
-		87AD46771E9B900B00C02FF5 /* ActionPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionPicker.h; sourceTree = "<group>"; };
-		87AD46781E9B900B00C02FF5 /* ActionPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionPicker.m; sourceTree = "<group>"; };
-		87AD46791E9B900C00C02FF5 /* ActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheet.h; sourceTree = "<group>"; };
-		87AD467A1E9B900C00C02FF5 /* ActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheet.m; sourceTree = "<group>"; };
-		87AD467D1E9B901700C02FF5 /* DLRangeSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DLRangeSlider.h; sourceTree = "<group>"; };
-		87AD467E1E9B901700C02FF5 /* DLRangeSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DLRangeSlider.m; sourceTree = "<group>"; };
-		87AD46801E9B902900C02FF5 /* MSPlainCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSPlainCellView.h; sourceTree = "<group>"; };
-		87AD46811E9B902900C02FF5 /* MSPlainCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSPlainCellView.m; sourceTree = "<group>"; };
+		87AD46771E9B900B00C02FF5 /* MSActionPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSActionPicker.h; sourceTree = "<group>"; };
+		87AD46781E9B900B00C02FF5 /* MSActionPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSActionPicker.m; sourceTree = "<group>"; };
+		87AD46791E9B900C00C02FF5 /* MSActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSActionSheet.h; sourceTree = "<group>"; };
+		87AD467A1E9B900C00C02FF5 /* MSActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSActionSheet.m; sourceTree = "<group>"; };
+		87AD467D1E9B901700C02FF5 /* MSRangeSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSRangeSlider.h; sourceTree = "<group>"; };
+		87AD467E1E9B901700C02FF5 /* MSRangeSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSRangeSlider.m; sourceTree = "<group>"; };
+		87AD46801E9B902900C02FF5 /* MSCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSCellView.h; sourceTree = "<group>"; };
+		87AD46811E9B902900C02FF5 /* MSCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSCellView.m; sourceTree = "<group>"; };
 		87AD46831E9B907400C02FF5 /* MSDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSDownloader.h; sourceTree = "<group>"; };
 		87AD46841E9B907400C02FF5 /* MSDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSDownloader.m; sourceTree = "<group>"; };
 		87AD46861E9B907F00C02FF5 /* MSTaskQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSTaskQueue.h; sourceTree = "<group>"; };
@@ -88,7 +84,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				87AD46AF1E9E27B000C02FF5 /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -128,8 +123,8 @@
 		87AD463D1E9B8E5B00C02FF5 /* Additions */ = {
 			isa = PBXGroup;
 			children = (
-				87AD46441E9B8E9F00C02FF5 /* JSONEntity.h */,
-				87AD46451E9B8E9F00C02FF5 /* JSONEntity.m */,
+				87AD46441E9B8E9F00C02FF5 /* MSJSONEntity.h */,
+				87AD46451E9B8E9F00C02FF5 /* MSJSONEntity.m */,
 				87AD46411E9B8E9800C02FF5 /* MSAdditions.h */,
 				87AD46421E9B8E9800C02FF5 /* MSAdditions.m */,
 				87AD46741E9B8F7800C02FF5 /* DLAutoLayout.h */,
@@ -145,8 +140,8 @@
 				87AD46481E9B8EB300C02FF5 /* MSBaseViewController.m */,
 				87AD46491E9B8EB300C02FF5 /* MSCameraController.h */,
 				87AD464A1E9B8EB300C02FF5 /* MSCameraController.m */,
-				87AD464D1E9B8EBA00C02FF5 /* QRCodeController.h */,
-				87AD464E1E9B8EBA00C02FF5 /* QRCodeController.m */,
+				87AD464D1E9B8EBA00C02FF5 /* MSQRCodeController.h */,
+				87AD464E1E9B8EBA00C02FF5 /* MSQRCodeController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -156,8 +151,6 @@
 			children = (
 				87AD46711E9B8F5500C02FF5 /* MSDataSource.h */,
 				87AD46721E9B8F5500C02FF5 /* MSDataSource.m */,
-				87AD46531E9B8EDE00C02FF5 /* MSVersion.h */,
-				87AD46541E9B8EDE00C02FF5 /* MSVersion.m */,
 				87AD46591E9B8EF900C02FF5 /* MSHttpClient.h */,
 				87AD465A1E9B8EF900C02FF5 /* MSHttpClient.m */,
 				87AD46831E9B907400C02FF5 /* MSDownloader.h */,
@@ -171,16 +164,16 @@
 		87AD46401E9B8E5B00C02FF5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				87AD46771E9B900B00C02FF5 /* ActionPicker.h */,
-				87AD46781E9B900B00C02FF5 /* ActionPicker.m */,
-				87AD46791E9B900C00C02FF5 /* ActionSheet.h */,
-				87AD467A1E9B900C00C02FF5 /* ActionSheet.m */,
-				87AD467D1E9B901700C02FF5 /* DLRangeSlider.h */,
-				87AD467E1E9B901700C02FF5 /* DLRangeSlider.m */,
-				87AD465C1E9B8F0F00C02FF5 /* HUDView.h */,
-				87AD465D1E9B8F0F00C02FF5 /* HUDView.m */,
-				87AD46801E9B902900C02FF5 /* MSPlainCellView.h */,
-				87AD46811E9B902900C02FF5 /* MSPlainCellView.m */,
+				87AD46771E9B900B00C02FF5 /* MSActionPicker.h */,
+				87AD46781E9B900B00C02FF5 /* MSActionPicker.m */,
+				87AD46791E9B900C00C02FF5 /* MSActionSheet.h */,
+				87AD467A1E9B900C00C02FF5 /* MSActionSheet.m */,
+				87AD467D1E9B901700C02FF5 /* MSRangeSlider.h */,
+				87AD467E1E9B901700C02FF5 /* MSRangeSlider.m */,
+				87AD465C1E9B8F0F00C02FF5 /* MSHUDView.h */,
+				87AD465D1E9B8F0F00C02FF5 /* MSHUDView.m */,
+				87AD46801E9B902900C02FF5 /* MSCellView.h */,
+				87AD46811E9B902900C02FF5 /* MSCellView.m */,
 				87AD465F1E9B8F1400C02FF5 /* MSBlockAlertView.h */,
 				87AD46601E9B8F1400C02FF5 /* MSBlockAlertView.m */,
 			);
@@ -255,20 +248,19 @@
 				87AD46881E9B907F00C02FF5 /* MSTaskQueue.m in Sources */,
 				87AD464C1E9B8EB300C02FF5 /* MSCameraController.m in Sources */,
 				87AD46731E9B8F5500C02FF5 /* MSDataSource.m in Sources */,
-				87AD465E1E9B8F0F00C02FF5 /* HUDView.m in Sources */,
-				87AD46821E9B902900C02FF5 /* MSPlainCellView.m in Sources */,
+				87AD465E1E9B8F0F00C02FF5 /* MSHUDView.m in Sources */,
+				87AD46821E9B902900C02FF5 /* MSCellView.m in Sources */,
 				87AD46361E9B8E3C00C02FF5 /* MusouKit.m in Sources */,
-				87AD46461E9B8E9F00C02FF5 /* JSONEntity.m in Sources */,
+				87AD46461E9B8E9F00C02FF5 /* MSJSONEntity.m in Sources */,
 				87AD46431E9B8E9800C02FF5 /* MSAdditions.m in Sources */,
 				87AD46761E9B8F7800C02FF5 /* DLAutoLayout.m in Sources */,
-				87AD46551E9B8EDE00C02FF5 /* MSVersion.m in Sources */,
 				87AD465B1E9B8EF900C02FF5 /* MSHttpClient.m in Sources */,
-				87AD467C1E9B900C00C02FF5 /* ActionSheet.m in Sources */,
-				87AD467F1E9B901700C02FF5 /* DLRangeSlider.m in Sources */,
+				87AD467C1E9B900C00C02FF5 /* MSActionSheet.m in Sources */,
+				87AD467F1E9B901700C02FF5 /* MSRangeSlider.m in Sources */,
 				87AD46851E9B907400C02FF5 /* MSDownloader.m in Sources */,
-				87AD467B1E9B900C00C02FF5 /* ActionPicker.m in Sources */,
+				87AD467B1E9B900C00C02FF5 /* MSActionPicker.m in Sources */,
 				87AD464B1E9B8EB300C02FF5 /* MSBaseViewController.m in Sources */,
-				87AD464F1E9B8EBA00C02FF5 /* QRCodeController.m in Sources */,
+				87AD464F1E9B8EBA00C02FF5 /* MSQRCodeController.m in Sources */,
 				87AD46611E9B8F1400C02FF5 /* MSBlockAlertView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

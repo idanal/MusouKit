@@ -6,9 +6,9 @@
 //  Copyright © 2016 Sean. All rights reserved.
 //
 
-#import "DLRangeSlider.h"
+#import "MSRangeSlider.h"
 
-@interface DLRangeSlider (){
+@interface MSRangeSlider (){
     
     UIView *_bar1;
     UIView *_bar2;
@@ -23,7 +23,7 @@
 
 @end
 
-@implementation DLRangeSlider
+@implementation MSRangeSlider
 
 - (void)awakeFromNib{
     [super awakeFromNib];

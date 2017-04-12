@@ -1,14 +1,14 @@
 //
-//  MSPlainCellView.m
-//  iLove
+//  MSCellView.m
+//  
 //
 //  Created by danal.luo on 15/7/28.
 //  Copyright (c) 2015年 danal. All rights reserved.
 //
 
-#import "MSPlainCellView.h"
+#import "MSCellView.h"
 
-@implementation MSPlainCellView
+@implementation MSCellView
 
 - (void)awakeFromNib{
     [super awakeFromNib];
@@ -68,7 +68,7 @@
 @end
 
 
-@implementation MSPlainCellViewBottom
+@implementation MSCellViewBottom
 
 - (void)awakeFromNib{
     [super awakeFromNib];
@@ -78,7 +78,7 @@
 @end
 
 
-@implementation MSPlainCellViewBoth
+@implementation MSCellViewBoth
 
 - (void)awakeFromNib{
     [super awakeFromNib];

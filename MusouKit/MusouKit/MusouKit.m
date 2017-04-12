@@ -8,6 +8,3 @@
 
 #import "MusouKit.h"
 
-@implementation MusouKit
-
-@end

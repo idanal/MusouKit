@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface QRCodeController : UIViewController
+@interface MSQRCodeController : UIViewController
 @property (nonatomic, assign) UIView *overlay;  //Customized overlay view
 @property (nonatomic, copy) void (^onScanComplete)(NSString *result, id controller);
 
@@ -28,6 +28,6 @@
 
 
 //Default overlay view
-@interface QRCodeOverlay : UIView
+@interface MSQRCodeOverlay : UIView
 @property (nonatomic, assign) IBOutlet UIButton *cancelButton;
 @end

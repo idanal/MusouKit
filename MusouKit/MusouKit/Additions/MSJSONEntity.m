@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 danal. All rights reserved.
 //
 
-#import "JSONEntity.h"
+#import "MSJSONEntity.h"
 #import <objc/runtime.h>
 
 #if !__has_feature(objc_arc)
