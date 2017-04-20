@@ -369,12 +369,20 @@
     };
 }
 
+- (ALViewBlock)dl_relativeTo{
+    return ^(UIView *v){
+        
+        self.translatesAutoresizingMaskIntoConstraints = NO;
+        [self dl_setToView:v];
+        return self;
+    };
+}
+
 - (ALViewBlock)dl_begin{
-    return ^(UIView *v, UIView *to){
+    return ^(UIView *v){
         
         self.translatesAutoresizingMaskIntoConstraints = NO;
         [self dl_setParent:v];
-        [self dl_setToView:to];
         return self;
     };
 }

@@ -10,8 +10,8 @@
 
 //Void
 typedef void (^ALVoidBlock)(void);
-//Begin with parent view and a refer view to align
-typedef UIView* (^ALViewBlock)(UIView *parent, UIView *toView);
+//A refer view to align
+typedef UIView* (^ALViewBlock)(UIView *view);
 //Value = multiplier * attribute + constant
 typedef UIView* (^ALValueBlock)(CGFloat constant);
 typedef UIView* (^ALReleationBlock)(NSLayoutRelation relation);
@@ -21,8 +21,10 @@ typedef UIView* (^ALReleationBlock)(NSLayoutRelation relation);
 
 /** First step: call begin */
 @property (nonatomic, readonly) ALViewBlock dl_begin;
-/** Last step: call end */
+/** Last step: call end. Don't forget it! */
 @property (nonatomic, readonly) ALVoidBlock dl_end;
+/** Set a relative view */
+@property (nonatomic, readonly) ALViewBlock dl_relativeTo;
 /** Set width */
 @property (nonatomic, readonly) ALValueBlock width;
 /** Set height */
@@ -68,14 +70,15 @@ typedef UIView* (^ALReleationBlock)(NSLayoutRelation relation);
  
  lbl
  .dl_resetLayout
- .dl_begin(self.view, nil)
+ .dl_begin(lbl.superview)
  .left(10)
  .right(-10)
  .relation(NSLayoutRelationLessThanOrEqual)
  .dl_end();
  
  lbl
- .dl_begin(self.view, box1)
+ .dl_begin(lbl.superview)
+ .dl_relativeTo(box1)
  .top(10)
  .dl_end();
 */
