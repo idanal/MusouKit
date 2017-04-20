@@ -25,6 +25,7 @@
 		87AD46821E9B902900C02FF5 /* MSCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD46811E9B902900C02FF5 /* MSCellView.m */; };
 		87AD46851E9B907400C02FF5 /* MSDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD46841E9B907400C02FF5 /* MSDownloader.m */; };
 		87AD46881E9B907F00C02FF5 /* MSTaskQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD46871E9B907F00C02FF5 /* MSTaskQueue.m */; };
+		87FEFCD21EA8BCF300BE1C9A /* MSImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 87FEFCD11EA8BCF300BE1C9A /* MSImageView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -77,6 +78,8 @@
 		87AD46861E9B907F00C02FF5 /* MSTaskQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSTaskQueue.h; sourceTree = "<group>"; };
 		87AD46871E9B907F00C02FF5 /* MSTaskQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSTaskQueue.m; sourceTree = "<group>"; };
 		87AD46AE1E9E27B000C02FF5 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		87FEFCD01EA8BCF300BE1C9A /* MSImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSImageView.h; sourceTree = "<group>"; };
+		87FEFCD11EA8BCF300BE1C9A /* MSImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSImageView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,6 +177,8 @@
 				87AD465D1E9B8F0F00C02FF5 /* MSHUDView.m */,
 				87AD46801E9B902900C02FF5 /* MSCellView.h */,
 				87AD46811E9B902900C02FF5 /* MSCellView.m */,
+				87FEFCD01EA8BCF300BE1C9A /* MSImageView.h */,
+				87FEFCD11EA8BCF300BE1C9A /* MSImageView.m */,
 				87AD465F1E9B8F1400C02FF5 /* MSBlockAlertView.h */,
 				87AD46601E9B8F1400C02FF5 /* MSBlockAlertView.m */,
 			);
@@ -247,6 +252,7 @@
 			files = (
 				87AD46881E9B907F00C02FF5 /* MSTaskQueue.m in Sources */,
 				87AD464C1E9B8EB300C02FF5 /* MSCameraController.m in Sources */,
+				87FEFCD21EA8BCF300BE1C9A /* MSImageView.m in Sources */,
 				87AD46731E9B8F5500C02FF5 /* MSDataSource.m in Sources */,
 				87AD465E1E9B8F0F00C02FF5 /* MSHUDView.m in Sources */,
 				87AD46821E9B902900C02FF5 /* MSCellView.m in Sources */,

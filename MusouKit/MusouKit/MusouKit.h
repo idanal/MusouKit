@@ -22,6 +22,7 @@
 #import "MSHUDView.h"
 #import "MSRangeSlider.h"
 #import "MSBlockAlertView.h"
+#import "MSImageView.h"
 
 #import "MSBaseViewController.h"
 #import "MSCameraController.h"
