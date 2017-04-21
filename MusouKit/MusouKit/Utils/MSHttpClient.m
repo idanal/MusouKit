@@ -263,3 +263,45 @@
 }
 
 @end
+
+
+@implementation NSMutableURLRequest (Form)
+
+static NSString *boundary = @"=======B-o-u-n-d-a-r-y=======";
+
+- (NSMutableData *)bodyData{
+    if (self.HTTPBody == nil){
+        self.HTTPBody = [NSMutableData new];
+        [self setValue:[NSString stringWithFormat:@"multipart/form-data; boundary=\"%@\"",boundary] forHTTPHeaderField:@"Content-Type"];
+    }
+    return (NSMutableData *)self.HTTPBody;
+}
+
+- (instancetype)appendFormValue:(id)val name:(NSString *)name{
+    NSString *str = [NSString stringWithFormat:@"%@", val];
+    return [self appendFormData:[str dataUsingEncoding:NSUTF8StringEncoding] name:name];
+}
+
+- (instancetype)appendFormData:(NSData *)data name:(NSString *)name{
+    [self.bodyData appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    [self.bodyData appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n", name] dataUsingEncoding:NSUTF8StringEncoding]];
+    [self.bodyData appendData:[@"Content-Type: application/octet-stream\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    [self.bodyData appendData:data];
+    return self;
+}
+
+- (instancetype)appendFileFormData:(NSData *)data name:(NSString *)name filename:(NSString *)filename{
+    [self.bodyData appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    [self.bodyData appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"%@\"\r\n", name, filename] dataUsingEncoding:NSUTF8StringEncoding]];
+    [self.bodyData appendData:[@"Content-Type: application/octet-stream\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    [self.bodyData appendData:data];
+    return self;
+}
+
+- (instancetype)appendEndBoundary{
+    [self.bodyData appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    [self setValue:[NSString stringWithFormat:@"%ld", [self.bodyData length]] forHTTPHeaderField:@"Content-Length"];
+    return self;
+}
+
+@end

@@ -63,4 +63,20 @@
 - (id)toFoundation;
 @end
 
+
+@interface NSMutableURLRequest (Form)
+
+/** Append a string or number */
+- (instancetype)appendFormValue:(id)val name:(NSString *)name;
+/** Append data with param name */
+- (instancetype)appendFormData:(NSData *)data name:(NSString *)name;
+/** Append file data with param name */
+- (instancetype)appendFileFormData:(NSData *)data name:(NSString *)name filename:(NSString *)filename;
+/** Append end boundary */
+- (instancetype)appendEndBoundary;
+
+@end
+
 //Test url @"http://vgirl.sinaapp.com/1.php";
+
+
