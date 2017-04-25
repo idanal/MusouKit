@@ -300,7 +300,7 @@ static NSString *boundary = @"=======B-o-u-n-d-a-r-y=======";
 
 - (instancetype)appendEndBoundary{
     [self.bodyData appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-    [self setValue:[NSString stringWithFormat:@"%ld", [self.bodyData length]] forHTTPHeaderField:@"Content-Length"];
+    [self setValue:[NSString stringWithFormat:@"%@", @([self.bodyData length])] forHTTPHeaderField:@"Content-Length"];
     return self;
 }
 
