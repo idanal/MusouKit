@@ -76,6 +76,13 @@ static NSString *s_Domain;
     };
 }
 
+- (MSSimpleHttp* (^)(BOOL))cacheResult{
+    return ^(BOOL cacheResult){
+        self->_cacheResult = cacheResult;
+        return self;
+    };
+}
+
 - (MSSimpleHttp* (^)(id, NSString *))put{
     return ^(id val, NSString *key){
         [self put:val key:key];
@@ -103,7 +110,9 @@ static NSString *s_Domain;
 }
 
 /** Send a request that support cache */
-- (void)doRequest:(void (^)(id, NSError *))onComplete shouldCache:(BOOL)shouldCache{
+- (void)doRequest:(void (^)(id, NSError *))onComplete{
+    
+    BOOL shouldCache = _cacheResult;
     
     NSString *path = [[self class] cacheFile:_url];
     if (shouldCache && [[NSFileManager defaultManager] fileExistsAtPath:path]){
@@ -183,12 +192,12 @@ static NSString *s_Domain;
     
 }
 
-- (void)doRequest:(void (^)(id, NSError *))onComplete{
-    [self doRequest:onComplete shouldCache:NO];
-}
-
 - (MSSimpleHttp *)use:(NSString *)method{
     return self.use(method);
+}
+
+- (MSSimpleHttp *)cacheResult:(BOOL)cacheResult{
+    return self.cacheResult(cacheResult);
 }
 
 - (MSSimpleHttp *)putKV:(NSString *)key val:(id)val{
