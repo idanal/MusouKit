@@ -23,6 +23,8 @@
 #import "MSRangeSlider.h"
 #import "MSBlockAlertView.h"
 #import "MSImageView.h"
+#import "MSAutoWebView.h"
+#import "MSTimerButton.h"
 
 #import "MSBaseViewController.h"
 #import "MSCameraController.h"
