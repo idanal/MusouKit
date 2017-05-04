@@ -8,9 +8,21 @@
 
 #import "MSTimerButton.h"
 
+@interface MSTimerButton ()
+/** Tick callback */
+@property (nonatomic, copy) void (^onTick)(MSTimerButton *);
+@end
+
 @implementation MSTimerButton
 
-- (void)start{
+- (void)dealloc{
+#ifdef DEBUG
+    NSLog(@"[%@ dealloc]", self);
+#endif
+}
+
+- (void)startWithTick:(void (^)(MSTimerButton *))tick{
+    self.onTick = tick;
     if (_timer){
         [self stop];
     }
