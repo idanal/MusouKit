@@ -184,7 +184,7 @@
 //Create an image with the color
 + (UIImage *)imageWithColor:(UIColor *)c;
 //Create an circle image
-+ (UIImage *)circleImageWithColor:(UIColor *)c size:(CGSize)size border:(CGFloat)border;
++ (UIImage *)circleImageWithColor:(UIColor *)c size:(CGFloat)size border:(CGFloat)border;
 
 @end
 

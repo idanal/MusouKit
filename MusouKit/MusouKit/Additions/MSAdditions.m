@@ -759,11 +759,11 @@ static NSString * const s_tapGesture = @"tapGesture";
     return img;
 }
 
-+ (UIImage *)circleImageWithColor:(UIColor *)c size:(CGSize)size border:(CGFloat)border{
++ (UIImage *)circleImageWithColor:(UIColor *)c size:(CGFloat)size border:(CGFloat)border{
     
-    CGFloat radius = size.width/2 - border/2;
+    CGFloat radius = size/2 - border/2;
     
-    CGRect rect = CGRectMake(0, 0, size.width, size.height);
+    CGRect rect = CGRectMake(0, 0, size, size);
     UIGraphicsBeginImageContextWithOptions(rect.size, NO, 0.0);
     CGContextRef ctx = UIGraphicsGetCurrentContext();
     CGContextSetAllowsAntialiasing(ctx, true);
@@ -771,13 +771,13 @@ static NSString * const s_tapGesture = @"tapGesture";
     CGContextSetLineWidth(ctx, border);
     CGContextSetFillColorWithColor(ctx, [UIColor clearColor].CGColor);
     CGContextFillRect(ctx, rect);
-    CGContextAddArc(ctx, size.width/2, size.height/2, radius, 0, M_PI*2, 0);
+    CGContextAddArc(ctx, size/2, size/2, radius, 0, M_PI*2, 0);
     CGContextSetStrokeColorWithColor(ctx, c.CGColor);
     CGContextStrokePath(ctx);
     
     UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
-    return [img resizableImageWithCapInsets:UIEdgeInsetsMake(0, size.width/2, 0, size.height/2)];
+    return [img resizableImageWithCapInsets:UIEdgeInsetsMake(0, size/2, 0, size/2)];
 }
 
 @end
