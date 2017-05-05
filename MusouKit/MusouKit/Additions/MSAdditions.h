@@ -180,6 +180,12 @@
 + (UIColor *)fashionPurple;
 + (UIColor *)fashionCyan;
 + (UIColor *)seperatorColor;    //C8C7CC
+
+//Create an image with the color
++ (UIImage *)imageWithColor:(UIColor *)c;
+//Create an circle image
++ (UIImage *)circleImageWithColor:(UIColor *)c size:(CGSize)size border:(CGFloat)border;
+
 @end
 
 

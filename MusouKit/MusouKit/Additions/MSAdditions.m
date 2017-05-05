@@ -748,6 +748,38 @@ static NSString * const s_tapGesture = @"tapGesture";
     return [UIColor colorWithRed:200/255.f green:199/255.f blue:204/255.f alpha:1.f];
 }
 
++ (UIImage *)imageWithColor:(UIColor *)c{
+    CGRect rect = CGRectMake(0, 0, 1, 1);
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef ctx = UIGraphicsGetCurrentContext();
+    CGContextSetFillColorWithColor(ctx, c.CGColor);
+    CGContextFillRect(ctx, rect);
+    UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return img;
+}
+
++ (UIImage *)circleImageWithColor:(UIColor *)c size:(CGSize)size border:(CGFloat)border{
+    
+    CGFloat radius = size.width/2 - border/2;
+    
+    CGRect rect = CGRectMake(0, 0, size.width, size.height);
+    UIGraphicsBeginImageContextWithOptions(rect.size, NO, 0.0);
+    CGContextRef ctx = UIGraphicsGetCurrentContext();
+    CGContextSetAllowsAntialiasing(ctx, true);
+    CGContextSetShouldAntialias(ctx, true);
+    CGContextSetLineWidth(ctx, border);
+    CGContextSetFillColorWithColor(ctx, [UIColor clearColor].CGColor);
+    CGContextFillRect(ctx, rect);
+    CGContextAddArc(ctx, size.width/2, size.height/2, radius, 0, M_PI*2, 0);
+    CGContextSetStrokeColorWithColor(ctx, c.CGColor);
+    CGContextStrokePath(ctx);
+    
+    UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return [img resizableImageWithCapInsets:UIEdgeInsetsMake(0, size.width/2, 0, size.height/2)];
+}
+
 @end
 
 #import <AudioToolbox/AudioToolbox.h>
