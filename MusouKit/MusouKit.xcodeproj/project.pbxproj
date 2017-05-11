@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		87217ECC1EC49CC000864944 /* MSCardSwipeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 87217ECB1EC49CC000864944 /* MSCardSwipeView.m */; };
 		87AD46361E9B8E3C00C02FF5 /* MusouKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD46351E9B8E3C00C02FF5 /* MusouKit.m */; };
 		87AD46371E9B8E3C00C02FF5 /* MusouKit.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 87AD46341E9B8E3C00C02FF5 /* MusouKit.h */; };
 		87AD46431E9B8E9800C02FF5 /* MSAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD46421E9B8E9800C02FF5 /* MSAdditions.m */; };
@@ -46,6 +47,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		87217ECA1EC49CC000864944 /* MSCardSwipeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSCardSwipeView.h; sourceTree = "<group>"; };
+		87217ECB1EC49CC000864944 /* MSCardSwipeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSCardSwipeView.m; sourceTree = "<group>"; };
 		87AD46311E9B8E3C00C02FF5 /* libMusouKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMusouKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		87AD46341E9B8E3C00C02FF5 /* MusouKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MusouKit.h; sourceTree = "<group>"; };
 		87AD46351E9B8E3C00C02FF5 /* MusouKit.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MusouKit.m; sourceTree = "<group>"; };
@@ -187,6 +190,8 @@
 				87AD46781E9B900B00C02FF5 /* MSActionPicker.m */,
 				87AD46791E9B900C00C02FF5 /* MSActionSheet.h */,
 				87AD467A1E9B900C00C02FF5 /* MSActionSheet.m */,
+				87217ECA1EC49CC000864944 /* MSCardSwipeView.h */,
+				87217ECB1EC49CC000864944 /* MSCardSwipeView.m */,
 				87AD467D1E9B901700C02FF5 /* MSRangeSlider.h */,
 				87AD467E1E9B901700C02FF5 /* MSRangeSlider.m */,
 				87AD465C1E9B8F0F00C02FF5 /* MSHUDView.h */,
@@ -289,6 +294,7 @@
 				87AD467F1E9B901700C02FF5 /* MSRangeSlider.m in Sources */,
 				87AD46851E9B907400C02FF5 /* MSDownloader.m in Sources */,
 				87AD467B1E9B900C00C02FF5 /* MSActionPicker.m in Sources */,
+				87217ECC1EC49CC000864944 /* MSCardSwipeView.m in Sources */,
 				87AD464B1E9B8EB300C02FF5 /* MSBaseViewController.m in Sources */,
 				87AD464F1E9B8EBA00C02FF5 /* MSQRCodeController.m in Sources */,
 				87AD46611E9B8F1400C02FF5 /* MSBlockAlertView.m in Sources */,
