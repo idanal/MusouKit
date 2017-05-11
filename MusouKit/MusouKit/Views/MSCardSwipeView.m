@@ -1,23 +1,22 @@
 //
 //  CardSwipeView.m
-//  CollectionLayoutKit
+//
 //
 //  Created by DANAL LUO on 2017/5/11.
 //  Copyright © 2017年 DANAL. All rights reserved.
 //
 
-#import "CardSwipeView.h"
+#import "MSCardSwipeView.h"
 
-@interface CardSwipeView ()
+@interface MSCardSwipeView ()
 @property (nonatomic, assign) NSInteger index;
 @property (nonatomic, assign) CGPoint centerDiff;
 @property (nonatomic, assign) NSInteger visibleNumber;  //default 3
 @property (nonatomic, strong) NSMutableArray *visibleViews;
-@property (nonatomic, strong) NSMutableArray *reusableViews;
 @property (nonatomic, weak) UIView *containerView;
 @end
 
-@implementation CardSwipeView
+@implementation MSCardSwipeView
 
 - (void)awakeFromNib{
     [super awakeFromNib];
@@ -36,7 +35,6 @@
     self.clipsToBounds = NO;
     _visibleNumber = 3;
     _visibleViews = [NSMutableArray new];
-    _reusableViews = [NSMutableArray new];
     
     UIView *container = [[UIView alloc] initWithFrame:self.bounds];
     container.backgroundColor = [UIColor clearColor];
@@ -47,20 +45,14 @@
     [self addGestureRecognizer:pan];
 }
 
-- (void)setDelegate:(id<CardSwipeViewDelegate>)delegate{
+- (void)setDelegate:(id<MSCardSwipeViewDelegate>)delegate{
     _delegate = delegate;
     [self reloadData];
-}
-
-- (void)reloadData{
-    self.index = 0;
-    [self fillViews:YES];
 }
 
 - (void)onPan:(UIPanGestureRecognizer *)g{
     UIView *v = _visibleViews.firstObject;
     if (!v){
-        [self reloadData];
         return;
     }
     
@@ -73,20 +65,25 @@
             v.center = CGPointMake(pos.x + _centerDiff.x, pos.y + _centerDiff.y);
             break;
         case UIGestureRecognizerStateEnded:
-            [self removeMovingView];
+        case UIGestureRecognizerStateCancelled:{
+            
+            CGRect rect = CGRectIntersection(self.bounds, v.frame);
+            if (fabs(rect.size.width)/self.bounds.size.width < 0.7
+                || fabs(rect.size.height)/self.bounds.size.height < 0.7){
+                [self removeMovingView];
+            } else {
+                [self putbackMovingView];
+            }
+        }
             break;
-        case UIGestureRecognizerStateCancelled:
         default:
             break;
     }
 }
 
-- (UIView *)dequeueResuableView{
-    UIView *v = self.reusableViews.lastObject;
-    v.transform = CGAffineTransformIdentity;
-    v.layer.anchorPoint = CGPointMake(0.5, 0.5);
-    [self.reusableViews removeLastObject];
-    return v;
+- (void)reloadData{
+    self.index = 0;
+    [self fillViews:YES];
 }
 
 - (void)removeMovingView{
@@ -96,12 +93,6 @@
     
     self.userInteractionEnabled = NO;
     [self.visibleViews removeObject:v];
-    [self.reusableViews addObject:v];
-    
-    //Cache views limt: the visibleNumber
-    if (self.reusableViews.count > self.visibleNumber){
-        [self.reusableViews removeObjectsInRange:NSMakeRange(0, self.reusableViews.count-self.visibleNumber)];
-    }
     
     [UIView animateWithDuration:.25 animations:^{
         
@@ -118,6 +109,14 @@
     }];
     
     [self fillViews:YES];
+}
+
+- (void)putbackMovingView{
+    UIView *v = _visibleViews.firstObject;
+    
+    [UIView animateWithDuration:.25 animations:^{
+        v.center = CGPointMake(self.bounds.size.width/2, 0);
+    }];
 }
 
 - (void)fillViews:(BOOL)animated{
