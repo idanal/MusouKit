@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		871EDD481EC40C4400CDF258 /* MSGPSConverter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 871EDD471EC40C4400CDF258 /* MSGPSConverter.mm */; };
 		87AD46361E9B8E3C00C02FF5 /* MusouKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD46351E9B8E3C00C02FF5 /* MusouKit.m */; };
 		87AD46371E9B8E3C00C02FF5 /* MusouKit.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 87AD46341E9B8E3C00C02FF5 /* MusouKit.h */; };
 		87AD46431E9B8E9800C02FF5 /* MSAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD46421E9B8E9800C02FF5 /* MSAdditions.m */; };
@@ -29,6 +28,7 @@
 		87B1EB0B1EAF23D6007386AD /* MSSimpleHttp.m in Sources */ = {isa = PBXBuildFile; fileRef = 87B1EB0A1EAF23D6007386AD /* MSSimpleHttp.m */; };
 		87B727431EBA1FBE005D04CF /* MSAutoWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 87B727421EBA1FBE005D04CF /* MSAutoWebView.m */; };
 		87B727471EBA2226005D04CF /* MSTimerButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 87B727461EBA2226005D04CF /* MSTimerButton.m */; };
+		87D786C91EC47391003B66BB /* MSGPSManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 87D786C81EC47391003B66BB /* MSGPSManager.mm */; };
 		87FEFCD21EA8BCF300BE1C9A /* MSImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 87FEFCD11EA8BCF300BE1C9A /* MSImageView.m */; };
 /* End PBXBuildFile section */
 
@@ -46,8 +46,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		871EDD461EC40C4400CDF258 /* MSGPSConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSGPSConverter.h; sourceTree = "<group>"; };
-		871EDD471EC40C4400CDF258 /* MSGPSConverter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MSGPSConverter.mm; sourceTree = "<group>"; };
 		87AD46311E9B8E3C00C02FF5 /* libMusouKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMusouKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		87AD46341E9B8E3C00C02FF5 /* MusouKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MusouKit.h; sourceTree = "<group>"; };
 		87AD46351E9B8E3C00C02FF5 /* MusouKit.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MusouKit.m; sourceTree = "<group>"; };
@@ -90,6 +88,8 @@
 		87B727421EBA1FBE005D04CF /* MSAutoWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSAutoWebView.m; sourceTree = "<group>"; };
 		87B727451EBA2226005D04CF /* MSTimerButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSTimerButton.h; sourceTree = "<group>"; };
 		87B727461EBA2226005D04CF /* MSTimerButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSTimerButton.m; sourceTree = "<group>"; };
+		87D786C71EC47391003B66BB /* MSGPSManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSGPSManager.h; sourceTree = "<group>"; };
+		87D786C81EC47391003B66BB /* MSGPSManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MSGPSManager.mm; sourceTree = "<group>"; };
 		87FEFCD01EA8BCF300BE1C9A /* MSImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSImageView.h; sourceTree = "<group>"; };
 		87FEFCD11EA8BCF300BE1C9A /* MSImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSImageView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -166,8 +166,6 @@
 			children = (
 				87AD46711E9B8F5500C02FF5 /* MSDataSource.h */,
 				87AD46721E9B8F5500C02FF5 /* MSDataSource.m */,
-				871EDD461EC40C4400CDF258 /* MSGPSConverter.h */,
-				871EDD471EC40C4400CDF258 /* MSGPSConverter.mm */,
 				87AD46591E9B8EF900C02FF5 /* MSHttpClient.h */,
 				87AD465A1E9B8EF900C02FF5 /* MSHttpClient.m */,
 				87AD46831E9B907400C02FF5 /* MSDownloader.h */,
@@ -176,6 +174,8 @@
 				87AD46871E9B907F00C02FF5 /* MSTaskQueue.m */,
 				87B1EB091EAF23D6007386AD /* MSSimpleHttp.h */,
 				87B1EB0A1EAF23D6007386AD /* MSSimpleHttp.m */,
+				87D786C71EC47391003B66BB /* MSGPSManager.h */,
+				87D786C81EC47391003B66BB /* MSGPSManager.mm */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -276,6 +276,7 @@
 				87FEFCD21EA8BCF300BE1C9A /* MSImageView.m in Sources */,
 				87B1EB0B1EAF23D6007386AD /* MSSimpleHttp.m in Sources */,
 				87AD46731E9B8F5500C02FF5 /* MSDataSource.m in Sources */,
+				87D786C91EC47391003B66BB /* MSGPSManager.mm in Sources */,
 				87B727471EBA2226005D04CF /* MSTimerButton.m in Sources */,
 				87AD465E1E9B8F0F00C02FF5 /* MSHUDView.m in Sources */,
 				87AD46821E9B902900C02FF5 /* MSCellView.m in Sources */,
@@ -285,7 +286,6 @@
 				87AD46761E9B8F7800C02FF5 /* DLAutoLayout.m in Sources */,
 				87AD465B1E9B8EF900C02FF5 /* MSHttpClient.m in Sources */,
 				87AD467C1E9B900C00C02FF5 /* MSActionSheet.m in Sources */,
-				871EDD481EC40C4400CDF258 /* MSGPSConverter.mm in Sources */,
 				87AD467F1E9B901700C02FF5 /* MSRangeSlider.m in Sources */,
 				87AD46851E9B907400C02FF5 /* MSDownloader.m in Sources */,
 				87AD467B1E9B900C00C02FF5 /* MSActionPicker.m in Sources */,
