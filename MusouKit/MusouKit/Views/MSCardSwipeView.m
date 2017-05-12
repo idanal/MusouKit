@@ -56,7 +56,7 @@
 
 - (void)setDelegate:(id<MSCardSwipeViewDelegate>)delegate{
     _delegate = delegate;
-    [self reloadData];
+    [self setNeedsLayout];
 }
 
 - (void)onPan:(UIPanGestureRecognizer *)g{
@@ -96,10 +96,10 @@
     }
 }
 
-- (void)reloadData{
+- (void)reloadData:(BOOL)animated{
     self.index = 0;
     self.displayingIndex = 0;
-    [self fillViews:YES];
+    [self fillViews:animated];
 }
 
 - (void)removeMovingView{
@@ -123,6 +123,12 @@
         self.userInteractionEnabled = YES;
         [v removeFromSuperview];
         
+        //To the end
+        if (self.displayingIndex == [_delegate cardSwipeViewTotalNumber]){
+            if ([_delegate respondsToSelector:@selector(cardSwipeViewDidSwipeToEnd:)]){
+                [_delegate cardSwipeViewDidSwipeToEnd:self];
+            }
+        }
     }];
     
     [self fillViews:YES];
@@ -180,6 +186,9 @@
 - (void)layoutSubviews{
     [super layoutSubviews];
     _containerView.frame = self.bounds;
+    if (_delegate && self.visibleViews.count == 0){
+        [self reloadData:NO];
+    }
 }
 
 @end

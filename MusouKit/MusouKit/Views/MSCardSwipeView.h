@@ -15,7 +15,7 @@
 @property (nonatomic, weak) id<MSCardSwipeViewDelegate> delegate;
 
 /** Reload data from index 0 */
-- (void)reloadData;
+- (void)reloadData:(BOOL)animated;
 
 @end
 
@@ -29,5 +29,8 @@
 - (UIView *)cardSwipeView:(MSCardSwipeView *)cardView viewAtIndex:(NSInteger)idx;
 /** Click A view at the specified index */
 - (void)cardSwipeView:(MSCardSwipeView *)cardView didClickAtIndex:(NSInteger)idx;
+/** Has swiped to the end */
+@optional
+- (void)cardSwipeViewDidSwipeToEnd:(MSCardSwipeView *)cardView;
 
 @end
