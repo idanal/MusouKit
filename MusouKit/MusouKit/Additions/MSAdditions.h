@@ -234,14 +234,6 @@
 @end
 
 
-@interface MSLog : NSObject
-+ (void)logToFile:(NSString *)format,...;
-+ (NSString *)logFromFile;
-+ (NSNumber *)logSize;
-+ (void)clear;
-@end
-
-
 //CGContext
 typedef enum {
     kRounderCornerPostionAll = 0,

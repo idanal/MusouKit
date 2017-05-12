@@ -1272,47 +1272,6 @@ static NSString * const s_tapGesture = @"tapGesture";
 @end
 
 
-@implementation MSLog
-
-+ (void)logToFile:(NSString *)format, ...{
-    NSString *file = [NSFileManager pathInCaches:@"log"];
-    NSDictionary *attrs = [[NSFileManager defaultManager] attributesOfItemAtPath:file error:nil];
-    NSNumber *fileSize = [attrs objectForKey:NSFileSize];
-    if (fileSize.unsignedLongLongValue > 500*1024){
-        [self clear];
-    }
-        
-    va_list ap;
-    va_start(ap, format);
-    NSString *msg = [[NSString alloc] initWithFormat:format arguments:ap];
-    va_end(ap);
-    NSString *now = [NSDate now];
-    FILE *f = fopen(file.UTF8String, "a+");
-    fputs(now.UTF8String, f);
-    fputs(msg.UTF8String, f);
-    fputs("\n", f);
-    fclose(f);
-}
-
-+ (NSString *)logFromFile{
-    NSString *file = [NSFileManager pathInCaches:@"log"];
-    return [NSString stringWithContentsOfFile:file encoding:NSUTF8StringEncoding error:nil];
-}
-
-+ (NSNumber *)logSize{
-    NSString *file = [NSFileManager pathInCaches:@"log"];
-    NSDictionary *attrs = [[NSFileManager defaultManager] attributesOfItemAtPath:file error:nil];
-    return [attrs objectForKey:NSFileSize];
-}
-
-+ (void)clear{
-    NSString *file = [NSFileManager pathInCaches:@"log"];
-    unlink(file.UTF8String);
-}
-
-@end
-
-
 //CGContext
 
 void CGAddRoundedCornerPath(CGRect rect, float corner, RounedCornerPosition position, CGContextRef c){
