@@ -27,5 +27,7 @@
 - (NSInteger)cardSwipeViewTotalNumber;
 /** A view at the specified index */
 - (UIView *)cardSwipeView:(MSCardSwipeView *)cardView viewAtIndex:(NSInteger)idx;
+/** Click A view at the specified index */
+- (void)cardSwipeView:(MSCardSwipeView *)cardView didClickAtIndex:(NSInteger)idx;
 
 @end

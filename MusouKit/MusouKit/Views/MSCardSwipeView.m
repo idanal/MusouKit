@@ -9,10 +9,16 @@
 #import "MSCardSwipeView.h"
 
 @interface MSCardSwipeView ()
-@property (nonatomic, assign) NSInteger index;
 @property (nonatomic, assign) CGPoint centerDiff;
-@property (nonatomic, assign) NSInteger visibleNumber;  //default 3
+//Latest view index on screen
+@property (nonatomic, assign) NSInteger index;
+//Current displaying view index
+@property (nonatomic, assign) NSInteger displayingIndex;
+//Visibile count of view. default 3
+@property (nonatomic, assign) NSInteger visibleNumber;
+//Views on screen
 @property (nonatomic, strong) NSMutableArray *visibleViews;
+//All views added to the container
 @property (nonatomic, weak) UIView *containerView;
 @end
 
@@ -43,6 +49,9 @@
     
     UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(onPan:)];
     [self addGestureRecognizer:pan];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTap:)];
+    [self addGestureRecognizer:tap];
 }
 
 - (void)setDelegate:(id<MSCardSwipeViewDelegate>)delegate{
@@ -81,8 +90,15 @@
     }
 }
 
+- (void)onTap:(UIGestureRecognizer *)g{
+    if (self.displayingIndex < [_delegate cardSwipeViewTotalNumber]){
+        [_delegate cardSwipeView:self didClickAtIndex:self.displayingIndex];
+    }
+}
+
 - (void)reloadData{
     self.index = 0;
+    self.displayingIndex = 0;
     [self fillViews:YES];
 }
 
@@ -92,6 +108,7 @@
     v.center = CGPointMake(v.center.x, v.center.y+v.bounds.size.height/2);
     
     self.userInteractionEnabled = NO;
+    self.displayingIndex++;
     [self.visibleViews removeObject:v];
     
     [UIView animateWithDuration:.25 animations:^{
