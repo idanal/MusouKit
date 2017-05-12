@@ -9,17 +9,17 @@
 Pod::Spec.new do |s|
 
   s.name         = "MusouKit"
-  s.version      = "0.0.4"
+  s.version      = "0.0.5"
   s.summary      = "A development kit for iOS"
   s.description  = <<-DESC
-                      A development kit for iOS by Danal.Luo.
+                      A development kit for iOS by Danal Luo.
                    DESC
 
   s.homepage     = "https://github.com/idanal/musouKit"
   # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
 
-  s.license      = "Apache License, Version 2.0"
-  s.license      = { :type => "Apache License, Version 2.0", :file => "LICENSE" }
+  s.license      = "MIT"
+  s.license      = { :type => "MIT", :file => "LICENSE" }
 
   s.author             = { "Danal.Luo" => "idanal.mail@qq.com" }
   # s.social_media_url   = "http://twitter.com/yunlin.luo"
