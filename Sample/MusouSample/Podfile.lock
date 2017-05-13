@@ -1,0 +1,12 @@
+PODS:
+  - MusouKit (0.0.5)
+
+DEPENDENCIES:
+  - MusouKit
+
+SPEC CHECKSUMS:
+  MusouKit: 2a37d8362c20d03b1ab5f1c2dbae5ed532f93cb1
+
+PODFILE CHECKSUM: ee7f5d12240bd31dc9833eb436cac6cc05d0102c
+
+COCOAPODS: 1.2.0
