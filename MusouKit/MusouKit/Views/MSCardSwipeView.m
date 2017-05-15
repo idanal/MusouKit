@@ -143,8 +143,8 @@
 }
 
 - (void)fillViews:(BOOL)animated{
-    if (self.index < [self.delegate cardSwipeViewTotalNumber]){
-        while (_visibleViews.count < _visibleNumber){
+    while (_visibleViews.count < _visibleNumber){
+        if (self.index < [self.delegate cardSwipeViewTotalNumber]){
 
             UIView *last = _visibleViews.lastObject;
             
@@ -161,6 +161,9 @@
             }
             [self.visibleViews addObject:v];
             self.index++;
+            
+        } else {
+            break;
         }
     }
     
