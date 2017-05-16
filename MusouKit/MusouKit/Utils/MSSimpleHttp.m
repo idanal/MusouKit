@@ -161,7 +161,14 @@ static NSString *s_Domain;
         
         if ([self.method.uppercaseString isEqualToString:@"GET"]){
             
-            url = query.length == 0 ? self.url : [NSString stringWithFormat:@"%@?%@", self.url, query];
+            url = self.url;
+            if (query.length > 0){
+                if ([url containsString:@"?"]){
+                    url = [NSString stringWithFormat:@"%@&%@", url, query];
+                } else {
+                    url = [NSString stringWithFormat:@"%@?%@", url, query];
+                }
+            }
             urlEncoded = [[self class] urlEncodeString:url];
             request.URL = [NSURL URLWithString:urlEncoded];
             
