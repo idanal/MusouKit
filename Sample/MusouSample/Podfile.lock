@@ -2,11 +2,15 @@ PODS:
   - MusouKit (0.0.5)
 
 DEPENDENCIES:
-  - MusouKit
+  - MusouKit (from `../../MusouKit.podspec`)
+
+EXTERNAL SOURCES:
+  MusouKit:
+    :path: ../../MusouKit.podspec
 
 SPEC CHECKSUMS:
   MusouKit: 2a37d8362c20d03b1ab5f1c2dbae5ed532f93cb1
 
-PODFILE CHECKSUM: ee7f5d12240bd31dc9833eb436cac6cc05d0102c
+PODFILE CHECKSUM: dd1e04c530ed77d210a748099f4b2b0b851025dc
 
-COCOAPODS: 1.2.0
+COCOAPODS: 1.1.1

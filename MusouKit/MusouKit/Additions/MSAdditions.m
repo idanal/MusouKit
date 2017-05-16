@@ -944,10 +944,63 @@ static NSString * const s_tapGesture = @"tapGesture";
     (double)timebase.denom /1e9;
 }
 
+- (void)registerApns{
+    if ([self respondsToSelector:@selector(registerForRemoteNotifications)]) {
+        [self registerForRemoteNotifications];
+        UIUserNotificationType notificationTypes = UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
+        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:notificationTypes categories:nil];
+        [self registerUserNotificationSettings:settings];
+    }
+    else{
+        UIRemoteNotificationType notificationTypes = UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert;
+        [self registerForRemoteNotificationTypes:notificationTypes];
+    }
+    
+}
+
 - (NSString *)handleDeviceToken:(NSData *)deviceToken{
     NSString *token = [NSString stringWithFormat:@"%@",deviceToken];
     token = [token stringByReplacingOccurrencesOfString:@"[ <>]" withString:@"" options:NSRegularExpressionSearch range:NSMakeRange(0, [token length])];
     return token;
+}
+
+- (void)showNotificationWithView:(UIView *)contentView{
+    UIView *v = contentView;   //contentView could not be a window
+    
+    UIView *parent = [[[UIApplication sharedApplication] delegate] window];
+    [parent addSubview:v];
+    v.translatesAutoresizingMaskIntoConstraints = NO;
+    //parent.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    CGFloat h = v.bounds.size.height;
+    CGFloat w = MIN(parent.bounds.size.width, parent.bounds.size.height);
+    
+    [parent addConstraint:[NSLayoutConstraint constraintWithItem:v attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:w]];
+    [parent addConstraint:[NSLayoutConstraint constraintWithItem:v attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:h]];
+    
+    [parent addConstraint:[NSLayoutConstraint constraintWithItem:v attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:parent attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
+    
+    NSLayoutConstraint *top = [NSLayoutConstraint constraintWithItem:v attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:parent attribute:NSLayoutAttributeTop multiplier:1.0 constant:-h];
+    [parent addConstraint:top];
+    
+    [parent layoutIfNeeded];
+    
+    //Animation
+    [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut
+                     animations:^{
+                         
+                         top.constant = 20;
+                         [parent layoutIfNeeded];
+                         
+                     } completion:^(BOOL finished) {
+                         
+                         [UIView animateWithDuration:0.2 delay:1 options:0 animations:^{
+                             v.alpha = 0;
+                         } completion:^(BOOL finished) {
+                             [v removeFromSuperview];
+                         }];
+                         
+                     }];
 }
 
 @end
