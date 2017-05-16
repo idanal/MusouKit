@@ -218,7 +218,7 @@
 - (NSString *)handleDeviceToken:(NSData *)deviceToken;
 
 //Simulate a apns alert
-- (void)showNotificationWithView:(UIView * _Nonnull)contentView;
+- (void)showNotificationWithView:(UIView *)contentView;
 
 @end
 
