@@ -25,7 +25,8 @@
 
 - (void)setup{
     self.delegate = self;
-    //    self.scrollView.bounces = NO;
+    self.scrollView.bounces = NO;
+    self.scrollView.scrollEnabled = NO;
     //    self.scalesPageToFit = YES;
 }
 
