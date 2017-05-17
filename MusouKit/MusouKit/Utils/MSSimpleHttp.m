@@ -9,7 +9,7 @@
 #import "MSSimpleHttp.h"
 #import <Security/Security.h>
 #import <CommonCrypto/CommonCrypto.h>
-
+#import "MSHttpRequest.h"
 
 @implementation MSSimpleHttp
 
@@ -83,6 +83,13 @@ static NSString *s_Domain;
     };
 }
 
+- (MSSimpleHttp* (^)(NSDictionary *))addHeaders{
+    return ^(NSDictionary *d){
+        self->_headers = d;
+        return self;
+    };
+}
+
 - (MSSimpleHttp* (^)(id, NSString *))put{
     return ^(id val, NSString *key){
         [self put:val key:key];
@@ -146,6 +153,11 @@ static NSString *s_Domain;
         NSMutableURLRequest *request = [NSMutableURLRequest new];
         request.HTTPMethod = self.method;
         
+        //headers
+        for (NSString *key in _headers){
+            [request addValue:_headers[key] forHTTPHeaderField:key];
+        }
+        
         NSString *url;
         NSString *urlEncoded;
         
@@ -184,19 +196,25 @@ static NSString *s_Domain;
         NSLog(@"\n\n==>doRequest: %@ \n\n==>with params: %@ \n\n", url, _params);
 #endif
         
-        NSURLSessionConfiguration *cfg = [NSURLSessionConfiguration defaultSessionConfiguration];
-        NSURLSession *session = [NSURLSession sessionWithConfiguration:cfg];
-        NSURLSessionTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                parseBlock(data, error);
-            });
-            
+        [self doURLRequest:request onComplete:^(id  _Nullable data, NSError * _Nullable error) {
+            parseBlock(data, error);
         }];
-        [task resume];
         
     }
     
+}
+
+- (void)doURLRequest:(NSURLRequest *)req onComplete:(void (^)(id _Nullable, NSError * _Nullable))onComplete{
+    NSURLSessionConfiguration *cfg = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:cfg];
+    NSURLSessionTask *task = [session dataTaskWithRequest:req completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            onComplete(data, error);
+        });
+        
+    }];
+    [task resume];
 }
 
 - (MSSimpleHttp *)use:(NSString *)method{
@@ -205,6 +223,10 @@ static NSString *s_Domain;
 
 - (MSSimpleHttp *)cacheResult:(BOOL)cacheResult{
     return self.cacheResult(cacheResult);
+}
+
+- (MSSimpleHttp *)addHeaders:(NSDictionary *)headers{
+    return self.addHeaders(headers);
 }
 
 - (MSSimpleHttp *)putKV:(NSString *)key val:(id)val{

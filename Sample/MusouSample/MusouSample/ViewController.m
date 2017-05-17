@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "MSHttpForm.h"
 
 @interface ViewController ()
 
@@ -17,6 +18,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    NSMutableURLRequest *req = [NSMutableURLRequest new];
+    req.URL = [NSURL URLWithString:@"http://10.0.0.18:8080/api/login"];
+    req.HTTPMethod = @"post";
+    [req beginAppending];
+    [req appendFormValue:@"danal" name:@"username"];
+    [req appendFormValue:@"123" name:@"password"];
+    [req endAppending];
+    NSURLSessionTask *task = [[NSURLSession sharedSession] dataTaskWithRequest:req completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        
+        NSLog(@"%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+    }];
+    [task resume];
 }
 
 

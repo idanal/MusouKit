@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		87217ECC1EC49CC000864944 /* MSCardSwipeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 87217ECB1EC49CC000864944 /* MSCardSwipeView.m */; };
+		874EE37F1ECC40C60090E476 /* MSHttpForm.m in Sources */ = {isa = PBXBuildFile; fileRef = 874EE37E1ECC40C60090E476 /* MSHttpForm.m */; };
 		87AD46361E9B8E3C00C02FF5 /* MusouKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD46351E9B8E3C00C02FF5 /* MusouKit.m */; };
 		87AD46371E9B8E3C00C02FF5 /* MusouKit.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 87AD46341E9B8E3C00C02FF5 /* MusouKit.h */; };
 		87AD46431E9B8E9800C02FF5 /* MSAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD46421E9B8E9800C02FF5 /* MSAdditions.m */; };
@@ -50,6 +51,8 @@
 /* Begin PBXFileReference section */
 		87217ECA1EC49CC000864944 /* MSCardSwipeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSCardSwipeView.h; sourceTree = "<group>"; };
 		87217ECB1EC49CC000864944 /* MSCardSwipeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSCardSwipeView.m; sourceTree = "<group>"; };
+		874EE37D1ECC40C60090E476 /* MSHttpForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSHttpForm.h; sourceTree = "<group>"; };
+		874EE37E1ECC40C60090E476 /* MSHttpForm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSHttpForm.m; sourceTree = "<group>"; };
 		87AD46311E9B8E3C00C02FF5 /* libMusouKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMusouKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		87AD46341E9B8E3C00C02FF5 /* MusouKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MusouKit.h; sourceTree = "<group>"; };
 		87AD46351E9B8E3C00C02FF5 /* MusouKit.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MusouKit.m; sourceTree = "<group>"; };
@@ -178,6 +181,8 @@
 				87AD46841E9B907400C02FF5 /* MSDownloader.m */,
 				87AD46861E9B907F00C02FF5 /* MSTaskQueue.h */,
 				87AD46871E9B907F00C02FF5 /* MSTaskQueue.m */,
+				874EE37D1ECC40C60090E476 /* MSHttpForm.h */,
+				874EE37E1ECC40C60090E476 /* MSHttpForm.m */,
 				87B1EB091EAF23D6007386AD /* MSSimpleHttp.h */,
 				87B1EB0A1EAF23D6007386AD /* MSSimpleHttp.m */,
 				87D786C71EC47391003B66BB /* MSGPSManager.h */,
@@ -285,6 +290,7 @@
 				87AD464C1E9B8EB300C02FF5 /* MSCameraController.m in Sources */,
 				87FEFCD21EA8BCF300BE1C9A /* MSImageView.m in Sources */,
 				87B1EB0B1EAF23D6007386AD /* MSSimpleHttp.m in Sources */,
+				874EE37F1ECC40C60090E476 /* MSHttpForm.m in Sources */,
 				87D786EC1EC5A369003B66BB /* MSLogger.m in Sources */,
 				87AD46731E9B8F5500C02FF5 /* MSDataSource.m in Sources */,
 				87D786C91EC47391003B66BB /* MSGPSManager.mm in Sources */,

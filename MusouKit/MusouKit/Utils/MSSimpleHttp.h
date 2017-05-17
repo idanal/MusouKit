@@ -15,6 +15,7 @@
  */
 @interface MSSimpleHttp : NSObject {
     NSMutableDictionary *_params;
+    NSDictionary *_headers;
     BOOL _cacheResult;
 }
 @property (nonatomic, copy, nonnull) NSString *url;
@@ -33,12 +34,17 @@
 //是否缓存结果
 - (MSSimpleHttp* _Nonnull (^_Nonnull)(BOOL cacheResult))cacheResult;
 
+//添加header
+- (MSSimpleHttp* _Nonnull (^_Nonnull)(NSDictionary * _Nonnull))addHeaders;
+
 //点语法传参 Put Key-Value
 - (MSSimpleHttp* _Nonnull (^_Nonnull)(NSString * _Nonnull key, id _Nonnull val))putKV;
-   
+
+
 //同上，给swift用
 - (MSSimpleHttp * _Nonnull)use:(NSString * _Nonnull)method;
 - (MSSimpleHttp * _Nonnull)cacheResult:(BOOL)cacheResult;
+- (MSSimpleHttp * _Nonnull)addHeaders:(NSDictionary * _Nonnull)headers;
 - (MSSimpleHttp * _Nonnull)putKV:(NSString * _Nonnull)key val:(id _Nullable)val;
 
 /*
@@ -46,6 +52,11 @@
  * @param onComplete, data: Dictionay 或 Array; error: 网络错误
  */
 - (void)doRequest:(void (^_Nonnull)(id _Nullable data, NSError * _Nullable error))onComplete;
+
+/**
+ * 发送NSURLRequest请求, 不缓存
+ */
+- (void)doURLRequest:(NSURLRequest * _Nonnull)req onComplete:(void (^_Nonnull)(id _Nullable data, NSError * _Nullable error))onComplete;
 
 //清理Cache
 + (void)clearCache:(NSString * _Nonnull)forUrl;

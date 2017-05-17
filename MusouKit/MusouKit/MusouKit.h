@@ -14,7 +14,8 @@
 #import "DLAutoLayout.h"
 
 #import "MSDataSource.h"
-#import "MSHttpClient.h"
+#import "MSSimpleHttp.h"
+#import "MSHttpRequest.h"
 
 #import "MSActionPicker.h"
 #import "MSActionSheet.h"
