@@ -7,7 +7,8 @@
 //
 
 #import "ViewController.h"
-#import "MSHttpForm.h"
+#import "MSHttpRequest.h"
+#import "MusouKit.h"
 
 @interface ViewController ()
 
@@ -30,6 +31,8 @@
         NSLog(@"%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
     }];
     [task resume];
+    
+
 }
 
 
@@ -38,5 +41,8 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [self.view showToast:@"message"];    
+}
 
 @end

@@ -68,12 +68,7 @@
 @end
 
 
-//Show message in a controller
-#define HUDShowMessage(msg_, subtitle_) [HUDView showMessageToView:self.view msg:msg_ subtitle:subtitle_];
-#define HUDShowLoading(msg_, subtitle_) [HUDView showLoadingToView:self.view msg:msg_ subtitle:subtitle_];
-#define HUDHide() [HUDView hideHUD:self.view];
-
-
+//Extension for View
 @interface UIView (HUDView)
 - (void)showToast:(NSString *)msg;
 - (void)showLoading:(NSString *)msg;

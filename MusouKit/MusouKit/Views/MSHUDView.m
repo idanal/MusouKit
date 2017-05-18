@@ -151,7 +151,7 @@
     //Animated show
     CAKeyframeAnimation *kfa = [CAKeyframeAnimation animationWithKeyPath:@"transform"];
     kfa.values = [NSArray arrayWithObjects:
-                  [NSValue valueWithCATransform3D:CATransform3DMakeScale(1.2f, 1.2f, 1.f)],
+                  [NSValue valueWithCATransform3D:CATransform3DMakeScale(1.1f, 1.1f, 1.f)],
                     [NSValue valueWithCATransform3D:CATransform3DMakeScale(1.f, 1.f, 1.f)],
                   nil];
     kfa.duration = .2f;
