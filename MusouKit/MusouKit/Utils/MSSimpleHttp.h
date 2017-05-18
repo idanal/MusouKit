@@ -16,6 +16,7 @@
 @interface MSSimpleHttp : NSObject {
     NSMutableDictionary *_params;
     NSDictionary *_headers;
+    NSURLSessionTask *_task;
     BOOL _cacheResult;
 }
 @property (nonatomic, copy, nonnull) NSString *url;
@@ -57,6 +58,11 @@
  * 发送NSURLRequest请求, 不缓存
  */
 - (void)doURLRequest:(NSURLRequest * _Nonnull)req onComplete:(void (^_Nonnull)(id _Nullable data, NSError * _Nullable error))onComplete;
+
+/**
+ * 取消
+ */
+- (void)cancel;
 
 //清理Cache
 + (void)clearCache:(NSString * _Nonnull)forUrl;

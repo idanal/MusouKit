@@ -215,6 +215,11 @@ static NSString *s_Domain;
         
     }];
     [task resume];
+    _task = task;
+}
+
+- (void)cancel{
+    [_task cancel];
 }
 
 - (MSSimpleHttp *)use:(NSString *)method{
