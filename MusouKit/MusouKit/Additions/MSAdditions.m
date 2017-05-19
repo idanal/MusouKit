@@ -65,14 +65,6 @@
 
 @implementation NSDate (Musou)
 
-+ (NSString *)now{
-//    NSDateFormatter *df = [[NSDateFormatter alloc] init];
-//    df.dateFormat = @"yyyy-MM-dd HH:mm:ss";
-    
-    NSString *dateStr = [[self localDateFormatter] stringFromDate:[NSDate date]];
-    return dateStr;
-}
-
 + (NSDate *)localDate{
     NSDate *date = [NSDate date];
     NSTimeZone *zone = [NSTimeZone systemTimeZone];
@@ -193,7 +185,7 @@ static NSString * const s_attachment = @"attachment";
 
 @implementation NSString (Musou)
 
-- (NSString *)str{
+- (NSString *)stringValue{
     return self;
 }
 
@@ -414,11 +406,11 @@ static NSBundle *_langBundle = nil;
 
 @implementation NSNull (Musou)
 
-- (NSInteger)length{
+- (NSUInteger)length{
     return 0;
 }
 
-- (NSString *)str{
+- (NSString *)stringValue{
     return nil;
 }
 
@@ -426,19 +418,27 @@ static NSBundle *_langBundle = nil;
     return 0;
 }
 
-- (NSInteger)intValue{
+- (NSUInteger)unsignedIntegerValue{
     return 0;
 }
 
-- (CGFloat)floatValue{
+- (int)intValue{
+    return 0;
+}
+
+- (float)floatValue{
     return 0.f;
 }
 
-- (long long)longLongValue{
-    return 0;
+- (double)doubleValue{
+    return 0.0;
 }
 
 - (long)longValue{
+    return 0;
+}
+
+- (long long)longLongValue{
     return 0;
 }
 
@@ -446,7 +446,11 @@ static NSBundle *_langBundle = nil;
     return NO;
 }
 
-- (id)objectForKey:(NSString *)key{
+- (id)objectForKey:(id)key{
+    return nil;
+}
+
+- (id)objectAtIndex:(NSUInteger)idx{
     return nil;
 }
 
@@ -455,12 +459,8 @@ static NSBundle *_langBundle = nil;
 
 @implementation NSNumber (Musou)
 
-- (NSInteger)length{
-    return [self.stringValue length];
-}
-
-- (NSString *)str{
-    return self.stringValue;
+- (NSUInteger)length{
+    return 0;
 }
 
 @end

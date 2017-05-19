@@ -30,7 +30,6 @@
 
 @interface NSDate (Musou)
 
-+ (NSString *)now;
 + (NSDate *)localDate;
 + (NSDateFormatter *)localDateFormatter;
 
@@ -58,7 +57,7 @@
 
 @interface NSString (Musou)
 
-- (NSString *)str;
+- (NSString *)stringValue;
 - (NSString *)md5;
 - (NSString *)sha1;
 - (NSString *)base64;
@@ -86,24 +85,35 @@
 @end
 
 
+//Compat for JSON/Dict parse
 @interface NSNull (Musou)
 
+- (NSUInteger)length;
+- (NSString *)stringValue;
+
+- (int)intValue;
 - (NSInteger)integerValue;
-- (NSInteger)intValue;
+- (NSUInteger)unsignedIntegerValue;
+
+- (long)longValue;
 - (long long)longLongValue;
-- (CGFloat)floatValue;
+
+- (float)floatValue;
+- (double)doubleValue;
+
 - (BOOL)boolValue;
-- (NSInteger)length;
-- (NSString *)str;
+
 //Dict
-- (id)objectForKey:(NSString *)key;
+- (id)objectForKey:(id)key;
+//Array
+- (id)objectAtIndex:(NSUInteger)idx;
+
 @end
 
 
 @interface NSNumber (Musou)
 
-- (NSInteger)length;
-- (NSString *)str;
+- (NSUInteger)length;
 
 @end
 
