@@ -29,6 +29,7 @@
 		87B727431EBA1FBE005D04CF /* MSAutoWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 87B727421EBA1FBE005D04CF /* MSAutoWebView.m */; };
 		87B727471EBA2226005D04CF /* MSTimerButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 87B727461EBA2226005D04CF /* MSTimerButton.m */; };
 		87CD79211ECE898000108F20 /* MSHttpRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 87CD79201ECE898000108F20 /* MSHttpRequest.m */; };
+		87CD79291ECEC95800108F20 /* MSSmartTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 87CD79281ECEC95800108F20 /* MSSmartTracker.m */; };
 		87D786EC1EC5A369003B66BB /* MSLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D786EB1EC5A369003B66BB /* MSLogger.m */; };
 		87FEFCD21EA8BCF300BE1C9A /* MSImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 87FEFCD11EA8BCF300BE1C9A /* MSImageView.m */; };
 /* End PBXBuildFile section */
@@ -91,6 +92,8 @@
 		87B727461EBA2226005D04CF /* MSTimerButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSTimerButton.m; sourceTree = "<group>"; };
 		87CD791F1ECE898000108F20 /* MSHttpRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSHttpRequest.h; sourceTree = "<group>"; };
 		87CD79201ECE898000108F20 /* MSHttpRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSHttpRequest.m; sourceTree = "<group>"; };
+		87CD79271ECEC95800108F20 /* MSSmartTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSSmartTracker.h; sourceTree = "<group>"; };
+		87CD79281ECEC95800108F20 /* MSSmartTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSSmartTracker.m; sourceTree = "<group>"; };
 		87D786EA1EC5A369003B66BB /* MSLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSLogger.h; sourceTree = "<group>"; };
 		87D786EB1EC5A369003B66BB /* MSLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSLogger.m; sourceTree = "<group>"; };
 		87FEFCD01EA8BCF300BE1C9A /* MSImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSImageView.h; sourceTree = "<group>"; };
@@ -179,6 +182,8 @@
 				87CD79201ECE898000108F20 /* MSHttpRequest.m */,
 				87D786EA1EC5A369003B66BB /* MSLogger.h */,
 				87D786EB1EC5A369003B66BB /* MSLogger.m */,
+				87CD79271ECEC95800108F20 /* MSSmartTracker.h */,
+				87CD79281ECEC95800108F20 /* MSSmartTracker.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -289,6 +294,7 @@
 				87AD46361E9B8E3C00C02FF5 /* MusouKit.m in Sources */,
 				87AD46461E9B8E9F00C02FF5 /* MSJSONEntity.m in Sources */,
 				87AD46431E9B8E9800C02FF5 /* MSAdditions.m in Sources */,
+				87CD79291ECEC95800108F20 /* MSSmartTracker.m in Sources */,
 				87AD46761E9B8F7800C02FF5 /* DLAutoLayout.m in Sources */,
 				87AD467C1E9B900C00C02FF5 /* MSActionSheet.m in Sources */,
 				87AD467F1E9B901700C02FF5 /* MSRangeSlider.m in Sources */,
