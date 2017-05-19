@@ -7,6 +7,46 @@
 //
 
 #import "MSSmartTracker.h"
+#import <objc/runtime.h>
+
+
+@interface UIViewController (SmartTracker)
+- (void)sm_viewDidAppear:(BOOL)animated;
+- (void)old_viewDidAppear:(BOOL)animated;
+@end
+
+@implementation UIViewController (SmartTracker)
+
+- (void)sm_viewDidAppear:(BOOL)animated{
+    //call super
+    [self old_viewDidAppear:animated];
+    [[MSSmartTracker shared] enterPage:self];
+}
+
+- (void)old_viewDidAppear:(BOOL)animated{
+    //imp has set to viewDidAppear:
+}
+
++ (void)sm_replaceMethods{
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        
+        Class cls = UIViewController.class;
+        SEL old = @selector(viewDidAppear:);
+        
+        //save orig method imp to old_viewDidAppear, so that we can call 'super' in new method
+        Method oldM = class_getInstanceMethod(cls, old);
+        class_replaceMethod(cls, @selector(old_viewDidAppear:), method_getImplementation(oldM), method_getTypeEncoding(oldM));
+        
+        //replace orig method with new method
+        Method m = class_getInstanceMethod(cls, @selector(sm_viewDidAppear:));
+        class_replaceMethod(cls, old, method_getImplementation(m), method_getTypeEncoding(m));
+        
+    });
+}
+
+@end
+
 
 @implementation MSSmartTracker
 
@@ -54,7 +94,9 @@
     if (_enabled != enabled){
 
         _enabled = enabled;
-        self.hidden = !_enabled;
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            self.hidden = !_enabled;
+        });
     }
     
 #endif
@@ -64,16 +106,11 @@
 #ifdef DEBUG
     if (_enableGlobalTrack != enableGlobalTrack){
         _enableGlobalTrack = enableGlobalTrack;
-        self.enabled = enableGlobalTrack;
         
         if (_enableGlobalTrack){
-            static dispatch_once_t onceToken;
-            dispatch_once(&onceToken, ^{
-                
-                //todo
-                
-            });
+            [UIViewController sm_replaceMethods];
         }
+        self.enabled = enableGlobalTrack;
     }
 #endif
 }
