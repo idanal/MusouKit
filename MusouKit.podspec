@@ -34,8 +34,8 @@ Pod::Spec.new do |s|
 
   s.source       = { :git => "https://github.com/idanal/musouKit.git", :tag => "#{s.version}" }
 
-  s.source_files  = "MusouKit/**/*.{h,m}"
-  #s.exclude_files = "Classes/Exclude"
+  s.source_files  = "MusouKit/**/*.{h,m,mm}"
+  s.exclude_files = "MusouKit/**/MSGPSManager.*"
 
   s.public_header_files = "MusouKit/**/*.h"
 
@@ -45,7 +45,7 @@ Pod::Spec.new do |s|
   #  the lib prefix of their name.
   #
 
-  # s.framework  = "SomeFramework"
+  # s.framework  = "CoreLocation"
   # s.frameworks = "SomeFramework", "AnotherFramework"
 
   # s.library   = "iconv"

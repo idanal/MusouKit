@@ -1,5 +1,5 @@
 PODS:
-  - MusouKit (0.0.6)
+  - MusouKit (0.1.0)
 
 DEPENDENCIES:
   - MusouKit (from `../../MusouKit.podspec`)
@@ -9,7 +9,7 @@ EXTERNAL SOURCES:
     :path: ../../MusouKit.podspec
 
 SPEC CHECKSUMS:
-  MusouKit: 4311fe2ea9d379464f783554fe68a9d281e4e310
+  MusouKit: d110dea51a5f7e447be78ce6ae3faf8fdc848603
 
 PODFILE CHECKSUM: 9c0a0b852c3d118e230234b721c7918c5a0c8fe4
 
