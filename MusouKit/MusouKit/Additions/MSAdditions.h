@@ -239,6 +239,9 @@
 - (UIImage *)scaleToSize:(CGSize)newSize;
 - (UIImage *)scaleByFactor:(float)scaleBy;
 
+//Change color
+- (UIImage *)tint:(UIColor *)color;
+
 @end
 
 

@@ -1048,6 +1048,21 @@ static NSString * const s_tapGesture = @"tapGesture";
     return newimg;
 }
 
+- (UIImage *)tint:(UIColor *)color{
+    CGRect rect = CGRectMake(0, 0, self.size.width, self.size.height);
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef ctx = UIGraphicsGetCurrentContext();
+    //CGContextTranslateCTM(ctx, 0, rect.size.height);
+    //CGContextScaleCTM(ctx, 1.0, -1.0);
+    CGContextSetBlendMode(ctx, kCGBlendModeNormal);
+    CGContextClipToMask(ctx, rect, self.CGImage);
+    [color setFill];
+    CGContextFillRect(ctx, rect);
+    UIImage *ret = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return ret;
+}
+
 @end
 
 
