@@ -1003,6 +1003,18 @@ static NSString * const s_tapGesture = @"tapGesture";
     return ret;
 }
 
+- (UIImage *)withCorner:(CGFloat)radius{
+    CGRect rect = CGRectMake(0, 0, self.size.width, self.size.height);
+    UIGraphicsBeginImageContextWithOptions(self.size, NO, 0.0);
+    CGContextRef ctx = UIGraphicsGetCurrentContext();
+    CGContextAddPath(ctx, [UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:radius].CGPath);
+    CGContextClip(ctx);
+    [self drawInRect:rect];
+    UIImage *ret = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return ret;
+}
+
 @end
 
 

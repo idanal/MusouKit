@@ -239,7 +239,8 @@
 
 //Change color
 - (UIImage *)tint:(UIColor *)color;
-
+//Corner with radius
+- (UIImage *)withCorner:(CGFloat)radius;
 @end
 
 
