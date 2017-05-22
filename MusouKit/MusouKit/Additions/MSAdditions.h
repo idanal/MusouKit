@@ -209,10 +209,8 @@
 
 + (NSString *)buildVersion;
 + (NSString *)appVersion;
-+ (NSNumber *)buildNumber;
-+ (NSString *)deviceType;   //设备类型，e.g. iPhone 4
++ (NSString *)deviceModel;  //e.g. iPhone5,1
 + (NSString *)getUUID:(NSString *)identifier;      //获取UUID
-+ (NSString *)provider;     //return "Apple"
 + (NSString *)systemLanguage;
 @end
 

@@ -822,62 +822,6 @@ static NSString * const s_tapGesture = @"tapGesture";
     CFRelease(fileURL);
 }
 
-/*
- *  获取版本型号
- *  "i386"          simulator
- *  "iPod1,1"       iPod Touch
- *  "iPhone1,1"     iPhone
- *  "iPhone1,2"     iPhone 3G
- *  "iPhone2,1"     iPhone 3GS
- *  "iPad1,1"       iPad
- *  "iPhone3,1"     iPhone 4
- */
-
-+ (NSString*)deviceType
-{
-    struct utsname systemInfo;
-    uname(&systemInfo);
-    NSString *deviceString = [NSString stringWithCString:systemInfo.machine encoding:NSUTF8StringEncoding];
-    
-    if ([deviceString isEqualToString:@"iPhone1,1"])    return @"iPhone 1G";
-    if ([deviceString isEqualToString:@"iPhone1,2"])    return @"iPhone 3G";
-    if ([deviceString isEqualToString:@"iPhone2,1"])    return @"iPhone 3GS";
-    if ([deviceString isEqualToString:@"iPhone3,1"])    return @"iPhone 4";
-    if ([deviceString isEqualToString:@"iPhone3,2"])    return @"Verizon iPhone 4";
-    if ([deviceString isEqualToString:@"iPhone3,2"])   return@"Verizon iPhone 4";
-    if ([deviceString isEqualToString:@"iPhone3,3"])   return@"iPhone 4 (CDMA)";
-    if ([deviceString isEqualToString:@"iPhone4,1"])   return @"iPhone 4s";
-    if ([deviceString isEqualToString:@"iPhone5,1"])   return @"iPhone 5 (GSM/WCDMA)";
-    if ([deviceString isEqualToString:@"iPhone5,2"])   return @"iPhone 5 (CDMA)";
-    if ([deviceString isEqualToString:@"iPhone5,3"])   return @"iPhone 5c (GSM/CDMA)";
-    if ([deviceString isEqualToString:@"iPhone5,4"])   return @"iPhone 5c (GSM)";
-    if ([deviceString isEqualToString:@"iPhone6,1"])   return @"iPhone 5s (GSM)";
-    if ([deviceString isEqualToString:@"iPhone6,2"])   return @"iPhone 5s (GSM/CDMA)";
-    
-    if ([deviceString isEqualToString:@"iPod1,1"])      return @"iPod Touch 1G";
-    if ([deviceString isEqualToString:@"iPod2,1"])      return @"iPod Touch 2G";
-    if ([deviceString isEqualToString:@"iPod3,1"])      return @"iPod Touch 3G";
-    if ([deviceString isEqualToString:@"iPod4,1"])      return @"iPod Touch 4G";
-    if ([deviceString isEqualToString:@"iPod5,1"])     return@"iPod Touch 5G";
-    
-    if ([deviceString isEqualToString:@"iPad1,1"])      return @"iPad";
-    if ([deviceString isEqualToString:@"iPad2,1"])      return @"iPad 2 (WiFi)";
-    if ([deviceString isEqualToString:@"iPad2,2"])      return @"iPad 2 (GSM)";
-    if ([deviceString isEqualToString:@"iPad2,3"])      return @"iPad 2 (CDMA)";
-    if ([deviceString isEqualToString:@"iPad2,4"])     return@"iPad 2 New";
-    if ([deviceString isEqualToString:@"iPad2,5"])     return@"iPad Mini (WiFi)";
-    if ([deviceString isEqualToString:@"iPad3,1"])     return@"iPad 3 (WiFi)";
-    if ([deviceString isEqualToString:@"iPad3,2"])     return@"iPad 3 (CDMA)";
-    if ([deviceString isEqualToString:@"iPad3,3"])     return@"iPad 3 (GSM)";
-    if ([deviceString isEqualToString:@"iPad3,4"])     return@"iPad 4 (WiFi)";
-    
-    if ([deviceString isEqualToString:@"i386"])         return @"Simulator";
-    if ([deviceString isEqualToString:@"x86_64"])       return @"Simulator";
-    
-    NSLog(@"NOTE: Unknown device type: %@", deviceString);
-    return deviceString;
-}
-
 + (NSString *)getUUID:(NSString *)identifier{
     
     UIPasteboard *pb = [UIPasteboard pasteboardWithName:identifier create:YES];
@@ -899,8 +843,10 @@ static NSString * const s_tapGesture = @"tapGesture";
     }
 }
 
-+ (NSString *)provider{
-    return @"Apple";
++ (NSString *)deviceModel{
+    struct utsname systemInfo;
+    uname(&systemInfo);
+    return [NSString stringWithCString:systemInfo.machine encoding:NSUTF8StringEncoding];
 }
 
 + (NSString *)buildVersion{
@@ -912,12 +858,6 @@ static NSString * const s_tapGesture = @"tapGesture";
     NSDictionary *appInfo = [[NSBundle mainBundle] infoDictionary];
     NSString *version = [appInfo objectForKey:@"CFBundleShortVersionString"];
     return version;
-}
-
-+ (NSNumber *)buildNumber {
-    NSDictionary *appInfo = [[NSBundle mainBundle] infoDictionary];
-    NSNumber *buildNumber = [appInfo objectForKey:@"CFBundleVersion"];
-    return buildNumber;
 }
 
 + (NSString *)systemLanguage{
