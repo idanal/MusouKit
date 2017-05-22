@@ -143,10 +143,6 @@ static NSString *s_Domain;
                 });
             }
             
-#ifdef DEBUG
-            NSLog(@"\n\n==>onResponse [%@]:%@ \n\n", self.url, json);
-#endif
-            
             onComplete(json, error);
         };
         
@@ -216,11 +212,15 @@ static NSString *s_Domain;
     NSURLSessionTask *task = [session dataTaskWithRequest:req completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         
 #ifdef DEBUG
-        id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-        if (!json){
-            json = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        if (error){
+            NSLog(@"%@", error);
+        } else {
+            id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+            if (!json){
+                json = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            }
+            NSLog(@"\n\n==>onResponse [%@]:%@ \n\n", req.URL, json);
         }
-        NSLog(@"\n\n==>onResponse [%@]:%@ \n\n", req.URL, json);
 #endif
         dispatch_async(dispatch_get_main_queue(), ^{
             onComplete(data, error);
