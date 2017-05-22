@@ -21,6 +21,7 @@
 }
 @property (nonatomic, copy, nonnull) NSString *url;
 @property (nonatomic, copy, nonnull) NSString *method;     //POST,GET,PUT...
+@property (nonatomic, copy, nullable) NSString *contentType;    //Default nil
 
 //设置Api域名
 + (void)setupDomain:(NSString * _Nonnull)apiDomain;

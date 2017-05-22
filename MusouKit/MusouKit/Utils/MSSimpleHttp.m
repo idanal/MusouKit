@@ -10,6 +10,7 @@
 #import <Security/Security.h>
 #import <CommonCrypto/CommonCrypto.h>
 #import "MSHttpRequest.h"
+#import "MSJSONEntity.h"
 
 @implementation MSSimpleHttp
 
@@ -183,13 +184,18 @@ static NSString *s_Domain;
             }
             urlEncoded = [[self class] urlEncodeString:url];
             request.URL = [NSURL URLWithString:urlEncoded];
-            
+
         } else {
             
             url = self.url;
             urlEncoded = [[self class] urlEncodeString:url];
             request.URL = [NSURL URLWithString:urlEncoded];
-            request.HTTPBody = [query dataUsingEncoding:NSUTF8StringEncoding];
+            
+            if ([self.contentType containsString:@"json"]){
+                request.HTTPBody = [_params toJSON];
+            } else {
+                request.HTTPBody = [query dataUsingEncoding:NSUTF8StringEncoding];
+            }
         }
         
 #ifdef DEBUG
