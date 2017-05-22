@@ -210,7 +210,7 @@ static NSString *s_Domain;
     
 }
 
-- (void)doURLRequest:(NSURLRequest *)req onComplete:(void (^)(id _Nullable, NSError * _Nullable))onComplete{
+- (void)doURLRequest:(NSURLRequest *)req onComplete:(void (^)(NSData * _Nullable, NSError * _Nullable))onComplete{
     NSURLSessionConfiguration *cfg = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:cfg];
     NSURLSessionTask *task = [session dataTaskWithRequest:req completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
@@ -275,12 +275,7 @@ static NSString *s_Domain;
 
 @implementation MSHttpResult
 
-+ (instancetype)new:(NSDictionary *)d{
-    MSHttpResult *r = [[self alloc] init];
-    r.code = [d[@"code"] integerValue];
-    r.success = [d[@"success"] integerValue];
-    r.message = d[@"msg"];
-    return r;
+- (void)parse:(NSDictionary * _Nullable)result{
 }
 
 @end

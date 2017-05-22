@@ -33,4 +33,8 @@
 /** Append file data with param name */
 - (void)appendFileFormData:(NSData *)data name:(NSString *)name filename:(NSString *)filename;
 
+#pragma mark - Send the request
+
+- (NSURLSessionTask *)send:(void (^)(NSData *, NSError *))onComplete;
+
 @end

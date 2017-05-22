@@ -58,7 +58,7 @@
 /**
  * 发送NSURLRequest请求, 不缓存
  */
-- (void)doURLRequest:(NSURLRequest * _Nonnull)req onComplete:(void (^_Nonnull)(id _Nullable data, NSError * _Nullable error))onComplete;
+- (void)doURLRequest:(NSURLRequest * _Nonnull)req onComplete:(void (^_Nonnull)(NSData * _Nullable data, NSError * _Nullable error))onComplete;
 
 /**
  * 取消
@@ -74,9 +74,9 @@
 
 //Simple result
 @interface MSHttpResult : NSObject
-@property (nonatomic, assign) BOOL success;
 @property (nonatomic, assign) NSInteger code;
 @property (nonatomic, copy, nullable) NSString *message;
-//Create with dict
-+ (instancetype _Nonnull)new:(NSDictionary * _Nullable)d;
+@property (nonatomic, assign, readonly) BOOL success;
+//Parse
+- (void)parse:(NSDictionary * _Nullable)result;
 @end

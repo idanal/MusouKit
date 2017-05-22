@@ -72,4 +72,20 @@ static NSString *boundary = @"=======B-o-u-n-d-a-r-y=======";
     [self setValue:[NSString stringWithFormat:@"%@", @([self.bodyData length])] forHTTPHeaderField:@"Content-Length"];
 }
 
+#pragma mark - Send the request
+
+- (NSURLSessionTask *)send:(void (^)(NSData *, NSError *))onComplete{
+    NSURLSessionConfiguration *cfg = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:cfg];
+    NSURLSessionTask *task = [session dataTaskWithRequest:self completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            onComplete(data, error);
+        });
+        
+    }];
+    [task resume];
+    return task;
+}
+
 @end
