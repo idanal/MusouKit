@@ -11,13 +11,13 @@
 
 @implementation UIImageView (Musou)
 
-+ (void)replace_urlImplementation:(id)target sel:(SEL)targetSel{
++ (void)replace_urlImplementation:(Class)targetCls sel:(SEL)targetSel{
     SEL orig = @selector(setUrl:placeholder:);
-    Method m = class_getInstanceMethod([target class], targetSel);
+    Method m = class_getInstanceMethod(targetCls, targetSel);
     class_replaceMethod(self, orig, method_getImplementation(m), method_getTypeEncoding(m));
 }
 
-- (void)setUrl:(NSString *)url placeholder:(UIImage *)placeholder{
+- (void)setUrl:(NSURL *)url placeholder:(UIImage *)placeholder{
     NSLog(@"Pls call 'replace_urlImplementation:sel' to set an Implementation.");
 }
 
