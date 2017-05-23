@@ -83,18 +83,6 @@
 }
 
 #pragma mark - Keyboard
-- (UIView *)findFirstResponder:(UIView *)inView{
-    if (inView.isFirstResponder) {
-        return inView;
-    }
-    for (UIView *subView in inView.subviews) {
-        UIView *firstResponder = [self findFirstResponder:subView];
-        if (firstResponder != nil) {
-            return firstResponder;
-        }
-    }
-    return nil;
-}
 
 - (UIViewController *)findCurrentVC{
     @try {
@@ -145,8 +133,26 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
 }
 
+- (UIView *)findResponder:(UIView *)view{
+    if (view.isFirstResponder){
+        return view;
+    }
+    UIView *ret;
+    for (UIView *subv in view.subviews){
+        if (subv.isFirstResponder){
+            return subv;
+        } else {
+            ret = [self findResponder:subv];
+            if (ret){
+                return ret;
+            }
+        }
+    }
+    return nil;
+}
+
 - (void)keyboardWillShowComplete:(CGRect)keyboardFrame{
-    UIView *responder = [self findFirstResponder:[self findCurrentVC].view];
+    UIView *responder = [self findResponder:self.view];
     UIView *view = self.view;
     
     if (responder){
@@ -154,7 +160,6 @@
 #ifdef DEBUG
         NSLog(@"%s %@", __FILE__, NSStringFromCGRect(rect));
 #endif
-        //        if (rect.origin.y + rect.size.height < view.bounds.size.height/2){
         if (rect.origin.y + rect.size.height < self.view.bounds.size.height-keyboardFrame.size.height){
             return;
         }
@@ -166,6 +171,7 @@
         rect.origin.y += [UIScreen mainScreen].bounds.size.height - rect.size.height;
     }
     self.view.frame = rect;
+    
 }
 
 - (void)keyboardWillHideComplete:(CGRect)keyboardFrame{
