@@ -10,8 +10,9 @@
 #import "MSHttpRequest.h"
 #import "MusouKit.h"
 
-@interface ViewController ()
 
+@interface ViewController ()
+@property (nonatomic, weak) IBOutlet UIButton *button;
 @end
 
 @implementation ViewController
@@ -33,6 +34,11 @@
     [task resume];
     
 
+    [NSMutableURLRequest send:@"put" url:[NSURL URLWithString:@"http://10.0.0.18/www/req.php"] parameters:@{@"a":@"1 23", @"b": @"4/56"} completion:^(NSData *d, NSError *e) {
+        NSLog(@"%@", [[NSString alloc] initWithData:d encoding:NSUTF8StringEncoding]);
+    }];
+    
+    [_button setImage:[MSQRCodeController createQRCodeImage:@"test"] forState:0];
 }
 
 

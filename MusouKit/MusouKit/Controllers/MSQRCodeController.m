@@ -136,9 +136,12 @@
     // Create an image with the contents of our bitmap
     CGImageRef scaledImage = CGBitmapContextCreateImage(bitmapRef);
     // Cleanup
+    CGColorSpaceRelease(cs);
     CGContextRelease(bitmapRef);
     CGImageRelease(bitmapImage);
-    return [UIImage imageWithCGImage:scaledImage];
+    UIImage *ret = [UIImage imageWithCGImage:scaledImage];
+    CGImageRelease(scaledImage);
+    return ret;
 }
 
 #pragma mark - QRCode image

@@ -1286,6 +1286,8 @@ static NSString * const s_tapGesture = @"tapGesture";
     if (status == noErr) {
         status = SecTrustEvaluate(myTrust, &trustResult);
     }
+    CFRelease(myPolicy);
+    CFRelease(myCertificate);
     return SecTrustCopyPublicKey(myTrust);
 }
 
