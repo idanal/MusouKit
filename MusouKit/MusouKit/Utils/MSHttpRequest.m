@@ -72,9 +72,15 @@ static NSString *boundary = @"=======B-o-u-n-d-a-r-y=======";
     [self setValue:[NSString stringWithFormat:@"%@", @([self.bodyData length])] forHTTPHeaderField:@"Content-Length"];
 }
 
-#pragma mark - Send the request
+@end
 
-- (NSURLSessionTask *)send:(void (^)(NSData *, NSError *))onComplete{
+
+#pragma mark - Send a request
+
+@implementation NSURLRequest (Musou)
+
+
+- (NSURLSessionTask *)send:(void (^)(NSData *, NSError *))completion{
     NSURLSessionConfiguration *cfg = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:cfg];
     NSURLSessionTask *task = [session dataTaskWithRequest:self completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
@@ -85,12 +91,43 @@ static NSString *boundary = @"=======B-o-u-n-d-a-r-y=======";
         }
 #endif
         dispatch_async(dispatch_get_main_queue(), ^{
-            onComplete(data, error);
+            completion(data, error);
         });
         
     }];
     [task resume];
     return task;
+}
+
++ (NSURLSessionTask *)send:(NSString *)httpMethod url:(NSURL *)url parameters:(NSDictionary *)params completion:(void (^)(NSData *, NSError *))completion{
+    NSMutableArray *paramArr = [NSMutableArray new];
+    [params enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+        NSString *val = [NSString stringWithFormat:@"%@", obj];
+        val = [val stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        [paramArr addObject:[NSString stringWithFormat:@"%@=%@",key,val]];
+    }];
+    NSString *query = [paramArr componentsJoinedByString:@"&"];
+    NSMutableURLRequest *req = [NSMutableURLRequest new];
+    
+    if ([httpMethod.uppercaseString isEqualToString:@"GET"]){
+        
+        NSString *urlStr = url.absoluteString;
+        if ([urlStr containsString:@"?"]){
+            urlStr = [NSString stringWithFormat:@"%@&%@", urlStr, query];
+        } else {
+            urlStr = [NSString stringWithFormat:@"%@?%@", urlStr, query];
+        }
+        req.URL = [NSURL URLWithString:urlStr];
+        req.HTTPMethod = httpMethod;
+        
+    } else {
+        
+        req.URL = url;
+        req.HTTPMethod = httpMethod;
+        req.HTTPBody = [query dataUsingEncoding:NSUTF8StringEncoding];
+        
+    }
+    return [req send:completion];
 }
 
 @end

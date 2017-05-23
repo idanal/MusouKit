@@ -33,8 +33,24 @@
 /** Append file data with param name */
 - (void)appendFileFormData:(NSData *)data name:(NSString *)name filename:(NSString *)filename;
 
-#pragma mark - Send the request
+@end
 
-- (NSURLSessionTask *)send:(void (^)(NSData *, NSError *))onComplete;
+
+#pragma mark - Send a request
+
+@interface NSURLRequest (Musou)
+
+/** Send with the request */
+- (NSURLSessionTask *)send:(void (^)(NSData *, NSError *))completion;
+
+/**
+ * Send with parameters
+ * @param httpMethod GET,POST,PUT,...
+ * @param url URL to request
+ * @param params Parameters contains foundation objects
+ * @param completion Callback when complete
+ * @return NSURLSessionTask
+ */
++ (NSURLSessionTask *)send:(NSString *)httpMethod url:(NSURL *)url parameters:(NSDictionary *)params completion:(void (^)(NSData *, NSError *))completion;
 
 @end
