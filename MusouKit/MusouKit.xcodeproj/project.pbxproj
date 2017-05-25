@@ -26,6 +26,7 @@
 		87AD46851E9B907400C02FF5 /* MSDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD46841E9B907400C02FF5 /* MSDownloader.m */; };
 		87AD46881E9B907F00C02FF5 /* MSTaskQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD46871E9B907F00C02FF5 /* MSTaskQueue.m */; };
 		87B1EB0B1EAF23D6007386AD /* MSSimpleHttp.m in Sources */ = {isa = PBXBuildFile; fileRef = 87B1EB0A1EAF23D6007386AD /* MSSimpleHttp.m */; };
+		87B548871ED6B17300BFACE5 /* MSSysShare.m in Sources */ = {isa = PBXBuildFile; fileRef = 87B548861ED6B17300BFACE5 /* MSSysShare.m */; };
 		87B727431EBA1FBE005D04CF /* MSAutoWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 87B727421EBA1FBE005D04CF /* MSAutoWebView.m */; };
 		87B727471EBA2226005D04CF /* MSTimerButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 87B727461EBA2226005D04CF /* MSTimerButton.m */; };
 		87CD79211ECE898000108F20 /* MSHttpRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 87CD79201ECE898000108F20 /* MSHttpRequest.m */; };
@@ -86,6 +87,8 @@
 		87AD46AE1E9E27B000C02FF5 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		87B1EB091EAF23D6007386AD /* MSSimpleHttp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSSimpleHttp.h; sourceTree = "<group>"; };
 		87B1EB0A1EAF23D6007386AD /* MSSimpleHttp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSSimpleHttp.m; sourceTree = "<group>"; };
+		87B548851ED6B17300BFACE5 /* MSSysShare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSSysShare.h; sourceTree = "<group>"; };
+		87B548861ED6B17300BFACE5 /* MSSysShare.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSSysShare.m; sourceTree = "<group>"; };
 		87B727411EBA1FBE005D04CF /* MSAutoWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSAutoWebView.h; sourceTree = "<group>"; };
 		87B727421EBA1FBE005D04CF /* MSAutoWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSAutoWebView.m; sourceTree = "<group>"; };
 		87B727451EBA2226005D04CF /* MSTimerButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSTimerButton.h; sourceTree = "<group>"; };
@@ -184,6 +187,8 @@
 				87D786EB1EC5A369003B66BB /* MSLogger.m */,
 				87CD79271ECEC95800108F20 /* MSSmartTracker.h */,
 				87CD79281ECEC95800108F20 /* MSSmartTracker.m */,
+				87B548851ED6B17300BFACE5 /* MSSysShare.h */,
+				87B548861ED6B17300BFACE5 /* MSSysShare.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -300,6 +305,7 @@
 				87AD467F1E9B901700C02FF5 /* MSRangeSlider.m in Sources */,
 				87AD46851E9B907400C02FF5 /* MSDownloader.m in Sources */,
 				87AD467B1E9B900C00C02FF5 /* MSActionPicker.m in Sources */,
+				87B548871ED6B17300BFACE5 /* MSSysShare.m in Sources */,
 				87217ECC1EC49CC000864944 /* MSCardSwipeView.m in Sources */,
 				87AD464B1E9B8EB300C02FF5 /* MSBaseViewController.m in Sources */,
 				87AD464F1E9B8EBA00C02FF5 /* MSQRCodeController.m in Sources */,

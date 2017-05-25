@@ -13,6 +13,7 @@
 		87928FDA1EC6D4E800F80CA5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87928FD81EC6D4E800F80CA5 /* Main.storyboard */; };
 		87928FDC1EC6D4E800F80CA5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 87928FDB1EC6D4E800F80CA5 /* Assets.xcassets */; };
 		87928FDF1EC6D4E800F80CA5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87928FDD1EC6D4E800F80CA5 /* LaunchScreen.storyboard */; };
+		87B548831ED68EE000BFACE5 /* fun.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 87B548821ED68EE000BFACE5 /* fun.jpg */; };
 		9AA6127C8AD7674D1FBC874B /* libPods-MusouSample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F594A591792E232E78BCA91 /* libPods-MusouSample.a */; };
 /* End PBXBuildFile section */
 
@@ -28,6 +29,7 @@
 		87928FDB1EC6D4E800F80CA5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		87928FDE1EC6D4E800F80CA5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		87928FE01EC6D4E800F80CA5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		87B548821ED68EE000BFACE5 /* fun.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = fun.jpg; sourceTree = "<group>"; };
 		8F594A591792E232E78BCA91 /* libPods-MusouSample.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MusouSample.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAF155F8CAD9044B87E800DB /* Pods-MusouSample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusouSample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MusouSample/Pods-MusouSample.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -74,6 +76,7 @@
 		87928FCE1EC6D4E800F80CA5 /* MusouSample */ = {
 			isa = PBXGroup;
 			children = (
+				87B548821ED68EE000BFACE5 /* fun.jpg */,
 				87928FD21EC6D4E800F80CA5 /* AppDelegate.h */,
 				87928FD31EC6D4E800F80CA5 /* AppDelegate.m */,
 				87928FD51EC6D4E800F80CA5 /* ViewController.h */,
@@ -138,6 +141,7 @@
 				TargetAttributes = {
 					87928FCB1EC6D4E800F80CA5 = {
 						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = 9S75R87456;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -168,6 +172,7 @@
 				87928FDF1EC6D4E800F80CA5 /* LaunchScreen.storyboard in Resources */,
 				87928FDC1EC6D4E800F80CA5 /* Assets.xcassets in Resources */,
 				87928FDA1EC6D4E800F80CA5 /* Main.storyboard in Resources */,
+				87B548831ED68EE000BFACE5 /* fun.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -349,6 +354,7 @@
 			baseConfigurationReference = FAF155F8CAD9044B87E800DB /* Pods-MusouSample.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 9S75R87456;
 				INFOPLIST_FILE = MusouSample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -362,6 +368,7 @@
 			baseConfigurationReference = 2DCC5E59D074A389EFAD5235 /* Pods-MusouSample.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 9S75R87456;
 				INFOPLIST_FILE = MusouSample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
