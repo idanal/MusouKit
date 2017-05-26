@@ -10,6 +10,8 @@
 #import <objc/runtime.h>
 
 
+#pragma mark - UIViewController Extensions
+
 @interface UIViewController (SmartTracker)
 - (void)sm_viewDidAppear:(BOOL)animated;
 - (void)old_viewDidAppear:(BOOL)animated;
@@ -48,6 +50,17 @@
 @end
 
 
+
+#pragma mark - MSSmartTracker
+
+@interface MSSmartTracker(){
+    __weak UILabel *_hierarchyLbl;
+    __weak UIViewController *_currentVC;
+}
+@property (nonatomic) BOOL enabled;
+@property (nonatomic, weak) UILabel *textLabel;
+@end
+
 @implementation MSSmartTracker
 
 + (instancetype)shared{
@@ -63,9 +76,10 @@
 - (id)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self){
-        
-        self.userInteractionEnabled = YES;
         self.backgroundColor = [UIColor clearColor];
+        
+#ifdef DEBUG
+        self.userInteractionEnabled = YES;
         CGRect rect = CGRectInset(self.bounds, 2, 0);
         UILabel *textLabel = [[UILabel alloc] initWithFrame:rect];
         [self addSubview:textLabel];
@@ -84,6 +98,7 @@
         [self addGestureRecognizer:tap];
         
         self.textLabel.hidden = YES;
+#endif
     }
     return self;
 }
@@ -116,20 +131,45 @@
 }
 
 - (void)onTap:(UITapGestureRecognizer *)sender{
-    self.textLabel.hidden = !self.textLabel.hidden;
+    if ([sender locationOfTouch:0 inView:self].x > 50){ //Tap at right
+        
+        self.textLabel.hidden = !self.textLabel.hidden;
+        _hierarchyLbl.hidden = self.textLabel.hidden;
+        
+    } else if (!self.textLabel.hidden) {    //Tap at left
+        
+        _hierarchyLbl.hidden = !_hierarchyLbl.hidden;
+        if (!_hierarchyLbl){
+            UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(0, 64, 320, 100)];
+            lbl.numberOfLines = 0;
+            lbl.font = [UIFont systemFontOfSize:14];
+            lbl.opaque = YES;
+            lbl.backgroundColor = [UIColor whiteColor];
+            lbl.layer.borderColor = [UIColor lightGrayColor].CGColor;
+            lbl.layer.borderWidth = 1.0;
+            [self addSubview:lbl];
+            _hierarchyLbl = lbl;
+        }
+        [self printVCHierarchy];
+    }
 }
 
 - (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event{
-    CGRect rect = CGRectMake(self.bounds.size.width-50, 0, 50, 20);
-    if (CGRectContainsPoint(rect, point)){
+#ifdef DEBUG
+    CGRect rightRect = CGRectMake(self.bounds.size.width-50, 0, 50, 20);
+    CGRect leftRect = CGRectMake(0, 0, 50, 20);
+    if (CGRectContainsPoint(rightRect, point)){
+        return YES;
+    } else if (CGRectContainsPoint(leftRect, point)){
         return YES;
     }
     return NO;
+#else
+    return NO;
+#endif
 }
 
-//获取当前屏幕显示的viewcontroller
-- (UIViewController *)getCurrentVC
-{
+- (UIViewController *)getCurrentVC{
     @try {
 
         UIViewController *result = nil;
@@ -164,8 +204,9 @@
 }
 
 - (void)enterPage:(UIViewController *)c{
-    UIViewController *curr = c;
-    [self echo:NSStringFromClass(curr.class)];
+    _currentVC = c;
+    [self echo:NSStringFromClass(c.class)];
+    [self printVCHierarchy];
 }
 
 - (void)exitPage:(UIViewController *)c{
@@ -181,6 +222,29 @@
 
 - (void)echo:(NSString *)text{
     _textLabel.text = text;
+}
+
+- (void)printVCHierarchy{
+    NSMutableString *str = [NSMutableString new];
+    NSMutableArray *vcs = [NSMutableArray new];
+    UIViewController *cur = _currentVC;
+    while (cur) {
+        [vcs insertObject:[NSString stringWithFormat:@"%@", cur.class] atIndex:0];
+        cur = cur.parentViewController;
+    }
+    char buff[32];
+    bzero(buff, sizeof(buff));
+    int i = 0;
+    for (NSString *vc in vcs){
+        memset(buff, '-', i);
+        [str appendFormat:@" %s|%@\n", buff, vc];
+        i += 4;
+    }
+    _hierarchyLbl.text = str;
+    [_hierarchyLbl sizeToFit];
+    CGRect frame = _hierarchyLbl.frame;
+    frame.size.width = self.bounds.size.width;
+    _hierarchyLbl.frame = frame;
 }
 
 @end
