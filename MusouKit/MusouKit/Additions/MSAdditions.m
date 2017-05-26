@@ -211,22 +211,6 @@ static NSString * const s_attachment = @"attachment";
     return [self limitToSize:size attrs:@{NSFontAttributeName: font}];
 }
 
-+ (NSString *)UUID:(NSString *)uuidIdentifier{
-    NSString *type = @"public.utf8-plain-text";
-    UIPasteboard *pb = [UIPasteboard pasteboardWithName:uuidIdentifier create:YES];
-    NSString *uuid = [pb valueForPasteboardType:type];
-    if (!uuid){
-        CFUUIDRef ref = CFUUIDCreate(NULL);
-        CFStringRef str = CFUUIDCreateString(nil, ref);
-        uuid = (__bridge NSString *)CFStringCreateCopy(NULL, str);
-        CFRelease(ref);
-        CFRelease(str);
-        [pb setPersistent:YES];
-        [pb setValue:uuid forPasteboardType:type];
-    }
-    return uuid;
-}
-
 + (NSStringEncoding)GBKEncoding{
     NSStringEncoding encoding =
     CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
@@ -823,7 +807,7 @@ static NSString * const s_tapGesture = @"tapGesture";
 }
 
 + (NSString *)getUUID:(NSString *)identifier{
-    
+    //name = @"public.utf8-plain-text";
     UIPasteboard *pb = [UIPasteboard pasteboardWithName:identifier create:YES];
     if ([pb string]){
         return [pb string];
@@ -831,14 +815,11 @@ static NSString * const s_tapGesture = @"tapGesture";
         
         CFUUIDRef uuid = CFUUIDCreate(NULL);
         CFStringRef uuidString = CFUUIDCreateString(NULL, uuid);
-        NSString *result = (__bridge NSString *)CFStringCreateCopy( NULL, uuidString);
+        NSString *result = [NSString stringWithFormat:@"%@", uuidString];
         CFRelease(uuid);
         CFRelease(uuidString);
         
         [pb setString:result];
-#if !__has_feature(objc_arc)
-        [result autorelease];
-#endif
         return result;
     }
 }

@@ -72,7 +72,6 @@
 /** Simple method */
 - (CGSize)limitToSize:(CGSize)size font:(UIFont *)font;
 
-+ (NSString *)UUID:(NSString *)uuidIdentifier;
 + (NSStringEncoding)GBKEncoding;
 + (NSString *)SSS:(NSString *)s1,...;
 + (NSString *)getFileMD5Hash:(NSString *)filePath;

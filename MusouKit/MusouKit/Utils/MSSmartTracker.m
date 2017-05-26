@@ -1,6 +1,6 @@
 //
 //  SmartTracker.m
-//  
+//
 //
 //  Created by DANAL LUO on 2016/12/12.
 //  Copyright © 2016年 GREI. All rights reserved.
@@ -58,7 +58,6 @@
     __weak UIViewController *_currentVC;
 }
 @property (nonatomic) BOOL enabled;
-@property (nonatomic, weak) UILabel *textLabel;
 @end
 
 @implementation MSSmartTracker
@@ -80,24 +79,11 @@
         
 #ifdef DEBUG
         self.userInteractionEnabled = YES;
-        CGRect rect = CGRectInset(self.bounds, 2, 0);
-        UILabel *textLabel = [[UILabel alloc] initWithFrame:rect];
-        [self addSubview:textLabel];
-        
-        textLabel.minimumScaleFactor = 0.5;
-        textLabel.textColor = [UIColor redColor];
-        textLabel.font = [UIFont boldSystemFontOfSize:12.0];
-        textLabel.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:.8];
-        
-        _textLabel = textLabel;
-        
         self.windowLevel = UIWindowLevelStatusBar;
         
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTap:)];
         tap.numberOfTapsRequired = 2;
         [self addGestureRecognizer:tap];
-        
-        self.textLabel.hidden = YES;
 #endif
     }
     return self;
@@ -107,7 +93,7 @@
 #ifdef DEBUG
     
     if (_enabled != enabled){
-
+        
         _enabled = enabled;
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             self.hidden = !_enabled;
@@ -132,11 +118,6 @@
 
 - (void)onTap:(UITapGestureRecognizer *)sender{
     if ([sender locationOfTouch:0 inView:self].x > 50){ //Tap at right
-        
-        self.textLabel.hidden = !self.textLabel.hidden;
-        _hierarchyLbl.hidden = self.textLabel.hidden;
-        
-    } else if (!self.textLabel.hidden) {    //Tap at left
         
         _hierarchyLbl.hidden = !_hierarchyLbl.hidden;
         if (!_hierarchyLbl){
@@ -171,7 +152,7 @@
 
 - (UIViewController *)getCurrentVC{
     @try {
-
+        
         UIViewController *result = nil;
         
         UIWindow * window = [[[UIApplication sharedApplication] windows] firstObject];
@@ -221,7 +202,7 @@
 }
 
 - (void)echo:(NSString *)text{
-    _textLabel.text = text;
+    //    _textLabel.text = text;
 }
 
 - (void)printVCHierarchy{
