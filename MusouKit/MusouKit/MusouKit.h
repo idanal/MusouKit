@@ -26,6 +26,7 @@
 #import "MSImageView.h"
 #import "MSAutoWebView.h"
 #import "MSTimerButton.h"
+#import "MSAnimatedImageView.h"
 
 #import "MSBaseViewController.h"
 #import "MSCameraController.h"

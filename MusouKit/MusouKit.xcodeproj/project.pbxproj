@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		87217ECC1EC49CC000864944 /* MSCardSwipeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 87217ECB1EC49CC000864944 /* MSCardSwipeView.m */; };
+		876EF99E1EE1838F0011D920 /* MSAnimatedImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 876EF99D1EE1838F0011D920 /* MSAnimatedImageView.m */; };
 		87AD46361E9B8E3C00C02FF5 /* MusouKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD46351E9B8E3C00C02FF5 /* MusouKit.m */; };
 		87AD46371E9B8E3C00C02FF5 /* MusouKit.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 87AD46341E9B8E3C00C02FF5 /* MusouKit.h */; };
 		87AD46431E9B8E9800C02FF5 /* MSAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD46421E9B8E9800C02FF5 /* MSAdditions.m */; };
@@ -51,6 +52,8 @@
 /* Begin PBXFileReference section */
 		87217ECA1EC49CC000864944 /* MSCardSwipeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSCardSwipeView.h; sourceTree = "<group>"; };
 		87217ECB1EC49CC000864944 /* MSCardSwipeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSCardSwipeView.m; sourceTree = "<group>"; };
+		876EF99C1EE1838F0011D920 /* MSAnimatedImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSAnimatedImageView.h; sourceTree = "<group>"; };
+		876EF99D1EE1838F0011D920 /* MSAnimatedImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSAnimatedImageView.m; sourceTree = "<group>"; };
 		87AD46311E9B8E3C00C02FF5 /* libMusouKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMusouKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		87AD46341E9B8E3C00C02FF5 /* MusouKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MusouKit.h; sourceTree = "<group>"; };
 		87AD46351E9B8E3C00C02FF5 /* MusouKit.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MusouKit.m; sourceTree = "<group>"; };
@@ -216,6 +219,8 @@
 				87B727421EBA1FBE005D04CF /* MSAutoWebView.m */,
 				87B727451EBA2226005D04CF /* MSTimerButton.h */,
 				87B727461EBA2226005D04CF /* MSTimerButton.m */,
+				876EF99C1EE1838F0011D920 /* MSAnimatedImageView.h */,
+				876EF99D1EE1838F0011D920 /* MSAnimatedImageView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -300,6 +305,7 @@
 				87AD46461E9B8E9F00C02FF5 /* MSJSONEntity.m in Sources */,
 				87AD46431E9B8E9800C02FF5 /* MSAdditions.m in Sources */,
 				87CD79291ECEC95800108F20 /* MSSmartTracker.m in Sources */,
+				876EF99E1EE1838F0011D920 /* MSAnimatedImageView.m in Sources */,
 				87AD46761E9B8F7800C02FF5 /* DLAutoLayout.m in Sources */,
 				87AD467C1E9B900C00C02FF5 /* MSActionSheet.m in Sources */,
 				87AD467F1E9B901700C02FF5 /* MSRangeSlider.m in Sources */,
