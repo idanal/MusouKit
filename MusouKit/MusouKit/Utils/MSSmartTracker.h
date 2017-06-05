@@ -17,9 +17,9 @@
 @interface MSSmartTracker : UIWindow
 /** Enable the tracker */
 @property (nonatomic) BOOL enabled;
-/** Enable the view tracker */
+/** Enable the view tracker. Default No */
 @property (nonatomic) BOOL enableViewTracker;
-/** Simple view tracker info print class name only */
+/** Simple view tracker info print class name only. Default YES */
 @property (nonatomic) BOOL simpleViewTrackerInfo;
 
 /** Singleton */

@@ -78,6 +78,7 @@
         self.backgroundColor = [UIColor clearColor];
         
 #ifdef DEBUG
+        self.simpleViewTrackerInfo = YES;
         self.userInteractionEnabled = YES;
         self.windowLevel = UIWindowLevelStatusBar;
         
@@ -241,7 +242,7 @@
         [vcs insertObject:[NSString stringWithFormat:@"%@", cur.class] atIndex:0];
         cur = cur.parentViewController;
     }
-    char buff[32];
+    char buff[64];
     bzero(buff, sizeof(buff));
     int i = 0;
     for (NSString *vc in vcs){
@@ -267,7 +268,7 @@
 - (void)hitTest:(CGPoint)pt inView:(UIView *)parent outView:(UIView **)outView hierarchy:(NSMutableArray<NSString *> *)hierarchy{
     
     UIWindow *window = [UIApplication sharedApplication].delegate.window;
-    char buff[64];
+    char buff[512]; //max levels=128
     bzero(buff, sizeof(buff));
     
     for (UIView *v in parent.subviews){
