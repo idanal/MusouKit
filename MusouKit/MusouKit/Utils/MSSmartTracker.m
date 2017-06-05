@@ -57,7 +57,6 @@
     __weak UILabel *_hierarchyLbl;
     __weak UIViewController *_currentVC;
 }
-@property (nonatomic) BOOL viewTrackerEnabled;
 @property (nonatomic, weak) UILabel *viewTracker;
 @end
 
@@ -108,16 +107,16 @@
     return self;
 }
 
-- (void)setEnableGlobalTrack:(BOOL)enableGlobalTrack{
+- (void)setEnabled:(BOOL)enabled{
 #ifdef DEBUG
-    if (_enableGlobalTrack != enableGlobalTrack){
-        _enableGlobalTrack = enableGlobalTrack;
+    if (_enabled != enabled){
+        _enabled = enabled;
         
-        if (_enableGlobalTrack){
+        if (_enabled){
             [UIViewController sm_replaceMethods];
         }
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            self.hidden = !_enableGlobalTrack;
+            self.hidden = !_enabled;
         });
     }
 #endif
@@ -142,14 +141,14 @@
         
     } else if ([sender locationOfTouch:0 inView:self].x < 50){ //Tap at left
         
-        _viewTrackerEnabled = !_viewTrackerEnabled;
-        _viewTracker.hidden = !_viewTrackerEnabled;
+        _enableViewTracker = !_enableViewTracker;
+        _viewTracker.hidden = !_enableViewTracker;
     }
 }
 
 - (void)onPan:(UIGestureRecognizer *)g{
     CGPoint pos = [g locationInView:self];
-    if (_viewTrackerEnabled){
+    if (_enableViewTracker){
         _viewTracker.center = pos;
     }
     if (g.state == UIGestureRecognizerStateEnded){
@@ -157,7 +156,7 @@
         UIWindow *window = [UIApplication sharedApplication].delegate.window;
         UIView *outView = nil;
         NSMutableArray *hierarchy = [NSMutableArray new];
-        [[self class] hitTest:pos inView:window outView:&outView hierarchy:hierarchy];
+        [self hitTest:pos inView:window outView:&outView hierarchy:hierarchy];
         NSLog(@"%@", hierarchy);
     }
 }
@@ -170,7 +169,7 @@
         return YES;
     } else if (CGRectContainsPoint(leftRect, point)){
         return YES;
-    } else if (_viewTrackerEnabled && CGRectContainsPoint(_viewTracker.frame, point)){
+    } else if (_enableViewTracker && CGRectContainsPoint(_viewTracker.frame, point)){
         return YES;
     }
     return NO;
@@ -257,7 +256,15 @@
     _hierarchyLbl.frame = frame;
 }
 
-+ (void)hitTest:(CGPoint)pt inView:(UIView *)parent outView:(UIView **)outView hierarchy:(NSMutableArray<NSString *> *)hierarchy{
+/**
+ Get the fastest child and hierarchy tapped
+ 
+ @param pt A point tap at the view
+ @param parent Parent view to test
+ @param outView The fastest child tapped
+ @param hierarchy View hierarchy tapped
+ */
+- (void)hitTest:(CGPoint)pt inView:(UIView *)parent outView:(UIView **)outView hierarchy:(NSMutableArray<NSString *> *)hierarchy{
     
     UIWindow *window = [UIApplication sharedApplication].delegate.window;
     char buff[64];
@@ -265,7 +272,7 @@
     
     for (UIView *v in parent.subviews){
         CGRect rect = [window convertRect:v.frame fromView:parent];
-        if (CGRectContainsPoint(rect, pt)){
+        if (v.hidden == NO && CGRectContainsPoint(rect, pt)){
             if (![NSStringFromClass(v.class) hasPrefix:@"_"]){  //private class
                 
                 *outView = v;
@@ -280,9 +287,9 @@
                 
                 NSString *prefix = [NSString stringWithFormat:@"|%s%@", buff, (strlen(buff) == 0 ? @"" : @"|")];
                 if ([v.nextResponder isKindOfClass:[UIViewController class]]){
-                    [hierarchy addObject:[NSString stringWithFormat:@"%@%@", prefix, v.nextResponder]];
+                    [hierarchy addObject:[NSString stringWithFormat:@"%@%@", prefix, _simpleViewTrackerInfo ? v.nextResponder.class : v.nextResponder]];
                 }
-                [hierarchy addObject:[NSString stringWithFormat:@"%@%@", prefix, v.description]];
+                [hierarchy addObject:[NSString stringWithFormat:@"%@%@", prefix, _simpleViewTrackerInfo ? v.class : v.description]];
                 [self hitTest:pt inView:v outView:outView hierarchy:hierarchy];
             }
         }

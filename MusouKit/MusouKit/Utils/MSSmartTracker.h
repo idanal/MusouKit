@@ -12,25 +12,20 @@
 /**
  * Controller 跟踪
  * 双击状态栏电池图标显示/隐藏控制器层次结构
+ * 双击状态栏左侧运营商图标显示/隐藏视图跟踪器
  */
 @interface MSSmartTracker : UIWindow
 /** Enable the tracker */
-@property (nonatomic) BOOL enableGlobalTrack;
+@property (nonatomic) BOOL enabled;
+/** Enable the view tracker */
+@property (nonatomic) BOOL enableViewTracker;
+/** Simple view tracker info print class name only */
+@property (nonatomic) BOOL simpleViewTrackerInfo;
 
 /** Singleton */
 + (instancetype)shared;
 
 /** Call when enter */
 - (void)enterPage:(UIViewController *)c;
-
-/**
- Get the fastest child and hierarchy
-
- @param pt A point tap at the view
- @param parent Parent view to test
- @param outView The fastest child tapped
- @param hierarchy View hierarchy tapped
- */
-+ (void)hitTest:(CGPoint)pt inView:(UIView *)parent outView:(UIView **)outView hierarchy:(NSMutableArray<NSString *> *)hierarchy;
 
 @end
