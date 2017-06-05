@@ -57,7 +57,8 @@
     __weak UILabel *_hierarchyLbl;
     __weak UIViewController *_currentVC;
 }
-@property (nonatomic) BOOL enabled;
+@property (nonatomic) BOOL viewTrackerEnabled;
+@property (nonatomic, weak) UILabel *viewTracker;
 @end
 
 @implementation MSSmartTracker
@@ -81,26 +82,30 @@
         self.userInteractionEnabled = YES;
         self.windowLevel = UIWindowLevelStatusBar;
         
+        UILabel *viewTracker = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+        viewTracker.center = CGPointMake(self.bounds.size.width/2, 20);
+        viewTracker.text = @"+";
+        viewTracker.font = [UIFont boldSystemFontOfSize:20];
+        viewTracker.textColor = [UIColor redColor];
+        viewTracker.textAlignment = NSTextAlignmentCenter;
+        viewTracker.clipsToBounds = YES;
+        viewTracker.layer.borderWidth = 2.0;
+        viewTracker.layer.borderColor = [UIColor redColor].CGColor;
+        viewTracker.layer.cornerRadius = viewTracker.bounds.size.width/2;
+        viewTracker.backgroundColor = [[UIColor orangeColor] colorWithAlphaComponent:.3];
+        viewTracker.hidden = YES;
+        [self addSubview:viewTracker];
+        _viewTracker = viewTracker;
+        
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTap:)];
         tap.numberOfTapsRequired = 2;
         [self addGestureRecognizer:tap];
+        
+        UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(onPan:)];
+        [self addGestureRecognizer:pan];
 #endif
     }
     return self;
-}
-
-- (void)setEnabled:(BOOL)enabled{
-#ifdef DEBUG
-    
-    if (_enabled != enabled){
-        
-        _enabled = enabled;
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            self.hidden = !_enabled;
-        });
-    }
-    
-#endif
 }
 
 - (void)setEnableGlobalTrack:(BOOL)enableGlobalTrack{
@@ -111,13 +116,15 @@
         if (_enableGlobalTrack){
             [UIViewController sm_replaceMethods];
         }
-        self.enabled = enableGlobalTrack;
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            self.hidden = !_enableGlobalTrack;
+        });
     }
 #endif
 }
 
 - (void)onTap:(UITapGestureRecognizer *)sender{
-    if ([sender locationOfTouch:0 inView:self].x > 50){ //Tap at right
+    if ([sender locationOfTouch:0 inView:self].x > (self.bounds.size.width-50)){ //Tap at right
         
         _hierarchyLbl.hidden = !_hierarchyLbl.hidden;
         if (!_hierarchyLbl){
@@ -132,6 +139,26 @@
             _hierarchyLbl = lbl;
         }
         [self printVCHierarchy];
+        
+    } else if ([sender locationOfTouch:0 inView:self].x < 50){ //Tap at left
+        
+        _viewTrackerEnabled = !_viewTrackerEnabled;
+        _viewTracker.hidden = !_viewTrackerEnabled;
+    }
+}
+
+- (void)onPan:(UIGestureRecognizer *)g{
+    CGPoint pos = [g locationInView:self];
+    if (_viewTrackerEnabled){
+        _viewTracker.center = pos;
+    }
+    if (g.state == UIGestureRecognizerStateEnded){
+        
+        UIView *view = [UIApplication sharedApplication].delegate.window;
+        UIView *outView = nil;
+        NSMutableArray *hierarchy = [NSMutableArray new];
+        [[self class] hitTest:pos inView:view outView:&outView hierarchy:hierarchy];
+        NSLog(@"%@", hierarchy);
     }
 }
 
@@ -142,6 +169,8 @@
     if (CGRectContainsPoint(rightRect, point)){
         return YES;
     } else if (CGRectContainsPoint(leftRect, point)){
+        return YES;
+    } else if (_viewTrackerEnabled && CGRectContainsPoint(_viewTracker.frame, point)){
         return YES;
     }
     return NO;
@@ -202,7 +231,7 @@
 }
 
 - (void)echo:(NSString *)text{
-    //    _textLabel.text = text;
+    //_textLbl.text = text;
 }
 
 - (void)printVCHierarchy{
@@ -217,7 +246,7 @@
     bzero(buff, sizeof(buff));
     int i = 0;
     for (NSString *vc in vcs){
-        memset(buff, '-', i);
+        memset(buff, ' ', i);
         [str appendFormat:@" %s|%@\n", buff, vc];
         i += 4;
     }
@@ -226,6 +255,34 @@
     CGRect frame = _hierarchyLbl.frame;
     frame.size.width = self.bounds.size.width;
     _hierarchyLbl.frame = frame;
+}
+
++ (void)hitTest:(CGPoint)pt inView:(UIView *)parent outView:(UIView **)outView hierarchy:(NSMutableArray<NSString *> *)hierarchy{
+    UIWindow *window = [UIApplication sharedApplication].delegate.window;
+    for (UIView *v in parent.subviews){
+        CGRect rect = [window convertRect:v.frame fromView:parent];
+        if (CGRectContainsPoint(rect, pt)){
+            if (![NSStringFromClass(v.class) hasPrefix:@"_"]){  //private class
+                
+                *outView = v;
+                if (hierarchy.count == 0){
+                    if ([v.nextResponder isKindOfClass:[UIViewController class]]){
+                        [hierarchy addObject:[NSString stringWithFormat:@"|%@", v.nextResponder]];
+                    }
+                    [hierarchy addObject:[NSString stringWithFormat:@"|%@", v.description]];
+                } else {
+                    char buff[32];
+                    bzero(buff, sizeof(buff));
+                    memset(buff, ' ', hierarchy.count*4);
+                    if ([v.nextResponder isKindOfClass:[UIViewController class]]){
+                        [hierarchy addObject:[NSString stringWithFormat:@"|%s|%@", buff, v.nextResponder]];
+                    }
+                    [hierarchy addObject:[NSString stringWithFormat:@"|%s|%@", buff, v.description]];
+                }
+                [self hitTest:pt inView:v outView:outView hierarchy:hierarchy];
+            }
+        }
+    }
 }
 
 @end

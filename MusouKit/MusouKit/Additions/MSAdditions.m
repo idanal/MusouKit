@@ -1270,7 +1270,10 @@ static NSString * const s_tapGesture = @"tapGesture";
     }
     CFRelease(myPolicy);
     CFRelease(myCertificate);
-    return SecTrustCopyPublicKey(myTrust);
+    if (status == noErr){
+        return SecTrustCopyPublicKey(myTrust);
+    }
+    return nil;
 }
 
 @end

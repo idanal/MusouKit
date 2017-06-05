@@ -23,7 +23,14 @@
 /** Call when enter */
 - (void)enterPage:(UIViewController *)c;
 
-///** Call when exit */
-//- (void)exitPage:(UIViewController *)c;
+/**
+ Get the fastest child and hierarchy
+
+ @param pt A point tap at the view
+ @param parent Parent view to test
+ @param outView The fastest child tapped
+ @param hierarchy View hierarchy tapped
+ */
++ (void)hitTest:(CGPoint)pt inView:(UIView *)parent outView:(UIView **)outView hierarchy:(NSMutableArray<NSString *> *)hierarchy;
 
 @end
