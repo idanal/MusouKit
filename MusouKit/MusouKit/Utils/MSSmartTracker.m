@@ -154,10 +154,10 @@
     }
     if (g.state == UIGestureRecognizerStateEnded){
         
-        UIView *view = [UIApplication sharedApplication].delegate.window;
+        UIWindow *window = [UIApplication sharedApplication].delegate.window;
         UIView *outView = nil;
         NSMutableArray *hierarchy = [NSMutableArray new];
-        [[self class] hitTest:pos inView:view outView:&outView hierarchy:hierarchy];
+        [[self class] hitTest:pos inView:window outView:&outView hierarchy:hierarchy];
         NSLog(@"%@", hierarchy);
     }
 }
@@ -258,27 +258,31 @@
 }
 
 + (void)hitTest:(CGPoint)pt inView:(UIView *)parent outView:(UIView **)outView hierarchy:(NSMutableArray<NSString *> *)hierarchy{
+    
     UIWindow *window = [UIApplication sharedApplication].delegate.window;
+    char buff[64];
+    bzero(buff, sizeof(buff));
+    
     for (UIView *v in parent.subviews){
         CGRect rect = [window convertRect:v.frame fromView:parent];
         if (CGRectContainsPoint(rect, pt)){
             if (![NSStringFromClass(v.class) hasPrefix:@"_"]){  //private class
                 
                 *outView = v;
-                if (hierarchy.count == 0){
-                    if ([v.nextResponder isKindOfClass:[UIViewController class]]){
-                        [hierarchy addObject:[NSString stringWithFormat:@"|%@", v.nextResponder]];
-                    }
-                    [hierarchy addObject:[NSString stringWithFormat:@"|%@", v.description]];
-                } else {
-                    char buff[32];
-                    bzero(buff, sizeof(buff));
-                    memset(buff, ' ', hierarchy.count*4);
-                    if ([v.nextResponder isKindOfClass:[UIViewController class]]){
-                        [hierarchy addObject:[NSString stringWithFormat:@"|%s|%@", buff, v.nextResponder]];
-                    }
-                    [hierarchy addObject:[NSString stringWithFormat:@"|%s|%@", buff, v.description]];
+                int level = 0;
+                UIView *tmp = v.superview;
+                while (tmp != window) {
+                    tmp = tmp.superview;
+                    ++level;
                 }
+                tmp = nil;
+                memset(buff, ' ', level*4);
+                
+                NSString *prefix = [NSString stringWithFormat:@"|%s%@", buff, (strlen(buff) == 0 ? @"" : @"|")];
+                if ([v.nextResponder isKindOfClass:[UIViewController class]]){
+                    [hierarchy addObject:[NSString stringWithFormat:@"%@%@", prefix, v.nextResponder]];
+                }
+                [hierarchy addObject:[NSString stringWithFormat:@"%@%@", prefix, v.description]];
                 [self hitTest:pt inView:v outView:outView hierarchy:hierarchy];
             }
         }
