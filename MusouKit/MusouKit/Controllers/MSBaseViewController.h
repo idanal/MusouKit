@@ -33,6 +33,27 @@
 @end
 
 
+#pragma mark - Storyboard
+
+/**
+ * Storyboard扩展，
+ * 规则：storyboard中的identifier必须与controller类同名，则可用create方法创建实例
+ */
+@interface UIViewController (Storyboard)
+/**
+ * 静态创建controller的方法
+ * 如将来需要开发ipad版，可在此方法中做智能判断来创建不同版本的controller
+ * 如果是使用storyboard,则会根据storyboardName和storyboradID来创建
+ */
++ (instancetype)create;
+/** Name.storyboard, 默认为nil */
++ (NSString *)storyboardName;
+/** storyboard Identifier, 默认为自已的类名 */
++ (NSString *)storyboradID;
+
+@end
+
+
 #pragma mark - UINavigationController
 
 @interface UINavigationController (Musou)

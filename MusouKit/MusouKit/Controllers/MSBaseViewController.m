@@ -208,6 +208,40 @@
 @end
 
 
+#pragma mark - Storyboard
+
+@implementation UIViewController (Storyboard)
+
++ (instancetype)create{
+    if ([self storyboardName] && [self storyboradID]){
+#ifdef DEBUG
+        NSLog(@"create vc with %@-%@",[self storyboardName],[self storyboradID]);
+#endif
+        return [[UIStoryboard storyboardWithName:[self storyboardName] bundle:nil]
+                instantiateViewControllerWithIdentifier:[self storyboradID]];
+    }
+    UIViewController *vc = [[self alloc] init];
+    //if(iPad){
+    //} else {
+    //}
+#ifdef DEBUG
+    NSLog(@"create vc with init");
+#endif
+    return vc;
+}
+
++ (NSString *)storyboradID{
+    NSString *clazz = NSStringFromClass(self);
+    return [clazz componentsSeparatedByString:@"."].lastObject;
+}
+
++ (NSString *)storyboardName{
+    return nil;
+}
+
+@end
+
+
 #pragma mark - UINavigationController
 
 @implementation UINavigationController (Musou)

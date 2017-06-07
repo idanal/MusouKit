@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		876EF9AB1EE78EB70011D920 /* SegmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 876EF9AA1EE78EB70011D920 /* SegmentViewController.m */; };
 		87928FD11EC6D4E800F80CA5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 87928FD01EC6D4E800F80CA5 /* main.m */; };
 		87928FD41EC6D4E800F80CA5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 87928FD31EC6D4E800F80CA5 /* AppDelegate.m */; };
 		87928FD71EC6D4E800F80CA5 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87928FD61EC6D4E800F80CA5 /* ViewController.m */; };
@@ -19,6 +20,8 @@
 
 /* Begin PBXFileReference section */
 		2DCC5E59D074A389EFAD5235 /* Pods-MusouSample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusouSample.release.xcconfig"; path = "Pods/Target Support Files/Pods-MusouSample/Pods-MusouSample.release.xcconfig"; sourceTree = "<group>"; };
+		876EF9A91EE78EB70011D920 /* SegmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegmentViewController.h; sourceTree = "<group>"; };
+		876EF9AA1EE78EB70011D920 /* SegmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegmentViewController.m; sourceTree = "<group>"; };
 		87928FCC1EC6D4E800F80CA5 /* MusouSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusouSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		87928FD01EC6D4E800F80CA5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		87928FD21EC6D4E800F80CA5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -82,6 +85,8 @@
 				87928FD51EC6D4E800F80CA5 /* ViewController.h */,
 				87928FD61EC6D4E800F80CA5 /* ViewController.m */,
 				87928FD81EC6D4E800F80CA5 /* Main.storyboard */,
+				876EF9A91EE78EB70011D920 /* SegmentViewController.h */,
+				876EF9AA1EE78EB70011D920 /* SegmentViewController.m */,
 			);
 			path = MusouSample;
 			sourceTree = "<group>";
@@ -231,6 +236,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				876EF9AB1EE78EB70011D920 /* SegmentViewController.m in Sources */,
 				87928FD71EC6D4E800F80CA5 /* ViewController.m in Sources */,
 				87928FD41EC6D4E800F80CA5 /* AppDelegate.m in Sources */,
 				87928FD11EC6D4E800F80CA5 /* main.m in Sources */,

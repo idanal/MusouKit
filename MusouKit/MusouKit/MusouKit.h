@@ -31,6 +31,7 @@
 #import "MSBaseViewController.h"
 #import "MSCameraController.h"
 #import "MSQRCodeController.h"
+#import "MSSegmentController.h"
 
 
 

@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "MSHttpRequest.h"
 #import "MusouKit.h"
+#import <objc/runtime.h>
 
 
 @interface ViewController ()
@@ -20,6 +21,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    self.title = [NSString stringWithFormat:@"vc%d", arc4random()%10];
+    
     NSMutableURLRequest *req = [NSMutableURLRequest new];
     req.URL = [NSURL URLWithString:@"http://10.0.0.18:8080/api/login"];
     req.HTTPMethod = @"post";
@@ -39,8 +42,13 @@
     }];
     
     [_button setImage:[MSQRCodeController createQRCodeImage:@"test"] forState:0];
+    NSLog(@"%s %@", __func__, self.title);
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    NSLog(@"%s %@", __func__, self.title);
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -49,6 +57,10 @@
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [self.view showToast:@"message"];    
+}
+
++ (NSString *)storyboardName{
+    return @"Main";
 }
 
 @end
