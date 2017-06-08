@@ -41,7 +41,7 @@
 @interface NSURLRequest (Musou)
 
 /** Send with the request */
-- (NSURLSessionTask *)send:(void (^)(NSData *, NSError *))completion;
+- (NSURLSessionTask *)send:(void (^)(NSData *, NSURLResponse *, NSError *))completion;
 
 /**
  * Send with parameters
@@ -51,6 +51,6 @@
  * @param completion Callback when complete
  * @return NSURLSessionTask
  */
-+ (NSURLSessionTask *)send:(NSString *)httpMethod url:(NSURL *)url parameters:(NSDictionary *)params completion:(void (^)(NSData *, NSError *))completion;
++ (NSURLSessionTask *)send:(NSString *)httpMethod url:(NSURL *)url parameters:(NSDictionary *)params completion:(void (^)(NSData *, NSURLResponse *, NSError *))completion;
 
 @end

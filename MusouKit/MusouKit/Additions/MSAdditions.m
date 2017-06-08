@@ -954,8 +954,8 @@ static NSString * const s_tapGesture = @"tapGesture";
     UIImage *image = self;
     CGSize size = CGSizeMake((NSInteger)(image.size.width * scaleBy), (NSInteger)(image.size.height * scaleBy));
     
-//    UIGraphicsBeginImageContext(size);
-    UIGraphicsBeginImageContextWithOptions(size, NO, 0.0);
+    UIGraphicsBeginImageContext(size);
+//    UIGraphicsBeginImageContextWithOptions(size, NO, 0.0);
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGAffineTransform transform = CGAffineTransformIdentity;
     

@@ -80,7 +80,7 @@ static NSString *boundary = @"=======B-o-u-n-d-a-r-y=======";
 @implementation NSURLRequest (Musou)
 
 
-- (NSURLSessionTask *)send:(void (^)(NSData *, NSError *))completion{
+- (NSURLSessionTask *)send:(void (^)(NSData *, NSURLResponse *, NSError *))completion{
     NSURLSessionConfiguration *cfg = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:cfg];
     NSURLSessionTask *task = [session dataTaskWithRequest:self completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
@@ -91,7 +91,7 @@ static NSString *boundary = @"=======B-o-u-n-d-a-r-y=======";
         }
 #endif
         dispatch_async(dispatch_get_main_queue(), ^{
-            completion(data, error);
+            completion(data, response, error);
         });
         
     }];
@@ -99,7 +99,7 @@ static NSString *boundary = @"=======B-o-u-n-d-a-r-y=======";
     return task;
 }
 
-+ (NSURLSessionTask *)send:(NSString *)httpMethod url:(NSURL *)url parameters:(NSDictionary *)params completion:(void (^)(NSData *, NSError *))completion{
++ (NSURLSessionTask *)send:(NSString *)httpMethod url:(NSURL *)url parameters:(NSDictionary *)params completion:(void (^)(NSData *, NSURLResponse *, NSError *))completion{
     NSMutableArray *paramArr = [NSMutableArray new];
     [params enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
         NSString *val = [NSString stringWithFormat:@"%@", obj];
