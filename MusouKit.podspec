@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "MusouKit"
-  s.version      = "0.1.2"
+  s.version      = "0.1.3"
   s.summary      = "A development kit for iOS"
   s.description  = <<-DESC
                       A development kit for iOS by Danal Luo.
