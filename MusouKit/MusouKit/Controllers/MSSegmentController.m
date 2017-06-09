@@ -93,7 +93,7 @@
 }
 
 - (void)reloadData{
-    [self.view layoutIfNeeded];
+//    [self.view layoutIfNeeded];
     
     CGFloat w = _segmentWidth;
     if (self.controllers.count < 4){
