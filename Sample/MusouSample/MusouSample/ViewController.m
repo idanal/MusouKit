@@ -18,11 +18,19 @@
 
 @implementation ViewController
 
+- (id)initWithCoder:(NSCoder *)aDecoder{
+    if (self = [super initWithCoder:aDecoder]){
+        static int vcidx = 0;
+        self.title = [NSString stringWithFormat:@"vc%d", vcidx];
+        vcidx++;
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    self.title = [NSString stringWithFormat:@"vc%d", arc4random()%10];
-    
+    self.label.text = self.title;
     NSMutableURLRequest *req = [NSMutableURLRequest new];
     req.URL = [NSURL URLWithString:@"http://10.0.0.18:8080/api/login"];
     req.HTTPMethod = @"post";
@@ -52,8 +60,8 @@
                       ];
 }
 
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
     NSLog(@"%s %@", __func__, self.title);
 }
 

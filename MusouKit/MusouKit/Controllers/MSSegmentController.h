@@ -32,6 +32,11 @@
  */
 - (void)reloadData;
 
+/** 
+ 选中某一项
+ */
+- (void)setSelectedIndex:(NSInteger)index animated:(BOOL)animated;
+
 /**
  Title指示器
  */

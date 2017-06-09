@@ -29,6 +29,7 @@
     self.titles = @[@"1",@"2",@"3",@"4",@"5",@"6"];
     self.indicatorWidth = 40;
     [self reloadData];
+    [self setSelectedIndex:2 animated:NO];
 }
 
 - (void)didReceiveMemoryWarning {

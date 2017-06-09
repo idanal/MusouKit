@@ -116,9 +116,19 @@
     [_titleView reloadData];
     [_controllerView reloadData];
     
-    _indicator.frame = CGRectMake(0, _titleView.bounds.size.height-2, w, 2);
+    _indicator.frame = CGRectMake(_selectedIndex*w, _titleView.bounds.size.height-2, w, 2);
     _scaleX = _indicatorWidth > 0.0 ? _indicatorWidth/w : 1.0;
     _indicator.transform = CGAffineTransformMakeScale(_scaleX, 1.0);
+}
+
+- (void)setSelectedIndex:(NSInteger)index animated:(BOOL)animated{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.01 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    
+        NSIndexPath *indexPath = [NSIndexPath indexPathForItem:index inSection:0];
+        [self _selectTitleAtIndexPath:indexPath];
+        [_titleView selectItemAtIndexPath:indexPath animated:animated scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
+        [_controllerView selectItemAtIndexPath:indexPath animated:animated scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
+    });
 }
 
 - (UIView *)indicatorView{
