@@ -25,6 +25,7 @@
 #import "MSBlockAlertView.h"
 #import "MSImageView.h"
 #import "MSAutoWebView.h"
+#import "MSSegmentBar.h"
 #import "MSTimerButton.h"
 #import "MSAnimatedImageView.h"
 
