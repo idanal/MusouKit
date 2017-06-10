@@ -9,6 +9,10 @@
 #import "MSSegmentController.h"
 #import "MSAdditions.h"
 
+
+NSString * const MSSegmentControllerNotificationOnSelected = @"MSSegmentControllerNotificationOnSelected";
+
+
 @interface MSSegmentController () <UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 {
     IBOutlet __weak UICollectionView *_titleView;
@@ -85,6 +89,16 @@
 - (void)_selectTitleAtIndexPath:(NSIndexPath *)indexPath{
     _selectedIndex = indexPath.item;
     [_titleView reloadData];
+    
+    //Delay to be sure the posting is after viewDidLoad
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:MSSegmentControllerNotificationOnSelected
+                                                            object:self.controllers[_selectedIndex]];
+#ifdef DEBUG
+        NSLog(@"%@ Selected controller at index:%ld", self, _selectedIndex);
+#endif
+    });
 }
 
 - (void)didReceiveMemoryWarning {
@@ -93,7 +107,6 @@
 }
 
 - (void)reloadData{
-//    [self.view layoutIfNeeded];
     
     CGFloat w = _segmentWidth;
     if (self.controllers.count < 4){

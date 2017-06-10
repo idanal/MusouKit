@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+//选中一项controller时的通知，noti.object=选中的controller
+extern NSString * const MSSegmentControllerNotificationOnSelected;
+
+
 @interface MSSegmentController : UIViewController
 /** 分段标题，必须与controllers一一对应 */
 @property (nonatomic, strong) NSArray<NSString *> *titles;
