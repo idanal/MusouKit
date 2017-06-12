@@ -10,8 +10,25 @@
 
 @implementation MSSegmentBar
 
-- (id)initWithFrame:(CGRect)frame buttons:(NSArray *)buttons
-{
+- (id)initWithFrame:(CGRect)frame titles:(NSArray<NSString *> *)titles{
+    self = [super initWithFrame:frame];
+    if (self){
+        NSMutableArray *buttons = [NSMutableArray new];
+        for (NSString *t in titles){
+            UIButton *butt = [UIButton buttonWithType:UIButtonTypeCustom];
+            [butt setTitle:t forState:UIControlStateNormal];
+            [butt setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+            [butt setTitleColor:[UIColor redColor] forState:UIControlStateSelected];
+            [buttons addObject:butt];
+            [self addSubview:butt];
+        }
+        _buttons = buttons;
+        [self setup];
+    }
+    return self;
+}
+
+- (id)initWithFrame:(CGRect)frame buttons:(NSArray<UIButton *> *)buttons{
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
@@ -26,7 +43,6 @@
     NSMutableArray *buttons = [[NSMutableArray alloc] init];
     for (UIView *v in self.subviews){
         if ([v isKindOfClass:[MSSegmentButton class]]){
-            v.userInteractionEnabled = NO;
             v.backgroundColor = [UIColor clearColor];
             [buttons addObject:v];
         } else if ([v isKindOfClass:[MSSegmentIndicator class]]){
@@ -37,32 +53,76 @@
         return obj1.frame.origin.x < obj2.frame.origin.x ? NSOrderedAscending : NSOrderedDescending;
     }];
     _buttons = buttons;
-    
     [self setup];
-    
 }
 
 - (void)setup{
-    CGFloat indicatorH = _indicatorHeight;
-    CGFloat w = self.bounds.size.width/_buttons.count, h = self.bounds.size.height - indicatorH;
-    for (NSInteger i = 0; i < _buttons.count; i++) {
-        MSSegmentButton *butt = _buttons[i];
-        butt.frame = CGRectMake(i*w, 0, w, h);
+    _indicatorWidth = 0.0;
+    _indicatorHeight = 2.0;
+    
+    UIButton *previous = nil;
+    for (NSInteger i = 0; i < _buttons.count; ++i){
+        UIButton *view = _buttons[i];
+        view.userInteractionEnabled = NO;
+        view.translatesAutoresizingMaskIntoConstraints = NO;
+        if (previous == nil){
+            
+            [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[view]-0-|"
+                                                                            options:0
+                                                                            metrics:nil
+                                                                              views:NSDictionaryOfVariableBindings(self, view)]];
+            [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[view]"
+                                                                            options:0
+                                                                            metrics:nil
+                                                                              views:NSDictionaryOfVariableBindings(self, view)]];
+        } else {
+            
+            [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[view(==previous)]"
+                                                                            options:0
+                                                                            metrics:nil
+                                                                              views:NSDictionaryOfVariableBindings(previous, view)]];
+            if (i == _buttons.count-1){
+                [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[previous][view(==previous)]-0-|"
+                                                                                options:0
+                                                                                metrics:nil
+                                                                                  views:NSDictionaryOfVariableBindings(previous, view)]];
+            } else {
+                [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[previous][view(==previous)]"
+                                                                                options:0
+                                                                                metrics:nil
+                                                                                  views:NSDictionaryOfVariableBindings(previous, view)]];
+            }
+        }
+        previous = view;
+
     }
-    if (!_indicator){
-        _indicator = [[MSSegmentIndicator alloc] initWithFrame:CGRectZero];
-        _indicator.clipsToBounds = YES;
-        [self addSubview:_indicator];
-    }
-    _indicator.backgroundColor = [UIColor redColor];
+    
 }
 
 - (void)layoutSubviews{
     [super layoutSubviews];
-    if (!_hasSetup){
-        _hasSetup = YES;
-        [self moveIndicatorTo:_selectedIndex animated:NO];
+    if (!_indicator){
+        _indicator = [[MSSegmentIndicator alloc] initWithFrame:CGRectZero];
+        _indicator.clipsToBounds = YES;
+        [self addSubview:_indicator];
+        _indicator.translatesAutoresizingMaskIntoConstraints = NO;
+        UIView *view = _indicator;
+        UIView *current = _buttons[_selectedIndex];
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[view(==h)]-0-|"
+                                                                     options:0
+                                                                     metrics:@{@"h":@(_indicatorHeight)}
+                                                                       views:NSDictionaryOfVariableBindings(view)]];
+        if (_indicatorWidth > 0){
+            [self addConstraint:[NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:_indicatorWidth]];
+        } else {
+            [self addConstraint:[NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:current attribute:NSLayoutAttributeWidth multiplier:1.0 constant:0]];
+        }
+        NSLayoutConstraint *centerX = [NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:current attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:1.0];
+        [self addConstraint:centerX];
+        _indicatorCenterX = centerX;
+        
     }
+    _indicator.backgroundColor = [UIColor redColor];
 }
 
 - (void)clearSelected{
@@ -75,19 +135,17 @@
 
 - (void)moveIndicatorTo:(NSInteger)idx animated:(BOOL)animated{
     [UIView animateWithDuration:animated ? .2f : 0.f animations:^{
-    
-        CGFloat sw = self.bounds.size.width/_buttons.count;
-        _indicatorWidth = 50;
-        if (_indicatorWidth == 0) _indicatorWidth = sw;
-        if (_indicatorHeight == 0) _indicatorHeight = 2.f;
         
-        CGFloat x = idx*sw + (sw-_indicatorWidth)/2;
-        _indicator.frame = CGRectMake(x,
-                                      self.bounds.size.height - _indicatorHeight,
-                                      _indicatorWidth,
-                                      _indicatorHeight
-                                      );
         _indicator.hidden = _indicatorHidden;
+        
+        UIView *view = _indicator;
+        [self removeConstraint:_indicatorCenterX];
+        NSLayoutConstraint *centerX = [NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:_buttons[idx] attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:1.0];
+        [self addConstraint:centerX];
+        _indicatorCenterX = centerX;
+        
+        [self layoutIfNeeded];
+        
     }];
 
 }
@@ -101,6 +159,9 @@
         for (NSInteger i = 0; i < _buttons.count; i++){
             MSSegmentButton *butt = _buttons[i];
             butt.selected = i == _selectedIndex;
+            if (_onButtonConfig){
+                _onButtonConfig(butt, butt.selected);
+            }
         }
         [self _buttonClick:selectedIndex];
     } else {
@@ -132,37 +193,83 @@
 
 @implementation MSSegmentView
 
-- (id)initWithFrame:(CGRect)frame{
-    self = [super initWithFrame:frame];
-    if (self){
-        [self awakeFromNib];
-    }
-    return self;
-}
-
-- (void)awakeFromNib{
-    [super awakeFromNib];
-    _scroll = [[UIScrollView alloc] initWithFrame:self.bounds];
-    _scroll.pagingEnabled = YES;
-    _scroll.delegate = self;
-    _scroll.showsHorizontalScrollIndicator = NO;
-    [self addSubview:_scroll];
-}
-
-- (void)layoutSubviews{
-    if (_delegate){
-        _pageNum = [_delegate segmentViewNumberOfPages];
-        _scroll.contentSize = CGSizeMake(self.bounds.size.width*_pageNum, self.bounds.size.height);
-        for (NSInteger i = 0; i < _pageNum; i++) {
-            UIView *view = [_delegate segmentView:self contentViewAtPage:i];
-            view.tag = 100+i;
-            view.frame = CGRectMake(_scroll.bounds.size.width*i, 0, _scroll.bounds.size.width, _scroll.bounds.size.height);
-            [_scroll addSubview:view];
-        }
-    }
-    if (_segmentBar){
+- (void)reloadWithTitles:(NSArray<NSString *> *)titles controllers:(NSArray<UIViewController *> *)controllers{
+    
+    if (!_segmentBar){
+        MSSegmentBar *segmentBar = [[MSSegmentBar alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width, 44) titles:titles];
+        [self addSubview:segmentBar];
+        _segmentBar = segmentBar;
+        _segmentBar.translatesAutoresizingMaskIntoConstraints = NO;
+        _segmentBar.backgroundColor = [UIColor whiteColor];
         [_segmentBar addTarget:self action:@selector(onSegmentBarClick:) forControlEvents:UIControlEventValueChanged];
+        
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_segmentBar]-0-|"
+                                                                     options:0
+                                                                     metrics:nil
+                                                                       views:NSDictionaryOfVariableBindings(_segmentBar)]];
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_segmentBar(44)]"
+                                                                     options:0
+                                                                     metrics:nil
+                                                                       views:NSDictionaryOfVariableBindings(_segmentBar)]];
     }
+    
+    if (!_scroll){
+        UIScrollView *scroll = [[UIScrollView alloc] init];
+        [self addSubview:scroll];
+        _scroll = scroll;
+        _scroll.pagingEnabled = YES;
+        _scroll.delegate = self;
+        _scroll.showsHorizontalScrollIndicator = NO;
+        _scroll.translatesAutoresizingMaskIntoConstraints = NO;
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_scroll]-0-|"
+                                                                     options:0
+                                                                     metrics:nil
+                                                                       views:NSDictionaryOfVariableBindings(_scroll)]];
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-44-[_scroll]-0-|"
+                                                                     options:0
+                                                                     metrics:nil
+                                                                       views:NSDictionaryOfVariableBindings(_scroll)]];
+    }
+    
+    UIView *previous = nil;
+    for (NSInteger i = 0; i < controllers.count; i++) {
+        UIView *view = controllers[i].view;
+        view.tag = 100+i;
+        [view removeFromSuperview];
+        [_scroll addSubview:view];
+        view.translatesAutoresizingMaskIntoConstraints = NO;
+  
+        if (previous == nil){
+     
+            [_scroll addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[view(==_scroll)]-0-|"
+                                                                         options:0
+                                                                         metrics:nil
+                                                                           views:NSDictionaryOfVariableBindings(_scroll, view)]];
+            [_scroll addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[view(==_scroll)]"
+                                                                         options:0
+                                                                         metrics:nil
+                                                                           views:NSDictionaryOfVariableBindings(_scroll, view)]];
+        } else {
+            
+            [_scroll addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[view(==previous)]"
+                                                                         options:0
+                                                                         metrics:nil
+                                                                           views:NSDictionaryOfVariableBindings(previous, view)]];
+            if (i == controllers.count-1){
+                [_scroll addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[previous][view(==previous)]-0-|"
+                                                                             options:0
+                                                                             metrics:nil
+                                                                               views:NSDictionaryOfVariableBindings(previous, view)]];
+            } else {
+                [_scroll addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[previous][view(==previous)]"
+                                                                             options:0
+                                                                             metrics:nil
+                                                                               views:NSDictionaryOfVariableBindings(previous, view)]];
+            }
+        }
+        previous = view;
+    }
+
 }
 
 - (void)onSegmentBarClick:(MSSegmentBar *)sender{

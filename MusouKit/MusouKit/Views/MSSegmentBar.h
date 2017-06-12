@@ -8,28 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-
-/**
- * Segmented bar for text segment
- */
-@interface MSSegmentBar : UIControl{
-    BOOL _hasSetup;
-}
-@property (nonatomic,readonly, strong) UIView *indicator;       //Indicate the current segment
-@property (nonatomic,readonly, strong) NSArray *buttons;         //Segmented buttons
-@property (nonatomic, assign) CGFloat indicatorWidth;           //Default not set
-@property (nonatomic, assign) CGFloat indicatorHeight;           //Default 2.f
-@property (nonatomic, assign) NSInteger selectedIndex;          //The selected button index
-@property (nonatomic, assign) BOOL indicatorHidden;             //Default NO
-
-- (id)initWithFrame:(CGRect)frame buttons:(NSArray *)buttons;
-
-//为适应特别需求
-- (void)clearSelected;
-
-@end
-
-
 /**
  * The segment button
  */
@@ -43,26 +21,49 @@ typedef UIImageView MSSegmentIndicator;
 
 
 /**
- * Segmented view that can slide
+ * Segmented bar for text segment
+ */
+@interface MSSegmentBar : UIControl{
+    BOOL _hasSetup;
+    UIView *_indicator;
+    __weak NSLayoutConstraint *_indicatorCenterX;
+}
+@property (nonatomic, readonly, strong) NSArray<UIButton *> *buttons;         //Segmented buttons
+@property (nonatomic, assign) CGFloat indicatorWidth;           //Default not set
+@property (nonatomic, assign) CGFloat indicatorHeight;           //Default 2.f
+@property (nonatomic, assign) NSInteger selectedIndex;          //The selected button index
+@property (nonatomic, assign) BOOL indicatorHidden;             //Default NO
+@property (nonatomic, copy) void (^onButtonConfig)(UIButton *button, BOOL selected);    //Config
+
+- (id)initWithFrame:(CGRect)frame titles:(NSArray<NSString *> *)titles;
+- (id)initWithFrame:(CGRect)frame buttons:(NSArray<UIButton *> *)buttons;
+
+//为适应特别需求
+- (void)clearSelected;
+
+@end
+
+
+/**
+ * Segmented view that can slide, using auto layout
  */
 @interface MSSegmentView : UIView <UIScrollViewDelegate>{
-    UIScrollView *_scroll;
+    __weak UIScrollView *_scroll;
 }
-@property (nonatomic, assign) IBOutlet id delegate;  /* MSSegmentViewDelegate */
-@property (nonatomic, assign) IBOutlet MSSegmentBar *segmentBar;
-@property (nonatomic, assign) NSInteger pageNum;
+@property (nonatomic, weak) IBOutlet id delegate;  /* MSSegmentViewDelegate */
+@property (nonatomic, weak) MSSegmentBar *segmentBar;
 @property (nonatomic, assign) NSInteger currentPage;
+
+/**
+ Reload
+
+ @param titles Titles
+ @param controllers Controllers
+ */
+- (void)reloadWithTitles:(NSArray<NSString *> *)titles controllers:(NSArray<UIViewController *> *)controllers;
 @end
 
 @protocol MSSegmentViewDelegate <NSObject>
-/**
- * Return number of total pages
- */
-- (NSInteger)segmentViewNumberOfPages;
-/**
- * Return the content view at the specified page
- */
-- (UIView *)segmentView:(MSSegmentView *)segView contentViewAtPage:(NSInteger)page;
 /**
  * Callback when scroll to a new page
  */
