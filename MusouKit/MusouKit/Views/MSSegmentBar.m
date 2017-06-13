@@ -97,6 +97,14 @@
 
     }
     
+    if (!_line){
+        _line = [[UIView alloc] init];
+        _line.backgroundColor = [UIColor colorWithRed:0xd1/255.0 green:0xd1/255.0 blue:0xd1/255.0 alpha:1.0];
+        [self addSubview:_line];
+        _line.translatesAutoresizingMaskIntoConstraints = NO;
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_line]-0-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_line)]];
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_line(0.5)]-0-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_line)]];
+    }
 }
 
 - (void)layoutSubviews{

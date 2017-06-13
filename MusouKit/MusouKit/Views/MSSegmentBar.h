@@ -25,6 +25,7 @@ typedef UIImageView MSSegmentIndicator;
  */
 @interface MSSegmentBar : UIControl{
     BOOL _hasSetup;
+    UIView *_line;
     UIView *_indicator;
     __weak NSLayoutConstraint *_indicatorCenterX;
 }
