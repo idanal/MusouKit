@@ -50,17 +50,23 @@ typedef UIImageView MSSegmentIndicator;
 @interface MSSegmentView : UIView <UIScrollViewDelegate>{
     __weak UIScrollView *_scroll;
 }
-@property (nonatomic, weak) IBOutlet id delegate;  /* MSSegmentViewDelegate */
-@property (nonatomic, weak) MSSegmentBar *segmentBar;
+/** MSSegmentViewDelegate */
+@property (nonatomic, weak) IBOutlet id delegate;
+/** Could be nil */
+@property (nonatomic, weak) IBOutlet MSSegmentBar *segmentBar;
+/** Read current page index */
 @property (nonatomic, assign) NSInteger currentPage;
 
 /**
  Reload
-
+ 
+ @param parentController Parent Controller
  @param titles Titles
  @param controllers Controllers
  */
-- (void)reloadWithTitles:(NSArray<NSString *> *)titles controllers:(NSArray<UIViewController *> *)controllers;
+- (void)reloadWithParentController:(UIViewController *)parentController
+                            titles:(NSArray<NSString *> *)titles
+                       controllers:(NSArray<UIViewController *> *)controllers;
 @end
 
 @protocol MSSegmentViewDelegate <NSObject>

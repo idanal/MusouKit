@@ -193,7 +193,7 @@
 
 @implementation MSSegmentView
 
-- (void)reloadWithTitles:(NSArray<NSString *> *)titles controllers:(NSArray<UIViewController *> *)controllers{
+- (void)reloadWithParentController:(UIViewController *)parentController titles:(NSArray<NSString *> *)titles controllers:(NSArray<UIViewController *> *)controllers{
     
     if (!_segmentBar){
         MSSegmentBar *segmentBar = [[MSSegmentBar alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width, 44) titles:titles];
@@ -233,7 +233,11 @@
     
     UIView *previous = nil;
     for (NSInteger i = 0; i < controllers.count; i++) {
-        UIView *view = controllers[i].view;
+        UIViewController *c = controllers[i];
+        if (parentController){
+            [parentController addChildViewController:c];
+        }
+        UIView *view = c.view;
         view.tag = 100+i;
         [view removeFromSuperview];
         [_scroll addSubview:view];
