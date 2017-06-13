@@ -10,34 +10,6 @@
 
 @implementation MSSegmentBar
 
-- (id)initWithFrame:(CGRect)frame titles:(NSArray<NSString *> *)titles{
-    self = [super initWithFrame:frame];
-    if (self){
-        NSMutableArray *buttons = [NSMutableArray new];
-        for (NSString *t in titles){
-            UIButton *butt = [UIButton buttonWithType:UIButtonTypeCustom];
-            [butt setTitle:t forState:UIControlStateNormal];
-            [butt setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-            [butt setTitleColor:[UIColor redColor] forState:UIControlStateSelected];
-            [buttons addObject:butt];
-            [self addSubview:butt];
-        }
-        _buttons = buttons;
-        [self setup];
-    }
-    return self;
-}
-
-- (id)initWithFrame:(CGRect)frame buttons:(NSArray<UIButton *> *)buttons{
-    self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code
-        _buttons = [[NSArray alloc] initWithArray:buttons];
-        [self setup];
-    }
-    return self;
-}
-
 - (void)awakeFromNib{
     [super awakeFromNib];
     NSMutableArray *buttons = [[NSMutableArray alloc] init];
@@ -56,81 +28,109 @@
     [self setup];
 }
 
+- (void)reloadWithTitles:(NSArray<NSString *> *)titles{
+    NSMutableArray *buttons = [NSMutableArray new];
+    for (NSString *t in titles){
+        UIButton *butt = [UIButton buttonWithType:UIButtonTypeCustom];
+        [butt setTitle:t forState:UIControlStateNormal];
+        [butt setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+        [butt setTitleColor:[UIColor redColor] forState:UIControlStateSelected];
+        [buttons addObject:butt];
+    }
+    [self reloadWithButtons:buttons];
+}
+
+- (void)reloadWithButtons:(NSArray<UIButton *> *)buttons{
+    for (UIView *butt in _buttons){
+        [butt removeFromSuperview];
+    }
+    _buttons = [[NSArray alloc] initWithArray:buttons];
+    [self setup];
+}
+
 - (void)setup{
-    _indicatorWidth = 0.0;
-    _indicatorHeight = 2.0;
+    if (_indicatorHeight == 0.0) _indicatorHeight = 2.0;
     
     UIButton *previous = nil;
     for (NSInteger i = 0; i < _buttons.count; ++i){
         UIButton *view = _buttons[i];
+        [self insertSubview:view atIndex:0];
+        view.selected = i == _selectedIndex;
         view.userInteractionEnabled = NO;
         view.translatesAutoresizingMaskIntoConstraints = NO;
         if (previous == nil){
             
             [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[view]-0-|"
-                                                                            options:0
-                                                                            metrics:nil
-                                                                              views:NSDictionaryOfVariableBindings(self, view)]];
+                                                                         options:0
+                                                                         metrics:nil
+                                                                           views:NSDictionaryOfVariableBindings(self, view)]];
             [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[view]"
-                                                                            options:0
-                                                                            metrics:nil
-                                                                              views:NSDictionaryOfVariableBindings(self, view)]];
+                                                                         options:0
+                                                                         metrics:nil
+                                                                           views:NSDictionaryOfVariableBindings(self, view)]];
         } else {
             
             [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[view(==previous)]"
-                                                                            options:0
-                                                                            metrics:nil
-                                                                              views:NSDictionaryOfVariableBindings(previous, view)]];
+                                                                         options:0
+                                                                         metrics:nil
+                                                                           views:NSDictionaryOfVariableBindings(previous, view)]];
             if (i == _buttons.count-1){
                 [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[previous][view(==previous)]-0-|"
-                                                                                options:0
-                                                                                metrics:nil
-                                                                                  views:NSDictionaryOfVariableBindings(previous, view)]];
+                                                                             options:0
+                                                                             metrics:nil
+                                                                               views:NSDictionaryOfVariableBindings(previous, view)]];
             } else {
                 [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[previous][view(==previous)]"
-                                                                                options:0
-                                                                                metrics:nil
-                                                                                  views:NSDictionaryOfVariableBindings(previous, view)]];
+                                                                             options:0
+                                                                             metrics:nil
+                                                                               views:NSDictionaryOfVariableBindings(previous, view)]];
             }
         }
         previous = view;
-
+        
     }
     
     if (!_line){
-        _line = [[UIView alloc] init];
+        UIView *line = [[UIView alloc] init];
+        [self addSubview:line];
+        _line = line;
         _line.backgroundColor = [UIColor colorWithRed:0xd1/255.0 green:0xd1/255.0 blue:0xd1/255.0 alpha:1.0];
-        [self addSubview:_line];
         _line.translatesAutoresizingMaskIntoConstraints = NO;
         [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_line]-0-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_line)]];
         [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_line(0.5)]-0-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_line)]];
     }
-}
-
-- (void)layoutSubviews{
-    [super layoutSubviews];
+    
     if (!_indicator){
-        _indicator = [[MSSegmentIndicator alloc] initWithFrame:CGRectZero];
+        UIView *indicator = [[MSSegmentIndicator alloc] init];
+        [self addSubview:indicator];
+        _indicator = indicator;
         _indicator.clipsToBounds = YES;
-        [self addSubview:_indicator];
+        _indicator.backgroundColor = [UIColor redColor];
         _indicator.translatesAutoresizingMaskIntoConstraints = NO;
+        
         UIView *view = _indicator;
         UIView *current = _buttons[_selectedIndex];
         [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[view(==h)]-0-|"
                                                                      options:0
                                                                      metrics:@{@"h":@(_indicatorHeight)}
                                                                        views:NSDictionaryOfVariableBindings(view)]];
-        if (_indicatorWidth > 0){
-            [self addConstraint:[NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:_indicatorWidth]];
-        } else {
-            [self addConstraint:[NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:current attribute:NSLayoutAttributeWidth multiplier:1.0 constant:0]];
-        }
+        _indicatorW = [NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:current attribute:NSLayoutAttributeWidth multiplier:1.0 constant:0];
+        [self addConstraint:_indicatorW];
         NSLayoutConstraint *centerX = [NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:current attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:1.0];
         [self addConstraint:centerX];
         _indicatorCenterX = centerX;
         
     }
-    _indicator.backgroundColor = [UIColor redColor];
+}
+
+- (void)layoutSubviews{
+    [super layoutSubviews];
+    if (_indicatorWidth > 0){
+        [self removeConstraint:_indicatorW];
+        UIView *view = _indicator;
+        _indicatorW = [NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:_indicatorWidth];
+        [self addConstraint:_indicatorW];
+    }
 }
 
 - (void)clearSelected{
@@ -155,7 +155,7 @@
         [self layoutIfNeeded];
         
     }];
-
+    
 }
 
 - (void)setSelectedIndex:(NSInteger)selectedIndex{
@@ -204,7 +204,7 @@
 - (void)reloadWithParentController:(UIViewController *)parentController titles:(NSArray<NSString *> *)titles controllers:(NSArray<UIViewController *> *)controllers{
     
     if (!_segmentBar){
-        MSSegmentBar *segmentBar = [[MSSegmentBar alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width, 44) titles:titles];
+        MSSegmentBar *segmentBar = [[MSSegmentBar alloc] init];
         [self addSubview:segmentBar];
         _segmentBar = segmentBar;
         _segmentBar.translatesAutoresizingMaskIntoConstraints = NO;
@@ -220,6 +220,7 @@
                                                                      metrics:nil
                                                                        views:NSDictionaryOfVariableBindings(_segmentBar)]];
     }
+    [_segmentBar reloadWithTitles:titles];
     
     if (!_scroll){
         UIScrollView *scroll = [[UIScrollView alloc] init];

@@ -25,19 +25,22 @@ typedef UIImageView MSSegmentIndicator;
  */
 @interface MSSegmentBar : UIControl{
     BOOL _hasSetup;
-    UIView *_line;
-    UIView *_indicator;
+    __weak UIView *_line;
+    __weak UIView *_indicator;
+    __weak NSLayoutConstraint *_indicatorW;
     __weak NSLayoutConstraint *_indicatorCenterX;
 }
-@property (nonatomic, readonly, strong) NSArray<UIButton *> *buttons;         //Segmented buttons
-@property (nonatomic, assign) CGFloat indicatorWidth;           //Default not set
-@property (nonatomic, assign) CGFloat indicatorHeight;           //Default 2.f
 @property (nonatomic, assign) NSInteger selectedIndex;          //The selected button index
+@property (nonatomic, readonly, strong) NSArray<UIButton *> *buttons;   //Segmented buttons
+@property (nonatomic, readonly, weak) UIView *indicator;        //Indicator View
+@property (nonatomic, assign) CGFloat indicatorWidth;           //Default not set
+@property (nonatomic, assign) CGFloat indicatorHeight;          //Default 2.0
 @property (nonatomic, assign) BOOL indicatorHidden;             //Default NO
 @property (nonatomic, copy) void (^onButtonConfig)(UIButton *button, BOOL selected);    //Config
 
-- (id)initWithFrame:(CGRect)frame titles:(NSArray<NSString *> *)titles;
-- (id)initWithFrame:(CGRect)frame buttons:(NSArray<UIButton *> *)buttons;
+//Reload
+- (void)reloadWithTitles:(NSArray<NSString *> *)titles;
+- (void)reloadWithButtons:(NSArray<UIButton *> *)buttons;
 
 //为适应特别需求
 - (void)clearSelected;
