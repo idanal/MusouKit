@@ -158,6 +158,16 @@
     
 }
 
+- (void)setOnButtonConfig:(void (^)(UIButton *, BOOL))onButtonConfig{
+    _onButtonConfig = onButtonConfig;
+    for (NSInteger i = 0; i < _buttons.count; i++){
+        MSSegmentButton *butt = _buttons[i];
+        if (_onButtonConfig){
+            _onButtonConfig(butt, butt.selected);
+        }
+    }
+}
+
 - (void)setSelectedIndex:(NSInteger)selectedIndex{
     if (_selectedIndex != selectedIndex){
         _selectedIndex = selectedIndex;
@@ -167,9 +177,6 @@
         for (NSInteger i = 0; i < _buttons.count; i++){
             MSSegmentButton *butt = _buttons[i];
             butt.selected = i == _selectedIndex;
-            if (_onButtonConfig){
-                _onButtonConfig(butt, butt.selected);
-            }
         }
         [self _buttonClick:selectedIndex];
     } else {
