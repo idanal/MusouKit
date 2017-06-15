@@ -24,7 +24,7 @@
     self.tableView.rowHeight = 44;
     
     [MSSmartTracker shared].enabled = YES;
-    [MSSmartTracker shared].simpleViewTrackerInfo = NO;
+    [MSSmartTracker shared].simpleViewTrackerInfo = YES;
 }
 
 - (void)didReceiveMemoryWarning {

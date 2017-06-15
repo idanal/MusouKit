@@ -54,8 +54,10 @@
 #pragma mark - MSSmartTracker
 
 @interface MSSmartTracker(){
-    __weak UILabel *_hierarchyLbl;
+    __weak UILabel *_vcHierarchyLbl;
+    __weak UILabel *_viewHierarchyLbl;
     __weak UIViewController *_currentVC;
+    dispatch_block_t _hideBlock;
 }
 @property (nonatomic, weak) UILabel *viewTracker;
 @end
@@ -126,8 +128,8 @@
 - (void)onTap:(UITapGestureRecognizer *)sender{
     if ([sender locationOfTouch:0 inView:self].x > (self.bounds.size.width-50)){ //Tap at right
         
-        _hierarchyLbl.hidden = !_hierarchyLbl.hidden;
-        if (!_hierarchyLbl){
+        _vcHierarchyLbl.hidden = !_vcHierarchyLbl.hidden;
+        if (!_vcHierarchyLbl){
             UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(0, 64, 320, 100)];
             lbl.numberOfLines = 0;
             lbl.font = [UIFont systemFontOfSize:14];
@@ -135,8 +137,9 @@
             lbl.backgroundColor = [UIColor whiteColor];
             lbl.layer.borderColor = [UIColor lightGrayColor].CGColor;
             lbl.layer.borderWidth = 1.0;
+            lbl.alpha = 0.9;
             [self addSubview:lbl];
-            _hierarchyLbl = lbl;
+            _vcHierarchyLbl = lbl;
         }
         [self printVCHierarchy];
         
@@ -144,6 +147,7 @@
         
         _enableViewTracker = !_enableViewTracker;
         _viewTracker.hidden = !_enableViewTracker;
+        _viewHierarchyLbl.hidden = YES;
     }
 }
 
@@ -156,9 +160,40 @@
         
         UIWindow *window = [UIApplication sharedApplication].delegate.window;
         UIView *outView = nil;
-        NSMutableArray *hierarchy = [NSMutableArray new];
-        [self hitTest:pos inView:window outView:&outView hierarchy:hierarchy];
-        NSLog(@"%@", hierarchy);
+//        NSMutableArray *hierarchy = [NSMutableArray new];
+//        [self hitTest:pos inView:window outView:&outView hierarchy:hierarchy];
+//        NSLog(@"%@", hierarchy);
+        outView = [window hitTest:pos withEvent:nil];
+        NSArray *hierarchy = [self recursiveViewsOf:outView atHitPoint:pos];
+        if (!_viewHierarchyLbl){
+            UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(0, 64, 320, 100)];
+            lbl.numberOfLines = 0;
+            lbl.font = [UIFont systemFontOfSize:14];
+            lbl.opaque = YES;
+            lbl.backgroundColor = [UIColor whiteColor];
+            lbl.layer.borderColor = [UIColor lightGrayColor].CGColor;
+            lbl.layer.borderWidth = 1.0;
+            lbl.alpha = 0.9;
+            [self addSubview:lbl];
+            _viewHierarchyLbl = lbl;
+        }
+
+        _viewHierarchyLbl.text = hierarchy.description;
+        [_viewHierarchyLbl sizeToFit];
+        _viewHierarchyLbl.hidden = NO;
+        [self bringSubviewToFront:_viewHierarchyLbl];
+        CGRect frame = _viewHierarchyLbl.frame;
+        frame.size.width = self.bounds.size.width;
+        _viewHierarchyLbl.frame = frame;
+        
+        if (_hideBlock){
+            dispatch_block_cancel(_hideBlock);
+            _hideBlock = nil;
+        }
+        _hideBlock = dispatch_block_create(0, ^{
+            _viewHierarchyLbl.hidden = YES;
+        });
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), _hideBlock);
     }
 }
 
@@ -250,11 +285,11 @@
         [str appendFormat:@" %s|%@\n", buff, vc];
         i += 4;
     }
-    _hierarchyLbl.text = str;
-    [_hierarchyLbl sizeToFit];
-    CGRect frame = _hierarchyLbl.frame;
+    _vcHierarchyLbl.text = str;
+    [_vcHierarchyLbl sizeToFit];
+    CGRect frame = _vcHierarchyLbl.frame;
     frame.size.width = self.bounds.size.width;
-    _hierarchyLbl.frame = frame;
+    _vcHierarchyLbl.frame = frame;
 }
 
 /**
@@ -295,6 +330,43 @@
             }
         }
     }
+}
+
+
+/**
+ Recursive finding its superviews
+
+ @param view View to recursive
+ @param pt Hit point
+ @return hierarchy array
+ */
+- (NSArray<NSString *> *)recursiveViewsOf:(UIView *)view atHitPoint:(CGPoint)pt{
+    NSMutableArray *hierarchy = [NSMutableArray new];
+    [hierarchy addObject:[NSString stringWithFormat:@"%@", _simpleViewTrackerInfo ? view.class : view.description]];
+    UIView *v = view.superview;
+    while (v) {
+        if ([v.nextResponder isKindOfClass:[UIViewController class]]){
+            [hierarchy addObject:[NSString stringWithFormat:@"%@", _simpleViewTrackerInfo ? v.nextResponder.class : v.nextResponder.description]];
+        } else {
+            [hierarchy addObject:[NSString stringWithFormat:@"%@", _simpleViewTrackerInfo ? v.class : v.description]];
+        }
+        v = v.superview;
+    }
+    
+    //print
+    char buff[512];
+    bzero(buff, sizeof(buff));
+    int level = 0;
+    NSMutableString *str = [NSMutableString new];
+    for (NSInteger i = hierarchy.count-1; i >= 0; --i){
+        memset(buff, ' ', level*4);
+        NSString *prefix = [NSString stringWithFormat:@"|%s%@", buff, (strlen(buff) == 0 ? @"" : @"|")];
+        [str appendFormat:@"%@%@\n", prefix, hierarchy[i]];
+        ++level;
+    }
+    NSLog(@"\n%@", str);
+    return [[hierarchy reverseObjectEnumerator] allObjects];
+    
 }
 
 @end
