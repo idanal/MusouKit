@@ -69,6 +69,27 @@
     [[MSSysShare shared] share:@"text" image:[UIImage imageNamed:@"fun.jpg"] link:[NSURL URLWithString:@"http://www.123.com"] completion:^(BOOL completed, NSError *error) {
         
     }];
+    [self testJson:nil];
+}
+
+- (IBAction)testJson:(id)sender{
+    
+    User *u = [User new];
+    u.name = @"Name";
+    u.age = 25;
+    u.friends = [NSMutableArray new];
+    
+    for (int i = 0; i < 3; i++){
+        User *f = [User new];
+        f.name = @"fff";
+        f.age = i+20;
+        [u.friends addObject:f];
+    }
+    NSString *json = [u toJSONString];
+    NSLog(@"%@", json);
+    
+    User *u2 = [User fromJSON:[json dataUsingEncoding:NSUTF8StringEncoding]];
+    NSLog(@"%@ %@", u2.name, u2.friends);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -78,6 +99,15 @@
 
 + (NSString *)storyboardName{
     return @"Main";
+}
+
+@end
+
+
+@implementation User
+
++ (NSDictionary *)classMap{
+    return @{@"friends": @"User"};
 }
 
 @end

@@ -13,3 +13,10 @@
 @property (nonatomic, weak) IBOutlet UILabel *label;
 @property (nonatomic, weak) IBOutlet UIImageView *imageView;
 @end
+
+
+@interface User : NSObject
+@property (nonatomic, strong) NSString *name;
+@property (nonatomic, assign) NSInteger age;
+@property (nonatomic, strong) NSMutableArray *friends;
+@end
