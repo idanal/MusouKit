@@ -306,12 +306,19 @@
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     _currentPage = ceilf(scrollView.contentOffset.x/scrollView.bounds.size.width);
+    _currentPage = MAX(_currentPage, 0);
+    _currentPage = MIN(_currentPage, self.segmentBar.buttons.count-1);
     if (_segmentBar){
         _segmentBar.selectedIndex = _currentPage;
     }
     if (_delegate){
         [_delegate segmentViewDidScrollToPage:self page:_currentPage];
     }
+}
+
+- (void)layoutSubviews{
+    [super layoutSubviews];
+    [_scroll setContentOffset:CGPointMake(_currentPage*_scroll.bounds.size.width, 0) animated:NO];
 }
 
 @end
