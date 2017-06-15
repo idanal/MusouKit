@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "MSHttpRequest.h"
 #import "MusouKit.h"
+#import "MSSysShare.h"
 #import <objc/runtime.h>
 
 
@@ -31,24 +32,13 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     self.label.text = self.title;
-    NSMutableURLRequest *req = [NSMutableURLRequest new];
-    req.URL = [NSURL URLWithString:@"http://10.0.0.18:8080/api/login"];
-    req.HTTPMethod = @"post";
-    [req beginAppending];
-    [req appendFormValue:@"danal" name:@"username"];
-    [req appendFormValue:@"123" name:@"password"];
-    [req endAppending];
-    NSURLSessionTask *task = [[NSURLSession sharedSession] dataTaskWithRequest:req completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        
-        NSLog(@"%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
-    }];
-    [task resume];
     
     [_button setImage:[MSQRCodeController createQRCodeImage:@"test"] forState:0];
-    NSLog(@"%s %@", __func__, self.title);
+    
     [_imageView setUrl:[NSURL URLWithString:@"http://wx4.sinaimg.cn/mw690/7348e379gy1fgcx72nt0kj21w01w0b2a.jpg"]
                   placeholder:[UIImage imageNamed:@"fun.jpg"] thumbSize:CGSizeMake(200, 200)];
-    [_button.imageView setUrl:[NSURL URLWithString:@"http://d.lanrentuku.com/down/png/1101/paradise_fruit/apple512.png"] placeholder:nil thumbSize:CGSizeMake(200, 200)];
+    
+//    [_button.imageView setUrl:[NSURL URLWithString:@"http://d.lanrentuku.com/down/png/1101/paradise_fruit/apple512.png"] placeholder:nil thumbSize:CGSizeMake(200, 200)];
     
     NSArray *urls = @[
                       @"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1496915123206&di=c1b97922a2b2d0a77292f5e2286d72ea&imgtype=0&src=http%3A%2F%2Fimg.taopic.com%2Fuploads%2Fallimg%2F131116%2F234936-1311160T93771.jpg",
@@ -60,9 +50,25 @@
                       ];
 }
 
-- (void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
-    NSLog(@"%s %@", __func__, self.title);
+- (IBAction)testRequest:(id)sender{
+    NSMutableURLRequest *req = [NSMutableURLRequest new];
+    req.URL = [NSURL URLWithString:@"http://www.baidu.com"];
+    req.HTTPMethod = @"get";
+//    [req beginAppending];
+//    [req appendFormValue:@"danal" name:@"username"];
+//    [req appendFormValue:@"123" name:@"password"];
+//    [req endAppending];
+    NSURLSessionTask *task = [[NSURLSession sharedSession] dataTaskWithRequest:req completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        
+        NSLog(@"%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+    }];
+    [task resume];
+}
+
+- (IBAction)testSysShare:(id)sender{
+    [[MSSysShare shared] share:@"text" image:[UIImage imageNamed:@"fun.jpg"] link:[NSURL URLWithString:@"http://www.123.com"] completion:^(BOOL completed, NSError *error) {
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -70,21 +76,8 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    [self.view showToast:@"message"];    
-}
-
 + (NSString *)storyboardName{
     return @"Main";
-}
-
-@end
-
-
-@implementation TestImageView
-
-- (void)dealloc{
-    NSLog(@"%s", __func__);
 }
 
 @end

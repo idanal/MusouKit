@@ -7,7 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#import "MSSmartTracker.h"
 
 @interface AppDelegate ()
 
@@ -18,8 +17,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    [MSSmartTracker shared].enabled = YES;
-    [MSSmartTracker shared].simpleViewTrackerInfo = NO;
     return YES;
 }
 

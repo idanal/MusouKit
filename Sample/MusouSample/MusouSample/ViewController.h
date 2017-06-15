@@ -13,7 +13,3 @@
 @property (nonatomic, weak) IBOutlet UILabel *label;
 @property (nonatomic, weak) IBOutlet UIImageView *imageView;
 @end
-
-@interface TestImageView : UIImageView
-
-@end
