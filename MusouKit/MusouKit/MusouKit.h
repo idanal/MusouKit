@@ -38,3 +38,9 @@
 
 //Macros
 #define kAppleLookupApi @"http://itunes.apple.com/lookup?id=%@"
+
+//Declare a weak reference to self
+#define MSWeakSelf __weak typeof(self) weakSelf = self
+
+//Print log in the console
+#define MSLog(format,...) printf("%s(%d):%s\n", @(__FILE__).lastPathComponent.UTF8String, __LINE__, [[NSString alloc] initWithFormat:format,__VA_ARGS__].UTF8String)
