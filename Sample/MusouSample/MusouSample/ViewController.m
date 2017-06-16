@@ -48,6 +48,8 @@
                       @"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1496915123669&di=d50655a5f869779fb493ce22ddde0512&imgtype=0&src=http%3A%2F%2Fimg.taopic.com%2Fuploads%2Fallimg%2F120326%2F2722-12032609394067.jpg",
                       @"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1496915123669&di=6e6eebba76983172582d6ed11ced0925&imgtype=0&src=http%3A%2F%2Fimg3.redocn.com%2Ftupian%2F20160129%2Fhuangseshuiguotuanjpggeshibeijingtupian_5832527.jpg"
                       ];
+    
+    [self testJson:nil];
 }
 
 - (IBAction)testRequest:(id)sender{
@@ -69,7 +71,6 @@
     [[MSSysShare shared] share:@"text" image:[UIImage imageNamed:@"fun.jpg"] link:[NSURL URLWithString:@"http://www.123.com"] completion:^(BOOL completed, NSError *error) {
         
     }];
-    [self testJson:nil];
 }
 
 - (IBAction)testJson:(id)sender{
@@ -106,7 +107,7 @@
 
 @implementation User
 
-+ (NSDictionary *)classMap{
+- (NSDictionary *)jeClassMap{
     return @{@"friends": @"User"};
 }
 

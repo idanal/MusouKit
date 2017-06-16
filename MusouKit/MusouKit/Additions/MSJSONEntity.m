@@ -42,14 +42,13 @@
 
 + (instancetype)fromDict:(NSDictionary *)d{
     NSObject *o = [[self alloc] init];
-    [o fromDict:d map:[o classMap]];
+    [o fromDict:d map:[o jeClassMap]];
     return o;
 }
 
 + (instancetype)fromJSON:(NSData *)json{
-    NSObject *o = [[self alloc] init];
-    [o fromDict:[NSJSONSerialization JSONObjectWithData:json options:NSJSONReadingMutableContainers error:nil] map:[o classMap]];
-    return o;
+    NSDictionary *d = [NSJSONSerialization JSONObjectWithData:json options:NSJSONReadingMutableContainers error:nil];
+    return [self fromDict:d];
 }
 
 - (instancetype)fromDict:(NSDictionary *)d map:(NSDictionary *)map{
@@ -81,13 +80,6 @@
 
 - (NSString *)toJSONString:(NSData *)data{
     return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-}
-
-- (void)printObject{
-    NSArray *keys = [NSObject getPropertyNames:self];
-    for (NSString *key in keys) {
-        NSLog(@"%@=%@",key,[self valueForKey:key]);
-    }
 }
 
 #pragma mark - private methods
@@ -177,18 +169,11 @@
     if (map[key]){
         return NSClassFromString(map[key]);
     } else {
-        NSString *name = key;
-        NSRange range = [name rangeOfString:@"List"];
-        if (range.length > 0 && range.location > 0){
-            name = [name substringToIndex:range.location];
-        }
-        NSString *c  = [name substringToIndex:1];
-        //return NSClassFromString([key capitalizedString]);
-        return NSClassFromString([name stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:[c uppercaseString]]);
+        return NSClassFromString([key capitalizedString]);
     }
 }
 
-- (NSDictionary *)classMap{
+- (NSDictionary *)jeClassMap{
     return nil;
 }
 
