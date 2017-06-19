@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <WebKit/WebKit.h>
 
 /**
  * Auto calculate the height of a webView
@@ -22,4 +23,11 @@
  */
 - (void)loadHtmlWithFixImg:(NSString *)html docWidth:(CGFloat)docWidth;
 
+@end
+
+
+
+@interface MSAutoWKWebView : WKWebView <UIScrollViewDelegate, WKNavigationDelegate>
+/** Callback when calculating done */
+@property (nonatomic, copy) void (^onLoadFinished)(void);
 @end

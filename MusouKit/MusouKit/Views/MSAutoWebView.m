@@ -58,3 +58,40 @@
 }
 
 @end
+
+
+
+@implementation MSAutoWKWebView
+
+- (WKNavigation *)loadHTMLString:(NSString *)string baseURL:(NSURL *)baseURL{
+    self.scrollView.bounces = NO;
+    self.scrollView.scrollEnabled = NO;
+    self.scrollView.delegate = self;
+    self.navigationDelegate = self;
+    
+    NSString *html = [NSString stringWithFormat:@"<head><meta name='viewport' content='width=device-width'/></head>%@", string];
+    return [super loadHTMLString:html baseURL:baseURL];
+}
+
+- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView{
+    return nil;
+}
+
+- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation{
+    [webView evaluateJavaScript:@"document.body.scrollHeight" completionHandler:^(id _Nullable val, NSError * _Nullable error) {
+        
+        NSLog(@"AutoHeightWebViewHeight:%@", val);
+        CGFloat h = [val doubleValue];
+        for (NSLayoutConstraint *c in webView.constraints){
+            if (c.firstAttribute == NSLayoutAttributeHeight){
+                c.constant = h;
+                break;
+            }
+        }
+        if (_onLoadFinished) {
+            _onLoadFinished();
+        }
+    }];
+}
+
+@end
