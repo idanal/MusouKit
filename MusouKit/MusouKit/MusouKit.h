@@ -43,4 +43,8 @@
 #define MSWeakSelf __weak typeof(self) weakSelf = self
 
 //Print log in the console
+#ifdef DEBUG
 #define MSLog(format,...) printf("%s(%d):%s\n", @(__FILE__).lastPathComponent.UTF8String, __LINE__, [[NSString alloc] initWithFormat:format,__VA_ARGS__].UTF8String)
+#else
+#define MSLog(format,...)
+#endif
