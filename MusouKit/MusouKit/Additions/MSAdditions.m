@@ -634,26 +634,36 @@ static NSString * const s_tapGesture = @"tapGesture";
         pv.backgroundColor = [UIColor clearColor];
         [self addSubview:pv];
         
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(didTextChange)
+                                                     name:UITextViewTextDidChangeNotification
+                                                   object:nil];
+        
     }
     pv.text = placeholder;
 }
 
 - (NSString *)placeholder{
-    UITextView *pv = (id)[self viewWithTag:0x100];
-    return pv.text;
+    return self.placeholderView.text;
+}
+
+- (UITextView *)placeholderView{
+    return (UITextView *)[self viewWithTag:0x100];
 }
 
 - (void)didTextChange{
-    UITextView *pv = (id)[self viewWithTag:0x100];
-    pv.hidden = [self hasText];
+    self.placeholderView.hidden = [self hasText];
+    if (self.text.length > 0){
+        unichar ch = [self.text characterAtIndex:self.text.length-1];
+        if (ch == '\n'){
+            [self resignFirstResponder];
+            self.text = [self.text substringToIndex:self.text.length-1];
+        }
+    }
 }
 
-- (BOOL)shouldEndOnReturn:(NSString *)replaceText{
-    if ([replaceText isEqualToString:@"\n"]){
-        [self resignFirstResponder];
-        return YES;
-    }
-    return NO;
+- (void)removePlaceholderObserver{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

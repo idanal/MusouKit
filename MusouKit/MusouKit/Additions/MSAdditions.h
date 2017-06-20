@@ -170,8 +170,12 @@
 
 - (void)setPlaceholder:(NSString *)placeholder;
 - (NSString *)placeholder;
-- (void)didTextChange;
-- (BOOL)shouldEndOnReturn:(NSString *)replaceText;
+
+//It's nil before a placeholder specified
+- (UITextView *)placeholderView;
+
+//Remember to call this method to remove the observer
+- (void)removePlaceholderObserver;
 
 @end
 
