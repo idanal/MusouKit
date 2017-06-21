@@ -48,8 +48,9 @@
     }
     
     if (self.animationDuration > 0.0){
-        CGFloat fps = self.animationDuration/self.animationImages.count;
-        self.displayLink.preferredFramesPerSecond = MIN(1.0/fps, 60);
+        CGFloat t = self.animationDuration/self.animationImages.count;
+        //self.displayLink.preferredFramesPerSecond = MIN(1.0/t, 60); //ios10+
+        self.displayLink.frameInterval = t*60;
     }
 }
 
