@@ -940,7 +940,7 @@ static NSString * const s_tapGesture = @"tapGesture";
 @implementation UIImage (Musou)
 
 - (UIImage *)clipsToRect:(CGRect)rect {
-    UIGraphicsBeginImageContext(rect.size);
+    UIGraphicsBeginImageContextWithOptions(rect.size, NO, self.scale);
     CGContextRef ctx = UIGraphicsGetCurrentContext();
     CGContextTranslateCTM(ctx, 0, self.size.height);
     CGContextScaleCTM(ctx, 1, -1);
@@ -951,11 +951,10 @@ static NSString * const s_tapGesture = @"tapGesture";
     return image;
 }
 
-- (UIImage *)scaleToSize:(CGSize)newSize {
-    float max = MAX(self.size.width, self.size.height);
-    if (max > MAX(newSize.width, newSize.height)) {
-        float factor = MAX(newSize.width,newSize.height)/max;
-        return [self scaleByFactor:factor];
+- (UIImage *)scaleByWidth:(CGFloat)width{
+    if (self.size.width > width){
+        float scaleBy = width/self.size.width;
+        return [self scaleByFactor:scaleBy];
     }
     return self;
 }
@@ -964,15 +963,13 @@ static NSString * const s_tapGesture = @"tapGesture";
     UIImage *image = self;
     CGSize size = CGSizeMake((NSInteger)(image.size.width * scaleBy), (NSInteger)(image.size.height * scaleBy));
     
-    UIGraphicsBeginImageContext(size);
-//    UIGraphicsBeginImageContextWithOptions(size, NO, 0.0);
+    UIGraphicsBeginImageContextWithOptions(size, NO, self.scale);
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGAffineTransform transform = CGAffineTransformIdentity;
     
     transform = CGAffineTransformScale(transform, scaleBy, scaleBy);
     CGContextConcatCTM(context, transform);
     
-    // Draw the image into the transformed context and return the image
     [image drawAtPoint:CGPointMake(0.0f, 0.0f)];
     UIImage *newimg = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
@@ -982,7 +979,7 @@ static NSString * const s_tapGesture = @"tapGesture";
 
 - (UIImage *)tint:(UIColor *)color{
     CGRect rect = CGRectMake(0, 0, self.size.width, self.size.height);
-    UIGraphicsBeginImageContext(rect.size);
+    UIGraphicsBeginImageContextWithOptions(rect.size, NO, self.scale);
     CGContextRef ctx = UIGraphicsGetCurrentContext();
     //CGContextTranslateCTM(ctx, 0, rect.size.height);
     //CGContextScaleCTM(ctx, 1.0, -1.0);
@@ -997,7 +994,7 @@ static NSString * const s_tapGesture = @"tapGesture";
 
 - (UIImage *)withCorner:(CGFloat)radius{
     CGRect rect = CGRectMake(0, 0, self.size.width, self.size.height);
-    UIGraphicsBeginImageContextWithOptions(self.size, NO, 0.0);
+    UIGraphicsBeginImageContextWithOptions(self.size, NO, self.scale);
     CGContextRef ctx = UIGraphicsGetCurrentContext();
     CGContextAddPath(ctx, [UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:radius].CGPath);
     CGContextClip(ctx);
