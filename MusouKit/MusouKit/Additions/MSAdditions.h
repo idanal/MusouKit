@@ -237,7 +237,7 @@
 @interface UIImage (Musou)
 
 - (UIImage *)clipsToRect:(CGRect)rect;
-- (UIImage *)scaleToSize:(CGSize)newSize;
+- (UIImage *)scaleByWidth:(CGFloat)width;
 - (UIImage *)scaleByFactor:(float)scaleBy;
 
 //Change color
