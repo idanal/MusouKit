@@ -8,16 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MSTimerButton : UIButton {
-    __weak NSTimer *_timer;
-}
-/** Start seconds, default 0 */
-@property (nonatomic, assign) NSInteger seconds;
+@interface MSTimerButton : UIButton
 
 /** Start with a tick callback */
 - (void)startWithTick:(void (^)(MSTimerButton *))tick;
 
-/** Stop, You must call it explicit */
+/** Stop */
 - (void)stop;
 
 @end
