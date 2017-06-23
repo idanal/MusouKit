@@ -219,12 +219,6 @@
 
 
 @interface UIApplication (Musou)
-+ (double)currentTimestamp;
-+ (double)machTimeToSecs:(uint64_t)time;
-
-//Register remote notification
-- (void)registerApns;
-
 //Convert deviceToken to String
 - (NSString *)handleDeviceToken:(NSData *)deviceToken;
 

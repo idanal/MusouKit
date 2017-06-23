@@ -858,36 +858,8 @@ static NSString * const s_tapGesture = @"tapGesture";
 
 @end
 
-#import <sys/time.h>
-#import <mach/mach_time.h>
+
 @implementation UIApplication (Musou)
-
-+ (double)currentTimestamp{
-    struct timeval tv;
-    gettimeofday(&tv,NULL);
-    return (tv.tv_sec * 1000. + tv.tv_usec / 1000.);
-}
-
-+ (double)machTimeToSecs:(uint64_t)time{
-    mach_timebase_info_data_t timebase;
-    mach_timebase_info(&timebase);
-    return (double)time * (double)timebase.numer /
-    (double)timebase.denom /1e9;
-}
-
-- (void)registerApns{
-    if ([self respondsToSelector:@selector(registerForRemoteNotifications)]) {
-        [self registerForRemoteNotifications];
-        UIUserNotificationType notificationTypes = UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
-        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:notificationTypes categories:nil];
-        [self registerUserNotificationSettings:settings];
-    }
-    else{
-        UIRemoteNotificationType notificationTypes = UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert;
-        [self registerForRemoteNotificationTypes:notificationTypes];
-    }
-    
-}
 
 - (NSString *)handleDeviceToken:(NSData *)deviceToken{
     NSString *token = [NSString stringWithFormat:@"%@",deviceToken];
