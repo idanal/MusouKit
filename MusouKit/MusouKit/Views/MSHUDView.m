@@ -202,20 +202,6 @@
     return hud;
 }
 
-+ (MSHUDView *)showLoadingToView:(UIView *)superview msg:(NSString *)msg subtitle:(NSString *)subtitle touchToHide:(BOOL)touchToHide
-{
-    MSHUDView *hud = [[MSHUDView alloc] initWithFrame:superview.bounds];
-    hud.touchToHide = touchToHide;
-    [superview addSubview:hud];
-    [hud showMessage:msg subtitle:subtitle loading:YES];
-    
-    return hud;
-}
-
-+ (MSHUDView *)showLoading:(UIView *)superview{
-    return [self showLoadingToView:superview msg:NSLocalizedString(@"Loading...", nil) subtitle:nil];
-}
-
 + (void)hideHUD:(UIView *)superview{
     for (UIView *v in superview.subviews){
         if ([v isKindOfClass:[MSHUDView class]]){
@@ -235,7 +221,7 @@
 }
 
 - (void)showLoading:(NSString *)msg{
-    [MSHUDView showLoadingToView:self msg:msg ? msg : @"加载中，请稍候..." subtitle:nil];
+    [MSHUDView showLoadingToView:self msg:msg subtitle:nil];
 }
 
 - (void)hideHUD{
