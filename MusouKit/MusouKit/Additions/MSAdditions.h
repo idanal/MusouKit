@@ -238,6 +238,8 @@
 - (UIImage *)tint:(UIColor *)color;
 //Corner with radius
 - (UIImage *)withCorner:(CGFloat)radius;
+//Rounded circle image
+- (UIImage *)roundedImage:(CGFloat)width;
 @end
 
 

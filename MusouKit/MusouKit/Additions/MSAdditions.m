@@ -966,13 +966,31 @@ static NSString * const s_tapGesture = @"tapGesture";
 
 - (UIImage *)withCorner:(CGFloat)radius{
     CGRect rect = CGRectMake(0, 0, self.size.width, self.size.height);
-    UIGraphicsBeginImageContextWithOptions(self.size, NO, self.scale);
+    UIGraphicsBeginImageContextWithOptions(self.size, NO, 0.0);   //use 0.0 to align pixels
     CGContextRef ctx = UIGraphicsGetCurrentContext();
     CGContextAddPath(ctx, [UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:radius].CGPath);
     CGContextClip(ctx);
     [self drawInRect:rect];
     UIImage *ret = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
+    return ret;
+}
+
+- (UIImage *)roundedImage:(CGFloat)width{
+    CGFloat minw = MIN(self.size.width, self.size.height);
+    CGFloat w = width > 0 ? width : minw;
+    CGRect rect = CGRectMake(0, 0, w, w);
+    UIGraphicsBeginImageContextWithOptions(rect.size, NO, 0.0);   //use 0.0 to align pixels
+    CGContextRef ctx = UIGraphicsGetCurrentContext();
+    CGContextAddPath(ctx, [UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:w/2.0].CGPath);
+    CGContextClip(ctx);
+    CGContextScaleCTM(ctx, w/self.size.height, w/self.size.height);
+    
+    rect.origin = CGPointMake(-(self.size.width-minw)/2.0, -(self.size.height-minw)/2.0);
+    [self drawAtPoint:rect.origin];
+    UIImage *ret = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
     return ret;
 }
 
