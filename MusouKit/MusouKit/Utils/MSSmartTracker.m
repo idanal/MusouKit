@@ -57,7 +57,14 @@
     __weak UILabel *_vcHierarchyLbl;
     __weak UILabel *_viewHierarchyLbl;
     __weak UIViewController *_currentVC;
+    
     dispatch_block_t _hideBlock;
+    
+    //Fps
+    int  _framesPerSecond;
+    CFTimeInterval _lastTimestamp;
+    __weak UILabel *_fpsLbl;
+    __weak CADisplayLink *_displayLink;
 }
 @property (nonatomic, weak) UILabel *viewTracker;
 @end
@@ -79,7 +86,6 @@
     if (self){
         self.backgroundColor = [UIColor clearColor];
         
-#ifdef DEBUG
         self.simpleViewTrackerInfo = YES;
         self.userInteractionEnabled = YES;
         self.windowLevel = UIWindowLevelStatusBar;
@@ -105,13 +111,11 @@
         
         UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(onPan:)];
         [self addGestureRecognizer:pan];
-#endif
     }
     return self;
 }
 
 - (void)setEnabled:(BOOL)enabled{
-#ifdef DEBUG
     if (_enabled != enabled){
         _enabled = enabled;
         
@@ -122,7 +126,53 @@
             self.hidden = !_enabled;
         });
     }
-#endif
+}
+
+- (void)setEnableFpsTracker:(BOOL)enableFpsTracker{
+    if (!self.enabled){
+        NSLog(@"SmartTracker is not enabled");
+        return;
+    }
+    if (_enableFpsTracker != enableFpsTracker){
+        _enableFpsTracker = enableFpsTracker;
+        
+        if (_enableFpsTracker){
+            
+            UILabel *fpsLbl = [[UILabel alloc] initWithFrame:CGRectMake(0, 20, 60, 12)];
+            [self addSubview:fpsLbl];
+            _fpsLbl = fpsLbl;
+            _fpsLbl.font = [UIFont systemFontOfSize:12];
+            _fpsLbl.textColor = [UIColor redColor];
+            _fpsLbl.textAlignment = NSTextAlignmentCenter;
+            _fpsLbl.center = CGPointMake(self.bounds.size.width/2, fpsLbl.center.y);
+            
+            CADisplayLink *displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(tick:)];
+            [displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
+            _displayLink = displayLink;
+            
+        } else {
+            
+            [_displayLink invalidate];
+            [_fpsLbl removeFromSuperview];
+            
+        }
+    }
+}
+
+- (void)tick:(CADisplayLink *)displayLink{
+    if (_lastTimestamp == 0.0){
+        _lastTimestamp = displayLink.timestamp;
+        return;
+    }
+    _framesPerSecond++;
+    double interval = displayLink.timestamp - _lastTimestamp;
+    if (interval >= 1.0){
+        
+        _fpsLbl.text = [NSString stringWithFormat:@"fps:%d", _framesPerSecond];
+        _lastTimestamp = displayLink.timestamp;
+        _framesPerSecond = 0;
+    }
+    
 }
 
 - (void)onTap:(UITapGestureRecognizer *)sender{

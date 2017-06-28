@@ -21,6 +21,10 @@
 @property (nonatomic) BOOL enableViewTracker;
 /** Simple view tracker info print class name only. Default YES */
 @property (nonatomic) BOOL simpleViewTrackerInfo;
+/** Enable the fps tracker. fps displayed at the top status bar */
+@property (nonatomic) BOOL enableFpsTracker;
+/** Access the fps label */
+@property (nonatomic, weak, readonly) UILabel *fpsLbl;
 
 /** Singleton */
 + (instancetype)shared;
