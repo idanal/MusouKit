@@ -1,33 +1,33 @@
 //
-//  MainViewController.m
-//  
+//  TableViewController.m
+//  MusouSample
 //
-//  Created by DANAL LUO on 2017/6/15.
-//
+//  Created by DANAL LUO on 27/06/2017.
+//  Copyright © 2017 danal. All rights reserved.
 //
 
-#import "MainViewController.h"
-#import "MSSmartTracker.h"
+#import "TableViewController.h"
+#import "MusouKit.h"
 
-@interface MainViewController ()
-@property (nonatomic, strong) NSArray<NSString *> *titles;
+
+@interface TableViewController ()
 @end
 
-@implementation MainViewController
+@implementation TableViewController
+
+- (void)dealloc{
+    NSLog(@"~~~~~~");
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.titles = @[
-                    @"Tests",
-                    @"MSSegmentController",
-                    @"Table"
-                    ];
-    self.tableView.rowHeight = 44;
-#ifdef DEBUG
-    [MSSmartTracker shared].enabled = YES;
-    [MSSmartTracker shared].simpleViewTrackerInfo = YES;
-    [MSSmartTracker shared].enableFpsTracker = YES;
-#endif
+    
+    // Uncomment the following line to preserve selection between presentations.
+    // self.clearsSelectionOnViewWillAppear = NO;
+    
+    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -42,29 +42,29 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.titles.count;
+    return 100;
 }
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-    cell.textLabel.text = self.titles[indexPath.row];
-    return cell;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    NSString *t = self.titles[indexPath.row];
-    if ([t isEqual:@"Tests"]){
-        [self performSegueWithIdentifier:@"gotoTests" sender:nil];
-    }
-    else if ([t isEqual:@"MSSegmentController"]){
-        [self performSegueWithIdentifier:@"gotoSegmentVC" sender:nil];
-    }
-    else if ([t isEqual:@"Table"]){
-        [self performSegueWithIdentifier:@"gotoTable" sender:nil];
-    }
+    UIImageView *imgv = (UIImageView *)[cell.contentView viewWithTag:1];
+    imgv.backgroundColor = [UIColor whiteColor];
+    
+    NSString *file = [[NSBundle mainBundle] pathForResource:@"2.jpg" ofType:nil];
+    UIImage *image = [[UIImage alloc] initWithContentsOfFile:file];
+    
+//    imgv.layer.cornerRadius = imgv.bounds.size.width/2;
+//    imgv.clipsToBounds = YES;
+//    imgv.image = image;
+    
+    imgv.image = [image roundedImage:imgv.bounds.size.width];
+    
+    UILabel *lbl = (UILabel *)[cell.contentView viewWithTag:2];
+    lbl.text = @(indexPath.row).stringValue;
+    
+    return cell;
 }
 
 /*
@@ -110,5 +110,21 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+@end
+
+
+@implementation MyView
+
+- (void)removeFromSuperview{
+    [super removeFromSuperview];
+    NSLog(@"removeFromSuperview:%@", self);
+    [_target invokeMethod:_selector object:nil];
+}
+
+- (void)setRemovedCallback:(SEL)selector target:(id)target{
+    _selector = selector;
+    _target = target;
+}
 
 @end
