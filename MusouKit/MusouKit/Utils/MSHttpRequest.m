@@ -53,13 +53,6 @@ static NSString *boundary = @"=======B-o-u-n-d-a-r-y=======";
     [self.bodyData appendData:[str dataUsingEncoding:NSUTF8StringEncoding]];
 }
 
-- (void)appendFormData:(NSData *)data name:(NSString *)name{
-    [self.bodyData appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-    [self.bodyData appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n", name] dataUsingEncoding:NSUTF8StringEncoding]];
-    [self.bodyData appendData:[@"Content-Type: application/octet-stream\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-    [self.bodyData appendData:data];
-}
-
 - (void)appendFileFormData:(NSData *)data name:(NSString *)name filename:(NSString *)filename{
     [self.bodyData appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
     [self.bodyData appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"%@\"\r\n", name, filename] dataUsingEncoding:NSUTF8StringEncoding]];
@@ -78,7 +71,6 @@ static NSString *boundary = @"=======B-o-u-n-d-a-r-y=======";
 #pragma mark - Send a request
 
 @implementation NSURLRequest (Musou)
-
 
 - (NSURLSessionTask *)send:(void (^)(NSData *, NSURLResponse *, NSError *))completion{
     NSURLSessionConfiguration *cfg = [NSURLSessionConfiguration defaultSessionConfiguration];

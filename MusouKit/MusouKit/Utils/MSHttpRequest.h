@@ -27,9 +27,6 @@
 /** Append a string or number */
 - (void)appendFormValue:(id)val name:(NSString *)name;
 
-/** Append data with param name */
-- (void)appendFormData:(NSData *)data name:(NSString *)name;
-
 /** Append file data with param name */
 - (void)appendFileFormData:(NSData *)data name:(NSString *)name filename:(NSString *)filename;
 
@@ -40,7 +37,7 @@
 
 @interface NSURLRequest (Musou)
 
-/** Send with the request */
+/** Send the request */
 - (NSURLSessionTask *)send:(void (^)(NSData *, NSURLResponse *, NSError *))completion;
 
 /**
