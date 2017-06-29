@@ -19,7 +19,7 @@ typedef UIView* (^ALReleationBlock)(NSLayoutRelation relation);
 
 @interface UIView (DLAutoLayout)
 
-/** First step: call begin */
+/** First step: call begin with it's superView */
 @property (nonatomic, readonly) ALViewBlock dl_begin;
 /** Last step: call end. Don't forget it! */
 @property (nonatomic, readonly) ALVoidBlock dl_end;
