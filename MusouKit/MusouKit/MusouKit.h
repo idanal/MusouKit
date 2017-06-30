@@ -22,6 +22,7 @@
 #import "MSCellView.h"
 #import "MSHUDView.h"
 #import "MSRangeSlider.h"
+#import "MSAlertView.h"
 #import "MSBlockAlertView.h"
 #import "MSImageView.h"
 #import "MSAutoWebView.h"
